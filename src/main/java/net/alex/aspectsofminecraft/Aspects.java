@@ -41,12 +41,49 @@ public class Aspects
     {
     }
 
+    //putting stuff in vanilla creative tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
 
+
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.COLORED_BLOCKS) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
+            event.accept(ModItems.LUMINOUS_TENDRIL);
+            event.accept(ModItems.YETI_CRAB_LEG);
+            event.accept(ModItems.YETI_CRAB_SETAE);
+            event.accept(ModItems.HAG_GOO);
+        }
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_COBALT);
             event.accept(ModItems.COBALT_INGOT);
         }
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS);
 
     }
 

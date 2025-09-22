@@ -1,5 +1,13 @@
 {
   "item.aspects.aspect": "Aspect",
+
   "item.aspects.raw_cobalt": "Raw Cobalt",
-  "item.aspects.cobalt_ingot": "Cobalt Ingot"
+  "item.aspects.cobalt_ingot": "Cobalt Ingot",
+
+  "item.aspects.luminous_tendril": "Luminous Tendril",
+  "item.aspects.yeti_crab_leg": "Yeti Crab Leg",
+  "item.aspects.yeti_crab_setae": "Yeti Crab Setae",
+  "item.aspects.hag_goo": "Hag Goo"
+
+
 }
