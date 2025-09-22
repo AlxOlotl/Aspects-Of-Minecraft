@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
+import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -27,7 +28,7 @@ public class Aspects
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
-
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -46,6 +47,8 @@ public class Aspects
 
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.RAW_COBALT_BLOCK);
+            event.accept(ModBlocks.COBALT_BLOCK);
 
         }
 
