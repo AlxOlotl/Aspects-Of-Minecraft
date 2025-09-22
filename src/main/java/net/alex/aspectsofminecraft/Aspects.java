@@ -1,6 +1,9 @@
 package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
+import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -17,13 +20,14 @@ import org.slf4j.Logger;
 @Mod(Aspects.MODID)
 public class Aspects
 {
-    // Define mod id in a common place for everything to reference
-    public static final String MODID = "aom";
-    // Directly reference a slf4j logger
+    public static final String MODID = "aspects";
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public Aspects() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus);
+
 
         modEventBus.addListener(this::commonSetup);
 
@@ -38,6 +42,12 @@ public class Aspects
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.RAW_COBALT);
+            event.accept(ModItems.COBALT_INGOT);
+        }
+
     }
 
     @SubscribeEvent
