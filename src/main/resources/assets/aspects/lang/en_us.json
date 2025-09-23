@@ -1,11 +1,16 @@
 {
   "item.aspects.aspect": "Aspect",
 
+  "creativetab.aspects_blocks_tab": "AOM Blocks",
+  "creativetab.aspects_items_tab": "AOM Items",
+
   "item.aspects.raw_cobalt": "Raw Cobalt",
   "item.aspects.cobalt_ingot": "Cobalt Ingot",
 
   "block.aspects.raw_cobalt_block": "Block of Raw Cobalt",
   "block.aspects.cobalt_block": "Block of Cobalt",
+  "block.aspects.cobalt_ore": "Cobalt Ore",
+  "block.aspects.deepslate_cobalt_ore": "Deepslate Cobalt Ore",
 
   "item.aspects.luminous_tendril": "Luminous Tendril",
   "item.aspects.yeti_crab_leg": "Yeti Crab Leg",
