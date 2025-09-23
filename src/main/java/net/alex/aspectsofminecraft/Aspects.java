@@ -51,6 +51,8 @@ public class Aspects
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.COBALT_BLOCK);
+            event.accept(ModBlocks.BOEBO_PLANK);
+            event.accept(ModBlocks.BOEBO_WOOD);
 
         }
 
@@ -62,6 +64,8 @@ public class Aspects
             event.accept(ModBlocks.COBALT_ORE);
             event.accept(ModBlocks.DEEPSLATE_COBALT_ORE);
             event.accept(ModBlocks.RAW_COBALT_BLOCK);
+            event.accept(ModBlocks.BAMBOO_CORAL_BLOCK);
+            event.accept(ModBlocks.SHELF_CORAL_BLOCK);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {

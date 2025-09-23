@@ -4,6 +4,9 @@
   "creativetab.aspects_blocks_tab": "AOM Blocks",
   "creativetab.aspects_items_tab": "AOM Items",
 
+  "block.aspects.bamboo_coral_block": "Bamboo Coral Block",
+  "block.aspects.shelf_coral_block": "Shelf Coral Block",
+
   "item.aspects.raw_cobalt": "Raw Cobalt",
   "item.aspects.cobalt_ingot": "Cobalt Ingot",
 
@@ -11,6 +14,9 @@
   "block.aspects.cobalt_block": "Block of Cobalt",
   "block.aspects.cobalt_ore": "Cobalt Ore",
   "block.aspects.deepslate_cobalt_ore": "Deepslate Cobalt Ore",
+
+  "block.aspects.boebo_planks": "Boebo Planks",
+  "block.aspects.boebo_wood": "Boebo Wood",
 
   "item.aspects.luminous_tendril": "Luminous Tendril",
   "item.aspects.yeti_crab_leg": "Yeti Crab Leg",

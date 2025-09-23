@@ -21,8 +21,18 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Aspects.MODID);
 
     //aboveground
+    public static final RegistryObject<Block> BOEBO_PLANK = registerBlock("boebo_plank",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+
+    public static final RegistryObject<Block> BOEBO_WOOD = registerBlock("boebo_wood",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
 
     //underwater
+    public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BUBBLE_CORAL_BLOCK)));
+
+    public static final RegistryObject<Block> SHELF_CORAL_BLOCK = registerBlock("shelf_coral_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.BUBBLE_CORAL_BLOCK)));
 
     //underground
     public static final RegistryObject<Block> COBALT_BLOCK = registerBlock("cobalt_block",
