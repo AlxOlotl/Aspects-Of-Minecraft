@@ -51,7 +51,7 @@ public class Aspects
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.COBALT_BLOCK);
-            event.accept(ModBlocks.BOEBO_PLANK);
+            event.accept(ModBlocks.BOEBO_PLANKS);
             event.accept(ModBlocks.BOEBO_WOOD);
 
         }

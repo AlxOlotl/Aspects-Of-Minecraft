@@ -24,7 +24,7 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.COBALT_BLOCK.get());
                         output.accept(ModBlocks.BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.SHELF_CORAL_BLOCK.get());
-                        output.accept(ModBlocks.BOEBO_PLANK.get());
+                        output.accept(ModBlocks.BOEBO_PLANKS.get());
                         output.accept(ModBlocks.BOEBO_WOOD.get());
 
                     } ).build());
