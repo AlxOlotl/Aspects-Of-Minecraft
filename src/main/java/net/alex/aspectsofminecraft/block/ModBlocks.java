@@ -27,12 +27,21 @@ public class ModBlocks {
     public static final RegistryObject<Block> BOEBO_WOOD = registerBlock("boebo_wood",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
 
+    public static final RegistryObject<Block> STRIPPED_BOEBO_WOOD = registerBlock("stripped_boebo_wood",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+
     //underwater
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.BUBBLE_CORAL_BLOCK)));
 
+    public static final RegistryObject<Block> DEAD_BAMBOO_CORAL_BLOCK = registerBlock("dead_bamboo_coral_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEAD_BUBBLE_CORAL_BLOCK)));
+
     public static final RegistryObject<Block> SHELF_CORAL_BLOCK = registerBlock("shelf_coral_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.BUBBLE_CORAL_BLOCK)));
+
+    public static final RegistryObject<Block> DEAD_SHELF_CORAL_BLOCK = registerBlock("dead_shelf_coral_block",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEAD_BUBBLE_CORAL_BLOCK)));
 
     //underground
     public static final RegistryObject<Block> COBALT_BLOCK = registerBlock("cobalt_block",

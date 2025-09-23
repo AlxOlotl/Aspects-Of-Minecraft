@@ -23,14 +23,17 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.RAW_COBALT_BLOCK.get());
                         output.accept(ModBlocks.COBALT_BLOCK.get());
                         output.accept(ModBlocks.BAMBOO_CORAL_BLOCK.get());
+                        output.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.SHELF_CORAL_BLOCK.get());
+                        output.accept(ModBlocks.DEAD_SHELF_CORAL_BLOCK.get());
                         output.accept(ModBlocks.BOEBO_PLANKS.get());
                         output.accept(ModBlocks.BOEBO_WOOD.get());
+                        output.accept(ModBlocks.STRIPPED_BOEBO_WOOD.get());
 
                     } ).build());
 
     public static final RegistryObject<CreativeModeTab> AOM_ITEMS = CREATIVE_MODE_TAB.register("aom_items",
-            () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.ASPECT.get()))
+            () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.OF.get()))
                     .title(Component.translatable("creativetab.aspects_items_tab"))
                     .displayItems((parameters, output) ->{
                         output.accept(ModItems.RAW_COBALT.get());
@@ -39,6 +42,13 @@ public class ModCreativeModeTab {
                         output.accept(ModItems.YETI_CRAB_LEG.get());
                         output.accept(ModItems.YETI_CRAB_SETAE.get());
                         output.accept(ModItems.HAG_GOO.get());
+
+                    } ).build());
+
+    public static final RegistryObject<CreativeModeTab> AOM_MOBS = CREATIVE_MODE_TAB.register("aom_mobs",
+            () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.MINECRAFT.get()))
+                    .title(Component.translatable("creativetab.aspects_mobs_tab"))
+                    .displayItems((parameters, output) ->{
 
                     } ).build());
 

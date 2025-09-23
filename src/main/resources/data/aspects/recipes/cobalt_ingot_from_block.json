@@ -1,0 +1,14 @@
+{
+ "type": "minecraft:crafting_shapeless",
+ "category": "misc",
+ "ingredients": [
+  {
+   "item": "aspects:cobalt_block"
+  }
+ ],
+ "result": {
+  "item": "aspects:cobalt_ingot",
+  "count": 9
+ }
+
+}

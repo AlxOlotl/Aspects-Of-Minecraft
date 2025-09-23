@@ -11,6 +11,8 @@ public class ModItems {
     public static final DeferredRegister<Item>ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Aspects.MODID);
 
     public static final RegistryObject<Item> ASPECT = ITEMS.register("aspect", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> OF = ITEMS.register("of", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MINECRAFT = ITEMS.register("minecraft", () -> new Item(new Item.Properties()));
 
     //ores
     public static final RegistryObject<Item> RAW_COBALT = ITEMS.register("raw_cobalt", () -> new Item(new Item.Properties()));
