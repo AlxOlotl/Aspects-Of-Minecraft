@@ -38,8 +38,8 @@ public class ModCreativeModeTab {
                     .displayItems((parameters, output) ->{
                         output.accept(ModItems.RAW_COBALT.get());
                         output.accept(ModItems.COBALT_INGOT.get());
-                        output.accept(ModItems.SPECKLEREY.get());
                         output.accept(ModItems.SPECKLEREY_SEEDS.get());
+                        output.accept(ModItems.SPECKLEREY.get());
                         output.accept(ModItems.LUMINOUS_TENDRIL.get());
                         output.accept(ModItems.YETI_CRAB_LEG.get());
                         output.accept(ModItems.YETI_CRAB_SETAE.get());

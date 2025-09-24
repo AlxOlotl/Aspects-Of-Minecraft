@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "layers=1": { "model": "aspects:block/hag_goo_layer" }
+  }
+}
