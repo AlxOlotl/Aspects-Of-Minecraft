@@ -35,7 +35,7 @@ public class ModItems {
     public static final RegistryObject<Item> BOEBO_DOOR = ITEMS.register("boebo_door", () -> new Item(new Item.Properties()));
 
     //foods
-    public static final RegistryObject<Item> SPECKLEREY = ITEMS.register("specklery", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SPECKLEREY = ITEMS.register("specklery", () -> new Item(new Item.Properties().food(ModFoodProperties.SPECKLERY)));
     public static final RegistryObject<Item> SPECKLEREY_SEEDS = ITEMS.register("specklery_seeds", () -> new Item(new Item.Properties()));
 
 
