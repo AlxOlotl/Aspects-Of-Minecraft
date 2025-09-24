@@ -29,6 +29,7 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.BOEBO_PLANKS.get());
                         output.accept(ModBlocks.BOEBO_WOOD.get());
                         output.accept(ModBlocks.STRIPPED_BOEBO_WOOD.get());
+                        output.accept(ModBlocks.HAG_GOO_BLOCK.get());
 
                     } ).build());
 

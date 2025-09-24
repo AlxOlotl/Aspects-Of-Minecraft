@@ -71,7 +71,13 @@ public class ModBlocks {
             () -> new BlockItem(ModBlocks.HAG_GOO_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
-            HagGooLayerBlock::new);
+            () -> new HagGooLayerBlock(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(0.2F)
+                    .sound(SoundType.SLIME_BLOCK)
+                    .noOcclusion()
+                    .isRedstoneConductor((state, level, pos) -> false)));
+
     //misc
 
 

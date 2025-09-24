@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft.entity.custom;
 
 import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.Packet;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -9,11 +10,10 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 public class HagGooProjectile extends ThrowableItemProjectile {
@@ -35,35 +35,63 @@ public class HagGooProjectile extends ThrowableItemProjectile {
     }
 
     @Override
-    protected void onHit(HitResult result) {
-        super.onHit(result);
+    protected void onHitBlock(BlockHitResult result) {
 
-        if (result.getType() == HitResult.Type.BLOCK) {
-            bounceCount++;
+        Vec3 motion = this.getDeltaMovement();
 
-            if (bounceCount <= MAX_BOUNCES) {
-                // Bounce logic
-                BlockPos pos = ((BlockHitResult) result).getBlockPos().above();
-                if (this.level().getBlockState(pos).isAir()) {
-                    this.level().setBlock(pos, ModBlocks.HAG_GOO_LAYER.get().defaultBlockState(), 3);
-                }
-                BlockHitResult blockHit = (BlockHitResult) result;
+        Direction face = result.getDirection();
+        double bounceFactor = 0.75;
 
-                // Reflect motion based on impact normal
-                switch (blockHit.getDirection()) {
-                    case UP, DOWN -> setDeltaMovement(getDeltaMovement().x, -getDeltaMovement().y * 0.6, getDeltaMovement().z);
-                    case NORTH, SOUTH -> setDeltaMovement(getDeltaMovement().x, getDeltaMovement().y, -getDeltaMovement().z * 0.6);
-                    case EAST, WEST -> setDeltaMovement(-getDeltaMovement().x * 0.6, getDeltaMovement().y, getDeltaMovement().z);
-                }
-            } else {
-                discard(); // Remove the projectile after 2 bounces
+        double x = motion.x;
+        double y = motion.y;
+        double z = motion.z;
+
+        if (face.getAxis() == Direction.Axis.X) {
+            x = -x * bounceFactor;
+            y = y * bounceFactor;
+            z = z * bounceFactor;
+        } else if (face.getAxis() == Direction.Axis.Y) {
+            x = x * bounceFactor;
+            y = -y * bounceFactor;
+            z = z * bounceFactor;
+        } else if (face.getAxis() == Direction.Axis.Z) {
+            x = x * bounceFactor;
+            y = y * bounceFactor;
+            z = -z * bounceFactor;
+        }
+
+        this.setDeltaMovement(new Vec3(x, y, z));
+
+        bounceCount++;
+
+        Block gooBlock = ModBlocks.HAG_GOO_LAYER.get();
+        Level level = this.level();
+        BlockPos pos = result.getBlockPos().above();
+
+        if (bounceCount == 1) {
+            // First bounce: place a single goo layer
+            if (level.isEmptyBlock(pos)) {
+                level.setBlock(pos, gooBlock.defaultBlockState(), 3);
             }
-        } else if (result.getType() == HitResult.Type.ENTITY) {
-            EntityHitResult entityHit = (EntityHitResult) result;
-            entityHit.getEntity().hurt(damageSources().thrown(this, this.getOwner()), 2.0F);
+        } else if (bounceCount >= 2) {
+            // Second bounce: place plus pattern
+            BlockPos[] positions = new BlockPos[]{
+                    pos, pos.north(), pos.south(), pos.east(), pos.west()
+            };
+
+            for (BlockPos p : positions) {
+                if (level.isEmptyBlock(p)) {
+                    level.setBlock(p, gooBlock.defaultBlockState(), 3);
+                }
+            }
+
+            // Remove projectile after final bounce
             this.discard();
         }
     }
+
+
+
 
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
