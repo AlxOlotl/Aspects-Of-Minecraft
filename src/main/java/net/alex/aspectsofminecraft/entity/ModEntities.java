@@ -9,8 +9,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntities {
+
     public static final DeferredRegister<EntityType<?>> ENTITIES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Aspects.MODID);
+
+
 
     public static final RegistryObject<EntityType<HagGooProjectile>> HAG_GOO_PROJECTILE =
             ENTITIES.register("hag_goo_projectile", () ->
@@ -19,4 +22,5 @@ public class ModEntities {
                             .clientTrackingRange(4)
                             .updateInterval(10)
                             .build("hag_goo_projectile"));
+
 }

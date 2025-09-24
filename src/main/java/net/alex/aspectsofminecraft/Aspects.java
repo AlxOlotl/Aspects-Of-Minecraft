@@ -2,6 +2,7 @@ package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,7 +30,7 @@ public class Aspects
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModCreativeModeTab.register(modEventBus);
-
+        ModEntities.ENTITIES.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
