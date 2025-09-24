@@ -1,5 +1,28 @@
 {
   "variants": {
-    "layers=1": { "model": "aspects:block/hag_goo_layer" }
+    "layers=1": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=2": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=3": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=4": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=5": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=6": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=7": {
+      "model": "aspects:block/hag_goo_layer"
+    },
+    "layers=8": {
+      "model": "aspects:block/hag_goo_layer"
+    }
   }
 }

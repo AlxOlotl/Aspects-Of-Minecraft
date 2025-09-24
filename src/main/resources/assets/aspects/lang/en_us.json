@@ -2,35 +2,27 @@
   "item.aspects.aspect": "Aspect",
   "item.aspects.of": "Of",
   "item.aspects.minecraft": "Minecraft",
-
   "creativetab.aspects_blocks_tab": "AOM Blocks",
   "creativetab.aspects_items_tab": "AOM Items",
   "creativetab.aspects_mobs_tab": "AOM Mobs",
-
   "block.aspects.bamboo_coral_block": "Bamboo Coral Block",
   "block.aspects.dead_bamboo_coral_block": "Dead Bamboo Coral Block",
   "block.aspects.shelf_coral_block": "Shelf Coral Block",
   "block.aspects.dead_shelf_coral_block": "Dead Shelf Coral Block",
-
   "item.aspects.raw_cobalt": "Raw Cobalt",
   "item.aspects.cobalt_ingot": "Cobalt Ingot",
-
   "item.aspects.specklerey": "Specklerey",
   "item.aspects.specklerey_seeds": "Specklerey Seeds",
-
   "block.aspects.raw_cobalt_block": "Block of Raw Cobalt",
   "block.aspects.cobalt_block": "Block of Cobalt",
   "block.aspects.cobalt_ore": "Cobalt Ore",
   "block.aspects.deepslate_cobalt_ore": "Deepslate Cobalt Ore",
-
   "block.aspects.boebo_planks": "Boebo Planks",
   "block.aspects.boebo_wood": "Boebo Wood",
   "block.aspects.stripped_boebo_wood": "Stipped Boebo Wood",
-
   "item.aspects.luminous_tendril": "Luminous Tendril",
   "item.aspects.yeti_crab_leg": "Yeti Crab Leg",
   "item.aspects.yeti_crab_setae": "Yeti Crab Setae",
-  "item.aspects.hag_goo": "Hag Goo"
-
-
+  "item.aspects.hag_goo": "Hag Goo",
+  "block.aspects.hag_goo_block": "Hag Goo Block"
 }

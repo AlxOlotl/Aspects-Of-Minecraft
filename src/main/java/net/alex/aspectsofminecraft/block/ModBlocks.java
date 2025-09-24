@@ -89,7 +89,15 @@ public class ModBlocks {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    public static void register(IEventBus eventBus) {
+    
+    public static final RegistryObject<Block> HAG_GOO_BLOCK = BLOCKS.register("hag_goo_block",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .strength(0.3F)
+                    .sound(SoundType.SLIME_BLOCK)
+                    .noOcclusion()
+                    .isRedstoneConductor((state, level, pos) -> false)));
+public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
 }
