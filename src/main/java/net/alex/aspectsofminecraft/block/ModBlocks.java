@@ -67,8 +67,8 @@ public class ModBlocks {
     //end
 
     //entities
-    public static final RegistryObject<Item> HAG_GOO_LAYER_ITEM = ModItems.ITEMS.register("hag_goo_layer",
-            () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HAG_GOO_BlOCK = ModItems.ITEMS.register("hag_goo_block",
+            () -> new BlockItem(ModBlocks.HAG_GOO_BLOCK.get(), new Item.Properties()));
 
     public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
             HagGooLayerBlock::new);

@@ -1,5 +1,6 @@
 package net.alex.aspectsofminecraft.entity.custom;
 
+import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.network.protocol.Packet;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -30,7 +31,7 @@ public class HagGooProjectile extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return Items.SLIME_BALL; // Or your custom "hag goo" item if needed
+        return ModItems.HAG_GOO.get(); // Or your custom "hag goo" item if needed
     }
 
     @Override
