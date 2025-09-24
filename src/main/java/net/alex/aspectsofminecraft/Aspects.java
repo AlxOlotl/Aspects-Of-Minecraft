@@ -123,7 +123,6 @@ public class Aspects
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             event.enqueueWork(() -> {
-                // Register renderer for Hag Goo projectile to avoid null renderer crash
                 EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());

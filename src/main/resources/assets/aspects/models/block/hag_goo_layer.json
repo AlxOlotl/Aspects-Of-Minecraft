@@ -1,21 +1,20 @@
 {
   "parent": "block/block",
   "textures": {
-    "top": "aspects:block/hag_goo_layer",
-    "side": "aspects:block/hag_goo_layer",
-    "particle": "aspects:block/hag_goo_layer"
+    "particle": "aspects:block/hag_goo_layer",
+    "all": "aspects:block/hag_goo_layer"
   },
   "elements": [
     {
       "from": [0, 0, 0],
       "to": [16, 1, 16],
       "faces": {
-        "up":   { "texture": "#top" },
-        "down": { "texture": "#side" },
-        "north": { "texture": "#side" },
-        "south": { "texture": "#side" },
-        "west":  { "texture": "#side" },
-        "east":  { "texture": "#side" }
+        "up":    { "texture": "#all" },
+        "down":  { "texture": "#all" },
+        "north": { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "east":  { "texture": "#all" }
       }
     }
   ]

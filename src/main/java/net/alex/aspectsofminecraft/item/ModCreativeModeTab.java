@@ -15,42 +15,42 @@ public class ModCreativeModeTab {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Aspects.MODID);
 
     public static final RegistryObject<CreativeModeTab> AOM_BLOCKS = CREATIVE_MODE_TAB.register("aom_blocks",
-            () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.ASPECT.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ASPECT.get()))
                     .title(Component.translatable("creativetab.aspects_blocks_tab"))
                     .displayItems((parameters, output) ->{
-                        output.accept(ModBlocks.COBALT_ORE.get());
-                        output.accept(ModBlocks.DEEPSLATE_COBALT_ORE.get());
-                        output.accept(ModBlocks.RAW_COBALT_BLOCK.get());
-                        output.accept(ModBlocks.COBALT_BLOCK.get());
-                        output.accept(ModBlocks.BAMBOO_CORAL_BLOCK.get());
-                        output.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get());
-                        output.accept(ModBlocks.SHELF_CORAL_BLOCK.get());
-                        output.accept(ModBlocks.DEAD_SHELF_CORAL_BLOCK.get());
-                        output.accept(ModBlocks.BOEBO_PLANKS.get());
-                        output.accept(ModBlocks.BOEBO_WOOD.get());
-                        output.accept(ModBlocks.STRIPPED_BOEBO_WOOD.get());
-                        output.accept(ModBlocks.HAG_GOO_BLOCK.get());
+                        output.accept(new ItemStack(ModBlocks.COBALT_ORE.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.DEEPSLATE_COBALT_ORE.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.RAW_COBALT_BLOCK.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.COBALT_BLOCK.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.BAMBOO_CORAL_BLOCK.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.SHELF_CORAL_BLOCK.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.DEAD_SHELF_CORAL_BLOCK.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.BOEBO_PLANKS.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.BOEBO_WOOD.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.STRIPPED_BOEBO_WOOD.get().asItem()));
+                        output.accept(new ItemStack(ModBlocks.HAG_GOO_BLOCK.get().asItem()));
 
                     } ).build());
 
     public static final RegistryObject<CreativeModeTab> AOM_ITEMS = CREATIVE_MODE_TAB.register("aom_items",
-            () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.OF.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ASPECT.get()))
                     .title(Component.translatable("creativetab.aspects_items_tab"))
                     .displayItems((parameters, output) ->{
-                        output.accept(ModItems.RAW_COBALT.get());
-                        output.accept(ModItems.COBALT_INGOT.get());
-                        output.accept(ModItems.SPECKLEREY_SEEDS.get());
-                        output.accept(ModItems.SPECKLEREY.get());
-                        output.accept(ModItems.LUMINOUS_TENDRIL.get());
-                        output.accept(ModItems.YETI_CRAB_LEG.get());
-                        output.accept(ModItems.YETI_CRAB_SETAE.get());
-                        output.accept(ModItems.HAG_GOO.get());
+                        output.accept(new ItemStack(ModItems.RAW_COBALT.get()));
+                        output.accept(new ItemStack(ModItems.COBALT_INGOT.get()));
+                        output.accept(new ItemStack(ModItems.SPECKLEREY_SEEDS.get()));
+                        output.accept(new ItemStack(ModItems.SPECKLEREY.get()));
+                        output.accept(new ItemStack(ModItems.LUMINOUS_TENDRIL.get()));
+                        output.accept(new ItemStack(ModItems.YETI_CRAB_LEG.get()));
+                        output.accept(new ItemStack(ModItems.YETI_CRAB_SETAE.get()));
+                        output.accept(new ItemStack(ModItems.HAG_GOO.get()));
 
 
                     } ).build());
 
     public static final RegistryObject<CreativeModeTab> AOM_MOBS = CREATIVE_MODE_TAB.register("aom_mobs",
-            () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.MINECRAFT.get()))
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ASPECT.get()))
                     .title(Component.translatable("creativetab.aspects_mobs_tab"))
                     .displayItems((parameters, output) ->{
 

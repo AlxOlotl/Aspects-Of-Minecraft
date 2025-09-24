@@ -40,7 +40,7 @@ public class HagGooProjectile extends ThrowableItemProjectile {
         Vec3 motion = this.getDeltaMovement();
 
         Direction face = result.getDirection();
-        double bounceFactor = 0.75;
+        double bounceFactor = 0.25;
 
         double x = motion.x;
         double y = motion.y;

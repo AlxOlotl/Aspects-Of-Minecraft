@@ -67,18 +67,25 @@ public class ModBlocks {
     //end
 
     //entities
-    public static final RegistryObject<Item> HAG_GOO_BlOCK = ModItems.ITEMS.register("hag_goo_block",
-            () -> new BlockItem(ModBlocks.HAG_GOO_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
-            () -> new HagGooLayerBlock(BlockBehaviour.Properties.of()
+    public static final RegistryObject<Block> HAG_GOO_LAYER =
+            registerBlock("hag_goo_layer",
+                    () -> new HagGooLayerBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK)
+                            .noOcclusion()
+                            .strength(0.1f)
+                            .sound(SoundType.SLIME_BLOCK)));
+
+
+    public static final RegistryObject<Block> HAG_GOO_BLOCK = BLOCKS.register("hag_goo_block",
+            () -> new Block(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.COLOR_PURPLE)
-                    .strength(0.2F)
+                    .strength(0.3F)
                     .sound(SoundType.SLIME_BLOCK)
                     .noOcclusion()
                     .isRedstoneConductor((state, level, pos) -> false)));
 
     //misc
+
 
 
 
@@ -91,18 +98,15 @@ public class ModBlocks {
 
     }
 
-    private static <T extends Block> RegistryObject<Item> registerBlockItem (String name, RegistryObject<T> block) {
-        return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    private static <T extends Block> void registerBlockItem(String name, RegistryObject<T> block) {
+        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
+                new Item.Properties().stacksTo(64) // max stack size, doesn't affect creative display count
+        ));
     }
 
-    
-    public static final RegistryObject<Block> HAG_GOO_BLOCK = BLOCKS.register("hag_goo_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE)
-                    .strength(0.3F)
-                    .sound(SoundType.SLIME_BLOCK)
-                    .noOcclusion()
-                    .isRedstoneConductor((state, level, pos) -> false)));
+
+
+
 public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
