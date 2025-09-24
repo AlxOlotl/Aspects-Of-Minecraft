@@ -32,7 +32,6 @@ public class HagGooLayerBlock extends FallingBlock implements SimpleWaterloggedB
         return SHAPE;
     }
 
-    // ---- WATERLOGGING ----
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);

@@ -32,7 +32,7 @@ public class ModItems {
     public static final RegistryObject<Item> YETI_CRAB_SETAE = ITEMS.register("yeti_crab_setae",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAG_GOO = ITEMS.register("hag_goo",
-            () -> new HagGooItem(new Item.Properties().stacksTo(32)));
+            () -> new HagGooItem(new Item.Properties()));
 
     //tools
 

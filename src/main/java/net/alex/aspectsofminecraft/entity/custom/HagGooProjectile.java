@@ -64,7 +64,7 @@ public class HagGooProjectile extends ThrowableItemProjectile {
 
         bounceCount++;
 
-        Block gooBlock = ModBlocks.HAG_GOO_LAYER.get();
+//        Block gooBlock = ModBlocks.HAG_GOO_LAYER.get();
         Level level = this.level();
         BlockPos pos = result.getBlockPos().above();
 
