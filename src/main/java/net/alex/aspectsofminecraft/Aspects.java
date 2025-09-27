@@ -5,10 +5,6 @@ import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -71,7 +67,6 @@ public class Aspects
             event.accept(ModBlocks.DEEPSLATE_COBALT_ORE);
             event.accept(ModBlocks.RAW_COBALT_BLOCK);
             event.accept(ModItems.SPECKLEREY_SEEDS);
-            event.accept(ModBlocks.HAG_GOO_BLOCK);
             event.accept(ModBlocks.BAMBOO_CORAL_BLOCK);
             event.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
             event.accept(ModBlocks.SHELF_CORAL_BLOCK);
@@ -83,7 +78,7 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-            event.accept(ModBlocks.HAG_GOO_BLOCK);
+
         }
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
@@ -120,10 +115,6 @@ public class Aspects
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            event.enqueueWork(() -> {
-                // Register renderer for Hag Goo projectile to avoid null renderer crash
-                ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
-            });
         }
     }
 }

@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
+import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -66,10 +67,11 @@ public class ModBlocks {
     //end
 
     //entities
-    public static final RegistryObject<Item> HAG_GOO_BlOCK = ModItems.ITEMS.register("hag_goo_block",
-            () -> new BlockItem(ModBlocks.HAG_GOO_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HAG_GOO_LAYER_ITEM = ModItems.ITEMS.register("hag_goo_layer",
+            () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(), new Item.Properties()));
 
-
+    public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
+            HagGooLayerBlock::new);
     //misc
 
 
@@ -87,15 +89,23 @@ public class ModBlocks {
         return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
-    
-    public static final RegistryObject<Block> HAG_GOO_BLOCK = BLOCKS.register("hag_goo_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_PURPLE)
-                    .strength(0.3F)
-                    .sound(SoundType.SLIME_BLOCK)
-                    .noOcclusion()
-                    .isRedstoneConductor((state, level, pos) -> false)));
-public static void register(IEventBus eventBus) {
+    public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }
+
+    public static final RegistryObject<Block> HAG_GOO_BLOCK = registerBlock("hag_goo_block",
+            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
+                    .strength(0.5f)
+                    .noOcclusion()
+                    .noCollission()
+                    .sound(SoundType.SLIME_BLOCK)) {
+                @Override
+                public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+                    if (entity instanceof LivingEntity livingEntity) {
+                        livingEntity.addEffect(new MobEffectInstance(ModEffects.HAGGED.get(), 200, 0, false, true));
+                    }
+                    super.entityInside(state, level, pos, entity);
+                }
+            }, ModCreativeModeTab.AOM_BLOCKS);
+
 }
