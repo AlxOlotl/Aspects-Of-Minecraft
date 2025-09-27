@@ -2,15 +2,25 @@ package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
+import net.alex.aspectsofminecraft.effect.ModEffects;
+import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.core.BlockPos;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -94,7 +104,7 @@ public class ModBlocks {
     }
 
     public static final RegistryObject<Block> HAG_GOO_BLOCK = registerBlock("hag_goo_block",
-            () -> new Block(BlockBehaviour.Properties.of(Material.CLAY)
+            () -> new Block(BlockBehaviour.Properties.of()
                     .strength(0.5f)
                     .noOcclusion()
                     .noCollission()
