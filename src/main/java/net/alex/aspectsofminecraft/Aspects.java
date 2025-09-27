@@ -75,7 +75,6 @@ public class Aspects
             event.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
             event.accept(ModBlocks.SHELF_CORAL_BLOCK);
             event.accept(ModBlocks.DEAD_SHELF_CORAL_BLOCK);
-            event.accept(ModBlocks.HAG_GOO_BLOCK);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
@@ -83,7 +82,6 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-            event.accept(ModBlocks.HAG_GOO_BLOCK);
 
         }
 
@@ -100,12 +98,11 @@ public class Aspects
             event.accept(ModItems.LUMINOUS_TENDRIL);
             event.accept(ModItems.YETI_CRAB_LEG);
             event.accept(ModItems.YETI_CRAB_SETAE);
-
+            event.accept(ModItems.HAG_GOO);
         }
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_COBALT);
             event.accept(ModItems.COBALT_INGOT);
-            event.accept(ModItems.HAG_GOO);
         }
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS);
 
@@ -124,6 +121,7 @@ public class Aspects
         {
             event.enqueueWork(() -> {
                 // Register renderer for Hag Goo projectile to avoid null renderer crash
+                EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
             });
         }
