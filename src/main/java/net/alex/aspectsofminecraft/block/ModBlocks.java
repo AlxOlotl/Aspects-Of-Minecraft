@@ -1,7 +1,6 @@
 package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
-import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -70,8 +69,7 @@ public class ModBlocks {
     public static final RegistryObject<Item> HAG_GOO_BlOCK = ModItems.ITEMS.register("hag_goo_block",
             () -> new BlockItem(ModBlocks.HAG_GOO_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
-            HagGooLayerBlock::new);
+
     //misc
 
 
