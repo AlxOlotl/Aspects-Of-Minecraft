@@ -1,6 +1,0 @@
-{
-  "parent": "block/thin_block",
-  "textures": {
-    "layer": "aspects:block/hag_goo_block"
-  }
-}

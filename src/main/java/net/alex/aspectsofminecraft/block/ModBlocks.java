@@ -1,15 +1,11 @@
 package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
-import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
 import net.alex.aspectsofminecraft.effect.ModEffects;
-import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -77,11 +73,7 @@ public class ModBlocks {
     //end
 
     //entities
-    public static final RegistryObject<Item> HAG_GOO_LAYER_ITEM = ModItems.ITEMS.register("hag_goo_layer",
-            () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
-            HagGooLayerBlock::new);
     //misc
 
 
@@ -116,6 +108,6 @@ public class ModBlocks {
                     }
                     super.entityInside(state, level, pos, entity);
                 }
-            }, ModCreativeModeTab.AOM_BLOCKS);
+            });
 
 }

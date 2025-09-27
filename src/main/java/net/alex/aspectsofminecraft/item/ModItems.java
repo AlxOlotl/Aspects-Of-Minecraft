@@ -1,7 +1,6 @@
 package net.alex.aspectsofminecraft.item;
 
 import net.alex.aspectsofminecraft.Aspects;
-import net.alex.aspectsofminecraft.item.custom.HagGooItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,7 +31,7 @@ public class ModItems {
     public static final RegistryObject<Item> YETI_CRAB_SETAE = ITEMS.register("yeti_crab_setae",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAG_GOO = ITEMS.register("hag_goo",
-            () -> new HagGooItem(new Item.Properties().stacksTo(32)));
+            () -> new Item(new Item.Properties().stacksTo(32)));
 
     //tools
 
