@@ -2,9 +2,12 @@ package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -33,6 +36,7 @@ public class Aspects
         ModEntities.ENTITIES.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModEffects.MOB_EFFECTS.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -71,6 +75,7 @@ public class Aspects
             event.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
             event.accept(ModBlocks.SHELF_CORAL_BLOCK);
             event.accept(ModBlocks.DEAD_SHELF_CORAL_BLOCK);
+            event.accept(ModBlocks.HAG_GOO_BLOCK);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
@@ -78,6 +83,7 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            event.accept(ModBlocks.HAG_GOO_BLOCK);
 
         }
 
@@ -109,12 +115,14 @@ public class Aspects
     {
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Aspects.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
+
         }
     }
 }

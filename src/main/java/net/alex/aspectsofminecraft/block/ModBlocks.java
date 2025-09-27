@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
+import net.alex.aspectsofminecraft.block.custom.HagGooBlock;
 import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -96,7 +97,7 @@ public class ModBlocks {
     }
 
     public static final RegistryObject<Block> HAG_GOO_BLOCK = registerBlock("hag_goo_block",
-            () -> new Block(BlockBehaviour.Properties.of()
+            () -> new HagGooBlock(BlockBehaviour.Properties.of()
                     .strength(0.5f)
                     .noOcclusion()
                     .noCollission()
