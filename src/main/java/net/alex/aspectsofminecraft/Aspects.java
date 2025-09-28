@@ -8,7 +8,6 @@ import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,10 +22,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(Aspects.MODID)
+@Mod(Aspects.MOD_ID)
 public class Aspects
 {
-    public static final String MODID = "aspects";
+    public static final String MOD_ID = "aspects";
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public Aspects() {
@@ -115,7 +114,7 @@ public class Aspects
     {
     }
 
-    @Mod.EventBusSubscriber(modid = Aspects.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = Aspects.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
         @SubscribeEvent

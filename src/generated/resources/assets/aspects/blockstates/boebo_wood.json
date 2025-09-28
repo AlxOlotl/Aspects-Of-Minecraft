@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "aspects:block/boebo_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "aspects:block/boebo_wood"
+    },
+    "axis=z": {
+      "model": "aspects:block/boebo_wood_horizontal",
+      "x": 90
+    }
+  }
+}

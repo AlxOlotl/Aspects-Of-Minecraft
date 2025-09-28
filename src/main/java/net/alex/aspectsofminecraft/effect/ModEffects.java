@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEffects {
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
-            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Aspects.MODID);
+            DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, Aspects.MOD_ID);
 
     public static final RegistryObject<MobEffect> HAGGED =
             MOB_EFFECTS.register("hagged", HaggedEffect::new);

@@ -12,10 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -28,17 +25,17 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Aspects.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Aspects.MOD_ID);
 
     //aboveground
     public static final RegistryObject<Block> BOEBO_PLANKS = registerBlock("boebo_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
 
     public static final RegistryObject<Block> BOEBO_WOOD = registerBlock("boebo_wood",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
 
     public static final RegistryObject<Block> STRIPPED_BOEBO_WOOD = registerBlock("stripped_boebo_wood",
-            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
 
     //underwater
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",
@@ -76,6 +73,22 @@ public class ModBlocks {
     //entities
 
     //misc
+    public static final RegistryObject<Block> HAG_GOO_BLOCK = registerBlock("hag_goo_block",
+            () -> new HagGooBlock(BlockBehaviour.Properties.of()
+                    .strength(0.5f)
+                    .noOcclusion()
+                    .noCollission()
+                    .sound(SoundType.SLIME_BLOCK)) {
+                @Override
+                public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+                    if (entity instanceof LivingEntity livingEntity) {
+                        livingEntity.addEffect(new MobEffectInstance(ModEffects.HAGGED.get(), 200, 0, false, true));
+                    }
+                    super.entityInside(state, level, pos, entity);
+                }
+            });
+
+
 
 
 
@@ -96,19 +109,6 @@ public class ModBlocks {
         BLOCKS.register(eventBus);
     }
 
-    public static final RegistryObject<Block> HAG_GOO_BLOCK = registerBlock("hag_goo_block",
-            () -> new HagGooBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f)
-                    .noOcclusion()
-                    .noCollission()
-                    .sound(SoundType.SLIME_BLOCK)) {
-                @Override
-                public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-                    if (entity instanceof LivingEntity livingEntity) {
-                        livingEntity.addEffect(new MobEffectInstance(ModEffects.HAGGED.get(), 200, 0, false, true));
-                    }
-                    super.entityInside(state, level, pos, entity);
-                }
-            });
+
 
 }

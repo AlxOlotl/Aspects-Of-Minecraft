@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModCreativeModeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Aspects.MODID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Aspects.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> AOM_BLOCKS = CREATIVE_MODE_TAB.register("aom_blocks",
             () -> CreativeModeTab.builder().icon(()->new ItemStack(ModItems.ASPECT.get()))

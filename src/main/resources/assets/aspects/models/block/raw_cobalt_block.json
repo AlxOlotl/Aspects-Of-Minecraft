@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "aspects:block/raw_cobalt_block"
-  }
-}
