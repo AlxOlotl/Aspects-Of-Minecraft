@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "aspects:block/stripped_boebo_log",
+    "side": "aspects:block/stripped_boebo_log"
+  }
+}

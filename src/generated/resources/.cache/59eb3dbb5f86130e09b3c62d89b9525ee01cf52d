@@ -1,0 +1,13 @@
+// 1.20.1	2025-09-28T08:55:18.9460317	Loot Tables
+02d973b1639d01311b3ec8cd0f4d4c92c32dd800 data/aspects/loot_tables/blocks/bamboo_coral_block.json
+04e82dbdf53292c4f352eebbd984fe6aa6a3c4e0 data/aspects/loot_tables/blocks/boebo_planks.json
+1609ecf2e2a19200bdc3ef23aa1590d872d766a8 data/aspects/loot_tables/blocks/boebo_wood.json
+88a948aa882c304fa5b538797834327db4dc978e data/aspects/loot_tables/blocks/cobalt_block.json
+6fc67043cd71939bdeaec92cebdb979857ccaf25 data/aspects/loot_tables/blocks/cobalt_ore.json
+70cab872c3658638fd125b54129d54301a05c4e2 data/aspects/loot_tables/blocks/dead_bamboo_coral_block.json
+2a807f1a9edd2dc651df54fdfb693bdfc05301ff data/aspects/loot_tables/blocks/dead_shelf_coral_block.json
+0412067b1f90f477a6d65030b4a6a13aebe73474 data/aspects/loot_tables/blocks/deepslate_cobalt_ore.json
+1dcbdadc77a262323d9565e152ec85780ae360e7 data/aspects/loot_tables/blocks/hag_goo_block.json
+50f9505d3aa89c3cda0eb2a73a380f52d1fb1489 data/aspects/loot_tables/blocks/raw_cobalt_block.json
+1ecf6dcd5e7982b08000d2ad9325913b25ec1a08 data/aspects/loot_tables/blocks/shelf_coral_block.json
+36c2818cf73879d7d58f22a9f07c5e3f38f09293 data/aspects/loot_tables/blocks/stripped_boebo_wood.json
