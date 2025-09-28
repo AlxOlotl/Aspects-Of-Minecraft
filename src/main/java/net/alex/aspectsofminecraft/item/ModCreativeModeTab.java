@@ -23,6 +23,7 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.RAW_COBALT_BLOCK.get());
                         output.accept(ModBlocks.COBALT_BLOCK.get());
                         output.accept(ModBlocks.HAG_GOO_BLOCK.get());
+                        output.accept(ModItems.HAG_GOO_LAYER.get());
                         output.accept(ModBlocks.BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.SHELF_CORAL_BLOCK.get());

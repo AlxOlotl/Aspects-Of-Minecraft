@@ -1,6 +1,8 @@
 package net.alex.aspectsofminecraft.item;
 
 import net.alex.aspectsofminecraft.Aspects;
+import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -44,6 +46,10 @@ public class ModItems {
     //blocks
     public static final RegistryObject<Item> BOEBO_DOOR = ITEMS.register("boebo_door",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> HAG_GOO_LAYER = ITEMS.register("hag_goo_layer",
+            () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(),
+                    new Item.Properties()));
+
 
     //foods
     public static final RegistryObject<Item> SPECKLEREY = ITEMS.register("specklerey",

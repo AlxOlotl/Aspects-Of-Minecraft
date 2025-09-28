@@ -88,10 +88,13 @@ public class ModBlocks {
                     super.entityInside(state, level, pos, entity);
                 }
             });
-    public static final RegistryObject<Block> HAG_GOO_LAYER = registerBlock("hag_goo_layer",
-            () -> new HagGooLayerBlock(BlockBehaviour.Properties.copy(ModBlocks.HAG_GOO_BLOCK.get())
-                    .noCollission()
-                    .noOcclusion()));
+    public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
+            () -> new HagGooLayerBlock(BlockBehaviour.Properties.of()
+                    .strength(0.1f)
+                    .noOcclusion()
+                    .noCollission()));
+
+
 
 
 

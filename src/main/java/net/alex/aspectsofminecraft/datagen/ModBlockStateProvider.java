@@ -2,15 +2,14 @@ package net.alex.aspectsofminecraft.datagen;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -41,6 +40,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 new ResourceLocation("aspects", "block/stripped_boebo_log"));
 
 
+
         blockWithItem(ModBlocks.BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.SHELF_CORAL_BLOCK);
@@ -48,35 +48,36 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
-        itemModels().withExistingParent("hag_goo_layer", "item/generated")
-                .texture("layer0", modLoc("block/hag_goo_block"));
+
 
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject){
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
+
     private void hagGooLayer(Block block) {
-        getVariantBuilder(block).forAllStates(state -> {
-            int layers = state.getValue(SnowLayerBlock.LAYERS);
+        simpleBlock(block, models().getBuilder("hag_goo_layer")
+                .parent(models().getExistingFile(mcLoc("block/block")))
+                .texture("all", modLoc("block/hag_goo_block"))
+                .element()
+                .from(0, 0, 0).to(16, 2, 16)
+                .face(Direction.UP).texture("#all").end()
+                .face(Direction.DOWN).texture("#all").end()
+                .face(Direction.NORTH).texture("#all").cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).texture("#all").cullface(Direction.SOUTH).end()
+                .face(Direction.WEST).texture("#all").cullface(Direction.WEST).end()
+                .face(Direction.EAST).texture("#all").cullface(Direction.EAST).end()
+                .end()
+        );
 
-            ModelFile parent = new ModelFile.UncheckedModelFile("minecraft:block/snow_height" + layers);
-
-            ModelFile model = models().getBuilder("hag_goo_height" + layers)
-                    .parent(parent)
-                    .texture("texture", modLoc("block/hag_goo_block"));
-
-
-
-            return ConfiguredModel.builder()
-                    .modelFile(model)
-                    .build();
-        });
-
-        // Item model
-        itemModels().withExistingParent("hag_goo_layer", "item/generated")
-                .texture("layer0", modLoc("block/hag_goo_block"));
+        itemModels().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
+                .parent(models().getExistingFile(modLoc("block/hag_goo_layer")));
     }
+
+
+
+
 
 
 }

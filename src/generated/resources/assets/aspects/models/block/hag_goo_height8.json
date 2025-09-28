@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/snow_height8",
-  "textures": {
-    "texture": "aspects:block/hag_goo_block"
-  }
-}
