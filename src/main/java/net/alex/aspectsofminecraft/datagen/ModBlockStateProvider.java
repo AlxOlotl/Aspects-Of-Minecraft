@@ -26,6 +26,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         axisBlock((RotatedPillarBlock) ModBlocks.BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/boebo_log"),
                 new ResourceLocation("aspects", "block/boebo_log"));
+        axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_BOEBO_WOOD.get(),
+                new ResourceLocation("aspects", "block/stripped_boebo_log"),
+                new ResourceLocation("aspects", "block/stripped_boebo_log"));
 
         blockWithItem(ModBlocks.BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
