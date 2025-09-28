@@ -2,6 +2,7 @@ package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.custom.HagGooBlock;
+import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
 import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -87,6 +88,12 @@ public class ModBlocks {
                     super.entityInside(state, level, pos, entity);
                 }
             });
+    public static final RegistryObject<Block> HAG_GOO_LAYER = registerBlock("hag_goo_layer",
+            () -> new HagGooLayerBlock(BlockBehaviour.Properties.copy(ModBlocks.HAG_GOO_BLOCK.get())
+                    .noCollission()
+                    .noOcclusion()));
+
+
 
 
 
