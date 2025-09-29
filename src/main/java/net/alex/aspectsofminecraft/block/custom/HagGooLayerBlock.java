@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -75,8 +76,21 @@ public class HagGooLayerBlock extends FallingBlock implements SimpleWaterloggedB
                 ? Fluids.WATER.getSource(false)
                 : super.getFluidState(state);
     }
+    @Override
+    public void onLand(Level level,
+                       BlockPos pos,
+                       BlockState fallingState,
+                       BlockState hitState,
+                       net.minecraft.world.entity.item.FallingBlockEntity fallingEntity) {
+        if (hitState.getBlock() instanceof HagGooLayerBlock) {
+            level.setBlockAndUpdate(pos, this.defaultBlockState()
+                    .setValue(BlockStateProperties.WATERLOGGED, hitState.getValue(BlockStateProperties.WATERLOGGED)));
+        } else {
+            super.onLand(level, pos, fallingState, hitState, fallingEntity);
+        }
+    }
 
-    // 🔑 Prevent drops if placed by projectile
+
     @Override
     public List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootParams.Builder builder) {
         if (state.getValue(PROJECTILE_PLACED)) {

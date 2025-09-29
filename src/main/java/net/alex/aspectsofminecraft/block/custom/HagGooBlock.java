@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -17,6 +18,22 @@ public class HagGooBlock extends Block implements SimpleWaterloggedBlock {
         super(props);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(BlockStateProperties.WATERLOGGED, false));
+    }
+
+    @Override
+    public boolean isStickyBlock(BlockState state) {
+        return true;
+    }
+
+    @Override
+    public boolean canStickTo(BlockState state, BlockState other) {
+        if (other.is(Blocks.SLIME_BLOCK) || other.is(Blocks.HONEY_BLOCK)) {
+            return false;
+        }
+        if (state.is(this) && other.is(this)) {
+            return true;
+        }
+        return true;
     }
 
 
