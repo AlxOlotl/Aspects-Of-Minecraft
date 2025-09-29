@@ -81,14 +81,18 @@ public class HagGooLayerBlock extends FallingBlock implements SimpleWaterloggedB
                        BlockPos pos,
                        BlockState fallingState,
                        BlockState hitState,
-                       net.minecraft.world.entity.item.FallingBlockEntity fallingEntity) {
+                       FallingBlockEntity fallingEntity) {
         if (hitState.getBlock() instanceof HagGooLayerBlock) {
-            level.setBlockAndUpdate(pos, this.defaultBlockState()
-                    .setValue(BlockStateProperties.WATERLOGGED, hitState.getValue(BlockStateProperties.WATERLOGGED)));
+            level.setBlockAndUpdate(pos.below(), this.defaultBlockState()
+                    .setValue(BlockStateProperties.WATERLOGGED,
+                            hitState.getValue(BlockStateProperties.WATERLOGGED))
+                    .setValue(PROJECTILE_PLACED, false));
+            fallingEntity.discard();
         } else {
             super.onLand(level, pos, fallingState, hitState, fallingEntity);
         }
     }
+
 
 
     @Override
