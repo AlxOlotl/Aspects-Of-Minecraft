@@ -44,8 +44,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.SHELF_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_SHELF_CORAL_BLOCK);
-
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
+
+        blockItem(ModBlocks.CHARRED_STAIRS);
+        blockItem(ModBlocks.CHARRED_SLABS);
+        blockItem(ModBlocks.BOEBO_STAIRS);
+        blockItem(ModBlocks.BOEBO_SLABS);
+        blockItem(ModBlocks.BOEBO_SLABS);
+        blockItem(ModBlocks.BOEBO_SLABS);
+        blockItem(ModBlocks.BOEBO_WOOD);
+        blockItem(ModBlocks.STRIPPED_BOEBO_WOOD);
+
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
         nautilusBlock(ModBlocks.NAUTILUS_BLOCK.get());
 
