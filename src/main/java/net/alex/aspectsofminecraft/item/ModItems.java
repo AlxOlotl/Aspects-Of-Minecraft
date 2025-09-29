@@ -2,6 +2,7 @@ package net.alex.aspectsofminecraft.item;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.item.custom.HagGooItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,7 +34,8 @@ public class ModItems {
     public static final RegistryObject<Item> YETI_CRAB_SETAE = ITEMS.register("yeti_crab_setae",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAG_GOO = ITEMS.register("hag_goo",
-            () -> new Item(new Item.Properties().stacksTo(32)));
+            () -> new HagGooItem(new Item.Properties().stacksTo(32)));
+
 
     //tools
 
@@ -49,6 +51,8 @@ public class ModItems {
     public static final RegistryObject<Item> HAG_GOO_LAYER = ITEMS.register("hag_goo_layer",
             () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(),
                     new Item.Properties()));
+    public static final RegistryObject<Item> NAUTILUS_BLOCK_ITEM = ITEMS.register("nautilus_block",
+            () -> new BlockItem(ModBlocks.NAUTILUS_BLOCK.get(), new Item.Properties()));
 
 
     //foods

@@ -29,6 +29,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.SHELF_CORAL_BLOCK.get());
         this.dropSelf(ModBlocks.DEAD_SHELF_CORAL_BLOCK.get());
         this.dropSelf(ModBlocks.HAG_GOO_BLOCK.get());
+        this.dropSelf(ModBlocks.NAUTILUS_BLOCK.get());
 
 
         this.add(ModBlocks.HAG_GOO_LAYER.get(), block -> createOreDrop(ModBlocks.HAG_GOO_LAYER.get(), ModItems.HAG_GOO.get()));

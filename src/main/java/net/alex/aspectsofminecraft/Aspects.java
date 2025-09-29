@@ -8,8 +8,10 @@ import net.alex.aspectsofminecraft.item.ModCreativeModeTab;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -58,6 +60,7 @@ public class Aspects
             event.accept(ModBlocks.BOEBO_PLANKS);
             event.accept(ModBlocks.BOEBO_WOOD);
             event.accept(ModBlocks.STRIPPED_BOEBO_WOOD);
+            event.accept(ModBlocks.NAUTILUS_BLOCK);
 
         }
 
@@ -83,6 +86,7 @@ public class Aspects
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
             event.accept(ModBlocks.HAG_GOO_BLOCK);
+            event.accept(ModBlocks.NAUTILUS_BLOCK);
 
         }
 
@@ -91,6 +95,7 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(ModItems.HAG_GOO);
 
         }
 
@@ -124,5 +129,11 @@ public class Aspects
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
 
         }
+        @SubscribeEvent
+        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(ModEntities.HAG_GOO_PROJECTILE.get(),
+                    ThrownItemRenderer::new);
+        }
+
     }
 }

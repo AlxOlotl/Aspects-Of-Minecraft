@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft.block;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.custom.HagGooBlock;
 import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
+import net.alex.aspectsofminecraft.block.custom.NautilusBlock;
 import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -72,14 +73,14 @@ public class ModBlocks {
     //end
 
     //entities
+    public static final RegistryObject<Block> NAUTILUS_BLOCK = BLOCKS.register("nautilus_block",
+            () -> new NautilusBlock(BlockBehaviour.Properties.of()
+                    .strength(1.5f).requiresCorrectToolForDrops().noOcclusion()));
 
     //misc
     public static final RegistryObject<Block> HAG_GOO_BLOCK = registerBlock("hag_goo_block",
             () -> new HagGooBlock(BlockBehaviour.Properties.of()
-                    .strength(0.5f)
-                    .noOcclusion()
-                    .noCollission()
-                    .sound(SoundType.SLIME_BLOCK)) {
+                    .strength(0.5f).noOcclusion().noCollission().sound(SoundType.SLIME_BLOCK).isRedstoneConductor((s,g,p) -> false)) {
                 @Override
                 public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
                     if (entity instanceof LivingEntity livingEntity) {
@@ -90,25 +91,12 @@ public class ModBlocks {
             });
     public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
             () -> new HagGooLayerBlock(BlockBehaviour.Properties.of()
-                    .strength(0.1f)
-                    .noOcclusion()
-                    .noCollission()));
-
-
-
-
-
-
-
-
-
-
+                    .strength(0.1f).noOcclusion().noCollission().sound(SoundType.SLIME_BLOCK)));
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
-
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem (String name, RegistryObject<T> block) {

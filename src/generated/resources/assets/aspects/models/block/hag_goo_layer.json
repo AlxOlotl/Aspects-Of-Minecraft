@@ -39,6 +39,7 @@
     }
   ],
   "textures": {
-    "all": "aspects:block/hag_goo_block"
+    "all": "aspects:block/hag_goo_block",
+    "particle": "aspects:block/hag_goo_block"
   }
 }
