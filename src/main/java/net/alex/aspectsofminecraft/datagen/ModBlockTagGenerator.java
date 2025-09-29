@@ -43,11 +43,17 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.BOEBO_PLANKS.get(),
+                        ModBlocks.BOEBO_STAIRS.get(),
+                        ModBlocks.BOEBO_STAIRS.get(),
                         ModBlocks.BOEBO_WOOD.get(),
-                        ModBlocks.STRIPPED_BOEBO_WOOD.get());
+                        ModBlocks.STRIPPED_BOEBO_WOOD.get(),
+                        ModBlocks.CHARRED_PLANKS.get(),
+                        ModBlocks.CHARRED_STAIRS.get(),
+                        ModBlocks.CHARRED_SLABS.get());
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
-                .add(ModBlocks.HAG_GOO_BLOCK.get());
+                .add(ModBlocks.HAG_GOO_BLOCK.get(),
+                        ModBlocks.HAG_GOO_LAYER.get());
     }
 
     @Override

@@ -1,5 +1,5 @@
-// 1.20.1	2025-09-28T09:29:50.4104384	Block Tage
-d423d2abff6e09db74a6ada628f4cfd4d200e79c data/minecraft/tags/blocks/mineable/axe.json
-80923543803cf08c1b787f7fac205a62753a7aac data/minecraft/tags/blocks/mineable/hoe.json
+// 1.20.1	2025-09-29T15:33:02.5421331	Block Tage
+1b8cc9974596bd3bf946b4ec3b82c0d264c950b7 data/minecraft/tags/blocks/mineable/axe.json
+e734ecad7d1c16a5e100ac0345aa60eb9a7bd1cc data/minecraft/tags/blocks/mineable/hoe.json
 20e166a06e5fbff68c2a4f392e928cf089aeb2cd data/minecraft/tags/blocks/mineable/pickaxe.json
 14bccfdc49c1e31991942500ce65aef92369b244 data/minecraft/tags/blocks/needs_iron_tool.json

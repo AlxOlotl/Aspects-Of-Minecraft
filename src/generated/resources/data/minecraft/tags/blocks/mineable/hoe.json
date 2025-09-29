@@ -1,5 +1,6 @@
 {
   "values": [
-    "aspects:hag_goo_block"
+    "aspects:hag_goo_block",
+    "aspects:hag_goo_layer"
   ]
 }

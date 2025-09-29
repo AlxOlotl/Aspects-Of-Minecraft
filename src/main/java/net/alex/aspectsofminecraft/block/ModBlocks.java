@@ -30,8 +30,23 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Aspects.MOD_ID);
 
     //aboveground
+    public static final RegistryObject<Block> CHARRED_PLANKS = registerBlock("charred_planks",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+
+    public static final RegistryObject<Block> CHARRED_STAIRS = registerBlock("charred_stairs",
+            () -> new StairBlock(() -> ModBlocks.CHARRED_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+
+    public static final RegistryObject<Block> CHARRED_SLABS = registerBlock("charred_slabs",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
+
     public static final RegistryObject<Block> BOEBO_PLANKS = registerBlock("boebo_planks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS)));
+
+    public static final RegistryObject<Block> BOEBO_STAIRS = registerBlock("boebo_stairs",
+            () -> new StairBlock(() -> ModBlocks.BOEBO_PLANKS.get().defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.OAK_STAIRS)));
+
+    public static final RegistryObject<Block> BOEBO_SLABS = registerBlock("boebo_slabs",
+            () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.OAK_SLAB)));
 
     public static final RegistryObject<Block> BOEBO_WOOD = registerBlock("boebo_wood",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)));
@@ -92,6 +107,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> HAG_GOO_LAYER = BLOCKS.register("hag_goo_layer",
             () -> new HagGooLayerBlock(BlockBehaviour.Properties.of()
                     .strength(0.1f).noOcclusion().noCollission().sound(SoundType.SLIME_BLOCK)));
+
+
+
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block){
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

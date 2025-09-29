@@ -1,7 +1,12 @@
 {
   "values": [
     "aspects:boebo_planks",
+    "aspects:boebo_stairs",
+    "aspects:boebo_stairs",
     "aspects:boebo_wood",
-    "aspects:stripped_boebo_wood"
+    "aspects:stripped_boebo_wood",
+    "aspects:charred_planks",
+    "aspects:charred_stairs",
+    "aspects:charred_slabs"
   ]
 }

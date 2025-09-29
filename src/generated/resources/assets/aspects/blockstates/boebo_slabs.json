@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "aspects:block/boebo_slabs"
+    },
+    "type=double": {
+      "model": "aspects:block/boebo_planks"
+    },
+    "type=top": {
+      "model": "aspects:block/boebo_slabs_top"
+    }
+  }
+}

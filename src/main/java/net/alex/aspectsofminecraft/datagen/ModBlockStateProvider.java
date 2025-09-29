@@ -5,9 +5,7 @@ import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -28,22 +26,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.COBALT_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_COBALT_ORE);
 
+        blockWithItem(ModBlocks.CHARRED_PLANKS);
+        stairsBlock((StairBlock) ModBlocks.CHARRED_STAIRS.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        slabBlock(((SlabBlock) ModBlocks.CHARRED_SLABS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+
         blockWithItem(ModBlocks.BOEBO_PLANKS);
+        stairsBlock((StairBlock) ModBlocks.BOEBO_STAIRS.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
+        slabBlock(((SlabBlock) ModBlocks.BOEBO_SLABS.get()), blockTexture(ModBlocks.BOEBO_PLANKS.get()), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
         axisBlock((RotatedPillarBlock) ModBlocks.BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/boebo_log"),
                 new ResourceLocation("aspects", "block/boebo_log"));
-        itemModels().cubeColumn(ModBlocks.BOEBO_WOOD.getId().getPath(),
-                new ResourceLocation("aspects", "block/boebo_log"),
-                new ResourceLocation("aspects", "block/boebo_log"));
-
         axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/stripped_boebo_log"),
                 new ResourceLocation("aspects", "block/stripped_boebo_log"));
-        itemModels().cubeColumn(ModBlocks.STRIPPED_BOEBO_WOOD.getId().getPath(),
-                new ResourceLocation("aspects", "block/stripped_boebo_log"),
-                new ResourceLocation("aspects", "block/stripped_boebo_log"));
-
-
 
         blockWithItem(ModBlocks.BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
@@ -56,6 +51,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
 
 
+    }
+
+    private void blockItem(RegistryObject<Block> blockRegistryObject) {
+        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile("aspects/block/" +
+                ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject){
