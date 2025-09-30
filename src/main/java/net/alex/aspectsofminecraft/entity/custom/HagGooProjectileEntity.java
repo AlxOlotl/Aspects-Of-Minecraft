@@ -44,19 +44,14 @@ public class HagGooProjectileEntity extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult result) {
         super.onHit(result);
-
         if (this.level().isClientSide) return;
-
         if (result instanceof BlockHitResult bhr) {
             BlockPos hitPos = bhr.getBlockPos().relative(bhr.getDirection());
-
             if (this.isInWaterOrBubble()) {
                 placeGoo(hitPos);
                 this.discard();
                 return;
             }
-
-            // 🟨 Regular land behavior
             if (bounceCount == 0) {
                 placeGoo(hitPos);
                 bounce(bhr.getDirection());
@@ -67,11 +62,9 @@ public class HagGooProjectileEntity extends ThrowableItemProjectile {
                 placeGoo(hitPos.south());
                 placeGoo(hitPos.east());
                 placeGoo(hitPos.west());
-
-                this.discard();
-            }
-        }
+                this.discard();}}
     }
+
 
 
     @Override
@@ -91,7 +84,6 @@ public class HagGooProjectileEntity extends ThrowableItemProjectile {
         BlockState gooLayer = ModBlocks.HAG_GOO_LAYER.get()
                 .defaultBlockState()
                 .setValue(HagGooLayerBlock.PROJECTILE_PLACED, true);
-
         if (level().getBlockState(pos).isAir()) {
             level().setBlockAndUpdate(pos, gooLayer);
         }
@@ -99,16 +91,20 @@ public class HagGooProjectileEntity extends ThrowableItemProjectile {
 
     private void bounce(Direction hitDir) {
         Vec3 motion = this.getDeltaMovement();
-
         if (hitDir == Direction.UP || hitDir == Direction.DOWN) {
-            motion = new Vec3(motion.x, -motion.y * 0.5, motion.z);
+            motion = new Vec3(motion.x, -motion.y * 0.7, motion.z);
         } else if (hitDir == Direction.EAST || hitDir == Direction.WEST) {
-            motion = new Vec3(-motion.x * 0.5, motion.y, motion.z);
+            motion = new Vec3(-motion.x * 0.7, motion.y, motion.z);
         } else if (hitDir == Direction.NORTH || hitDir == Direction.SOUTH) {
-            motion = new Vec3(motion.x, motion.y, -motion.z * 0.5);
+            motion = new Vec3(motion.x, motion.y, -motion.z * 0.7);
         }
-
-        this.setDeltaMovement(motion.scale(0.5));
+        this.setDeltaMovement(motion);
+        this.setPos(
+                this.getX() + hitDir.getStepX() * 0.1,
+                this.getY() + hitDir.getStepY() * 0.1,
+                this.getZ() + hitDir.getStepZ() * 0.1
+        );
     }
+
 
 }

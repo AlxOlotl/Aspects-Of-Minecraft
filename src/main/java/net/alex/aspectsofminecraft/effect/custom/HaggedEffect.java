@@ -32,24 +32,42 @@ public class HaggedEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
+        int cappedAmp = Math.min(amplifier, 3);
+
         RandomSource random = entity.getRandom();
+
+        float dropChance = 0.005f + (0.05f * cappedAmp);
+
         ItemStack mainHand = entity.getMainHandItem();
-        if (!mainHand.isEmpty() && random.nextFloat() < 0.005f) {
+        if (!mainHand.isEmpty() && random.nextFloat() < dropChance) {
             entity.spawnAtLocation(mainHand.copy());
             entity.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         }
+
         ItemStack offHand = entity.getOffhandItem();
-        if (!offHand.isEmpty() && random.nextFloat() < 0.005f) {
+        if (!offHand.isEmpty() && random.nextFloat() < dropChance) {
             entity.spawnAtLocation(offHand.copy());
             entity.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, ItemStack.EMPTY);
         }
+
         for (EquipmentSlot slot : EquipmentSlot.values()) {
             if (slot.getType() == EquipmentSlot.Type.ARMOR) {
                 ItemStack armorPiece = entity.getItemBySlot(slot);
-                if (!armorPiece.isEmpty() && random.nextFloat() < 0.005f) {
+                if (!armorPiece.isEmpty() && random.nextFloat() < dropChance) {
                     entity.spawnAtLocation(armorPiece.copy());
                     entity.setItemSlot(slot, ItemStack.EMPTY);
-                }}}
+                }
+            }
+        }
+
+        if (entity.isAlive() && entity.onGround() && entity.getDeltaMovement().y > 0) {
+            double reduction = 1.0 - (0.25 * (cappedAmp + 1));
+            entity.setDeltaMovement(
+                    entity.getDeltaMovement().x,
+                    entity.getDeltaMovement().y * Math.max(reduction, 0.0),
+                    entity.getDeltaMovement().z
+            );
+        }
     }
 
     @Override
