@@ -9,3 +9,19 @@
 [29Sep2025 22:28:32.571] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
 [29Sep2025 22:28:34.036] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\torre\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, aspects, --all, --output, C:\Users\torre\OneDrive\Desktop\MOD MAKING FILE\Aspects-Of-Minecraft-1.20.X\src\generated\resources, --existing, C:\Users\torre\OneDrive\Desktop\MOD MAKING FILE\Aspects-Of-Minecraft-1.20.X\src\main\resources]
 [29Sep2025 22:28:34.473] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [aspects]
+[29Sep2025 22:28:39.405] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.9, for MC 1.20.1 with MCP 20230612.114412
+[29Sep2025 22:28:39.410] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.9 Initialized
+[29Sep2025 22:28:39.871] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/torre/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.9_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.9_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[29Sep2025 22:28:39.872] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/torre/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.9_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.4.9_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[29Sep2025 22:28:40.082] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: aspects
+[29Sep2025 22:28:40.314] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: aspects finished after 231 ms
+[29Sep2025 22:28:40.314] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block Tage
+[29Sep2025 22:28:40.333] [main/INFO] [net.minecraft.data.DataGenerator/]: Block Tage finished after 17 ms
+[29Sep2025 22:28:40.333] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: aspects
+[29Sep2025 22:28:40.338] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: aspects finished after 4 ms
+[29Sep2025 22:28:40.338] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[29Sep2025 22:28:40.409] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 71 ms
+[29Sep2025 22:28:40.409] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[29Sep2025 22:28:40.439] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 29 ms
+[29Sep2025 22:28:40.439] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 356 ms
+[29Sep2025 22:28:40.451] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 141, old count: 141, new count: 142, removed stale: 0, written: 0
