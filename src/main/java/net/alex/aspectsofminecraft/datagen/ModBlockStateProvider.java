@@ -36,15 +36,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
         axisBlock((RotatedPillarBlock) ModBlocks.BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/boebo_log"),
                 new ResourceLocation("aspects", "block/boebo_log"));
+        itemModels().cubeColumn(ModBlocks.BOEBO_WOOD.getId().getPath(),
+                new ResourceLocation("aspects", "block/boebo_log"),
+                new ResourceLocation("aspects", "block/boebo_log"));
+
         axisBlock((RotatedPillarBlock) ModBlocks.STRIPPED_BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/stripped_boebo_log"),
                 new ResourceLocation("aspects", "block/stripped_boebo_log"));
+        itemModels().cubeColumn(ModBlocks.STRIPPED_BOEBO_WOOD.getId().getPath(),
+                new ResourceLocation("aspects", "block/stripped_boebo_log"),
+                new ResourceLocation("aspects", "block/stripped_boebo_log"));
+
+
 
         blockWithItem(ModBlocks.BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.SHELF_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_SHELF_CORAL_BLOCK);
-        blockWithItem(ModBlocks.HAG_GOO_BLOCK);
 
         blockItem(ModBlocks.CHARRED_STAIRS);
         blockItem(ModBlocks.CHARRED_SLABS);
@@ -55,6 +63,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockItem(ModBlocks.BOEBO_WOOD);
         blockItem(ModBlocks.STRIPPED_BOEBO_WOOD);
 
+        blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
         nautilusBlock(ModBlocks.NAUTILUS_BLOCK.get());
 
@@ -63,9 +72,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile("aspects/block/" +
-                ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
+        simpleBlockItem(blockRegistryObject.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/" +
+                        ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath())));
     }
+
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject){
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));

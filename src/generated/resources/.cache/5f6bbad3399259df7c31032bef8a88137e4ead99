@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-29T15:53:38.6993177	Block States: aspects
+// 1.20.1	2025-09-29T16:09:02.9744904	Block States: aspects
 8a464c98af63cb5ea07be52191cd030f2a3c9e64 assets/aspects/blockstates/bamboo_coral_block.json
 602125d5ab2c14f293e55a30e8969de3da16bd1d assets/aspects/blockstates/boebo_planks.json
 714e051139d12a51ee35657a52c39a59de27c710 assets/aspects/blockstates/boebo_slabs.json
@@ -47,7 +47,12 @@ f00ae608a85b50aa2fe926207889b974bc6d1ac0 assets/aspects/models/block/shelf_coral
 b38c94056aed120c2dbe9e9be2bb3ccd4e049689 assets/aspects/models/block/stripped_boebo_wood_horizontal.json
 2b9c5e4e5e31e3aa366cc82c95cb61dc0350a5a7 assets/aspects/models/item/bamboo_coral_block.json
 1cd735ab91b4c7cff48099dd6231a36396c4d1b4 assets/aspects/models/item/boebo_planks.json
+a88fbed535377dd8ef7fbe1c200a0e7a5e92c915 assets/aspects/models/item/boebo_slabs.json
+2caf1c49d9c90e44ff01085ead2dbf30e5172923 assets/aspects/models/item/boebo_stairs.json
+3cf2e7f9ad9bb878defbb3d7143dbc26b9fe7861 assets/aspects/models/item/boebo_wood.json
 e4930ff6ea384415689a08f881e853464a4bb168 assets/aspects/models/item/charred_planks.json
+eacd59a7d1e1b2e4d5febcf66e65d1aafc4aed26 assets/aspects/models/item/charred_slabs.json
+079cd53dd37629de9c91ca4beb1f1e470dae6a7c assets/aspects/models/item/charred_stairs.json
 54c90a94141e5fdbd011aeacbe816bc188d10632 assets/aspects/models/item/cobalt_block.json
 9e180fac8c2d0258fcee2668e42e14c05a901230 assets/aspects/models/item/cobalt_ore.json
 4900cff78b9b413305b6fd8ee5cab0f9292291b3 assets/aspects/models/item/dead_bamboo_coral_block.json
@@ -58,3 +63,4 @@ d974834d9a4c75a109006a43f53afe34b66c6b8f assets/aspects/models/item/hag_goo_bloc
 63e909b97ff68e9956b551f2e71af27cf8d5cb27 assets/aspects/models/item/nautilus_block.json
 72698a30ec35b2812ee407f5c2b02a3a2932400d assets/aspects/models/item/raw_cobalt_block.json
 46691e3cd74c1eb2a3210dd95f1a96f4cb7c116a assets/aspects/models/item/shelf_coral_block.json
+c551067a639744c6ebcc815aa1c9c90a4a458c67 assets/aspects/models/item/stripped_boebo_wood.json
