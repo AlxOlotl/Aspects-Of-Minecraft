@@ -23,8 +23,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.RAW_COBALT_BLOCK.get());
         this.dropSelf(ModBlocks.CHARRED_PLANKS.get());
         this.dropSelf(ModBlocks.CHARRED_STAIRS.get());
+        this.dropSelf(ModBlocks.CHARRED_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.CHARRED_BUTTON.get());
         this.dropSelf(ModBlocks.BOEBO_PLANKS.get());
         this.dropSelf(ModBlocks.BOEBO_STAIRS.get());
+        this.dropSelf(ModBlocks.BOEBO_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.BOEBO_BUTTON.get());
         this.dropSelf(ModBlocks.BOEBO_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_BOEBO_WOOD.get());
         this.dropSelf(ModBlocks.BAMBOO_CORAL_BLOCK.get());

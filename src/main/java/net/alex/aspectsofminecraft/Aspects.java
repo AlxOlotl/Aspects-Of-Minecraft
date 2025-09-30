@@ -57,10 +57,20 @@ public class Aspects
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.COBALT_BLOCK);
-            event.accept(ModBlocks.BOEBO_PLANKS);
             event.accept(ModBlocks.BOEBO_WOOD);
+            event.accept(ModBlocks.BOEBO_PLANKS);
+            event.accept(ModBlocks.BOEBO_STAIRS);
+            event.accept(ModBlocks.BOEBO_SLABS);
+            event.accept(ModBlocks.BOEBO_PRESSURE_PLATE);
+            event.accept(ModBlocks.BOEBO_BUTTON);
+            event.accept(ModBlocks.CHARRED_PLANKS);
+            event.accept(ModBlocks.CHARRED_STAIRS);
+            event.accept(ModBlocks.CHARRED_SLABS);
+            event.accept(ModBlocks.CHARRED_PRESSURE_PLATE);
+            event.accept(ModBlocks.CHARRED_BUTTON);
             event.accept(ModBlocks.STRIPPED_BOEBO_WOOD);
             event.accept(ModBlocks.NAUTILUS_BLOCK);
+
 
         }
 
@@ -85,6 +95,10 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
+            event.accept(ModBlocks.CHARRED_PRESSURE_PLATE);
+            event.accept(ModBlocks.CHARRED_BUTTON);
+            event.accept(ModBlocks.BOEBO_PRESSURE_PLATE);
+            event.accept(ModBlocks.BOEBO_BUTTON);
             event.accept(ModBlocks.HAG_GOO_BLOCK);
             event.accept(ModBlocks.NAUTILUS_BLOCK);
 
@@ -104,11 +118,11 @@ public class Aspects
             event.accept(ModItems.LUMINOUS_TENDRIL);
             event.accept(ModItems.YETI_CRAB_LEG);
             event.accept(ModItems.YETI_CRAB_SETAE);
-            event.accept(ModItems.HAG_GOO);
         }
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_COBALT);
             event.accept(ModItems.COBALT_INGOT);
+            event.accept(ModItems.HAG_GOO);
         }
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS);
 

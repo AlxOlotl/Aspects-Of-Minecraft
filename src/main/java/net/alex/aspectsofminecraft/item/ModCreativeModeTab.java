@@ -34,11 +34,15 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.CHARRED_PLANKS.get());
                         output.accept(ModBlocks.CHARRED_STAIRS.get());
                         output.accept(ModBlocks.CHARRED_SLABS.get());
+                        output.accept(ModBlocks.CHARRED_PRESSURE_PLATE.get());
+                        output.accept(ModBlocks.CHARRED_BUTTON.get());
+                        output.accept(ModBlocks.BOEBO_WOOD.get());
+                        output.accept(ModBlocks.STRIPPED_BOEBO_WOOD.get());
                         output.accept(ModBlocks.BOEBO_PLANKS.get());
                         output.accept(ModBlocks.BOEBO_STAIRS.get());
                         output.accept(ModBlocks.BOEBO_SLABS.get());
-                        output.accept(ModBlocks.BOEBO_WOOD.get());
-                        output.accept(ModBlocks.STRIPPED_BOEBO_WOOD.get());
+                        output.accept(ModBlocks.BOEBO_PRESSURE_PLATE.get());
+                        output.accept(ModBlocks.BOEBO_BUTTON.get());
                     })
                     .build()
     );

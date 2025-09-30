@@ -1,6 +1,8 @@
-// 1.20.1	2025-09-28T08:43:39.0628911	Item Models: aspects
+// 1.20.1	2025-09-29T22:26:46.8858583	Item Models: aspects
 677cc4fd6ec62f124f54e14cd29b2f380c2c9cdd assets/aspects/models/item/aspect.json
+90d11f7eac3718636e5da04439451f69a7852aa5 assets/aspects/models/item/boebo_button.json
 5085ff10bec6a9719b4268a7e45a1695dbff5801 assets/aspects/models/item/boebo_door.json
+2dd659ba2d772afebe3acc866a44b507657ccd93 assets/aspects/models/item/charred_button.json
 89b999d651bbdd0c30835e46f8da9c0ba6057e12 assets/aspects/models/item/cobalt_ingot.json
 c31dd1c5fa6c87735f3f3c54ff1bfd1884f8517a assets/aspects/models/item/hag_goo.json
 11d5d802afe4127d7dcecf16ab89987dce597d81 assets/aspects/models/item/luminous_tendril.json

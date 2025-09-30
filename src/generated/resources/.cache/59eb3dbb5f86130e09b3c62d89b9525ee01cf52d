@@ -1,10 +1,14 @@
-// 1.20.1	2025-09-29T15:29:56.3099218	Loot Tables
+// 1.20.1	2025-09-29T22:26:46.8868569	Loot Tables
 02d973b1639d01311b3ec8cd0f4d4c92c32dd800 data/aspects/loot_tables/blocks/bamboo_coral_block.json
+3b2cd044197d69e874d727a0a91641f453e30ed0 data/aspects/loot_tables/blocks/boebo_button.json
 04e82dbdf53292c4f352eebbd984fe6aa6a3c4e0 data/aspects/loot_tables/blocks/boebo_planks.json
+04ea20183417548475c32a31d55d6965311dc6f7 data/aspects/loot_tables/blocks/boebo_pressure_plate.json
 23afff4a49d348feded690e8341e6ddb03de4232 data/aspects/loot_tables/blocks/boebo_slabs.json
 038a26ecc214b90ef05ee39fc0e0f8fe5cdd19c4 data/aspects/loot_tables/blocks/boebo_stairs.json
 1609ecf2e2a19200bdc3ef23aa1590d872d766a8 data/aspects/loot_tables/blocks/boebo_wood.json
+04d6b9aa5e4acd7cc83dc19c68f383d9dc20246a data/aspects/loot_tables/blocks/charred_button.json
 87acc355ba2e25e8255885a1b5bdc3a3021d96f0 data/aspects/loot_tables/blocks/charred_planks.json
+338efb060d14b8db9d8eda52d9a8ac172758c7b4 data/aspects/loot_tables/blocks/charred_pressure_plate.json
 371e27a556e690f36d125c38dbfa7f5c56c75c62 data/aspects/loot_tables/blocks/charred_slabs.json
 7d257260cb1350540727aa0473fd05a4c18b9651 data/aspects/loot_tables/blocks/charred_stairs.json
 88a948aa882c304fa5b538797834327db4dc978e data/aspects/loot_tables/blocks/cobalt_block.json

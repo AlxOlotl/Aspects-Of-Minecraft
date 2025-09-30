@@ -26,10 +26,14 @@
   "block.aspects.charred_planks": "Charred Planks",
   "block.aspects.charred_stairs": "Charred Stairs",
   "block.aspects.charred_slabs": "Charred Slabs",
+  "block.aspects.charred_pressure_plate": "Charred Pressure Plater",
+  "block.aspects.charred_button": "Charred Button",
 
   "block.aspects.boebo_planks": "Boebo Planks",
   "block.aspects.boebo_stairs": "Boebo Stairs",
   "block.aspects.boebo_slabs": "Boebo Slabs",
+  "block.aspects.boebo_pressure_plate": "Boebo Pressure Plate",
+  "block.aspects.boebo_button": "Boebo Button",
   "block.aspects.boebo_wood": "Boebo Wood",
   "block.aspects.stripped_boebo_wood": "Stipped Boebo Wood",
 

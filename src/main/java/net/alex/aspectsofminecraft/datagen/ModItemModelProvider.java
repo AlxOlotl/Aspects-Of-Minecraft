@@ -1,13 +1,16 @@
 package net.alex.aspectsofminecraft.datagen;
 
 import net.alex.aspectsofminecraft.Aspects;
+import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
@@ -30,6 +33,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SPECKLEREY_SEEDS);
         simpleItem(ModItems.HAG_GOO);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
+        buttonItem(ModBlocks.CHARRED_BUTTON, ModBlocks.CHARRED_PLANKS);
+        buttonItem(ModBlocks.BOEBO_BUTTON, ModBlocks.BOEBO_PLANKS);
+    }
+    public void buttonItem(RegistryObject<Block> block, RegistryObject<Block> baseBlock){
+        this.withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),mcLoc("block/button_inventory"))
+                .texture("texture", new ResourceLocation(Aspects.MOD_ID,"block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> itemRegistryObject){

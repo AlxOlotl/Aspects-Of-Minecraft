@@ -29,10 +29,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.CHARRED_PLANKS);
         stairsBlock((StairBlock) ModBlocks.CHARRED_STAIRS.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
         slabBlock(((SlabBlock) ModBlocks.CHARRED_SLABS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        buttonBlock((ButtonBlock) ModBlocks.CHARRED_BUTTON.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        pressurePlateBlock((PressurePlateBlock) ModBlocks.CHARRED_PRESSURE_PLATE.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
 
         blockWithItem(ModBlocks.BOEBO_PLANKS);
         stairsBlock((StairBlock) ModBlocks.BOEBO_STAIRS.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
         slabBlock(((SlabBlock) ModBlocks.BOEBO_SLABS.get()), blockTexture(ModBlocks.BOEBO_PLANKS.get()), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
+        buttonBlock((ButtonBlock) ModBlocks.BOEBO_BUTTON.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
+        pressurePlateBlock((PressurePlateBlock) ModBlocks.BOEBO_PRESSURE_PLATE.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
         axisBlock((RotatedPillarBlock) ModBlocks.BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/boebo_log"),
                 new ResourceLocation("aspects", "block/boebo_log"));
@@ -56,10 +60,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockItem(ModBlocks.CHARRED_STAIRS);
         blockItem(ModBlocks.CHARRED_SLABS);
+        blockItem(ModBlocks.CHARRED_PRESSURE_PLATE);
         blockItem(ModBlocks.BOEBO_STAIRS);
         blockItem(ModBlocks.BOEBO_SLABS);
-        blockItem(ModBlocks.BOEBO_SLABS);
-        blockItem(ModBlocks.BOEBO_SLABS);
+        blockItem(ModBlocks.BOEBO_PRESSURE_PLATE);
         blockItem(ModBlocks.BOEBO_WOOD);
         blockItem(ModBlocks.STRIPPED_BOEBO_WOOD);
 
