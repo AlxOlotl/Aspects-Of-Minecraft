@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bottom": "aspects:block/boebo_door_bottom",
+    "top": "aspects:block/boebo_door_top"
+  }
+}

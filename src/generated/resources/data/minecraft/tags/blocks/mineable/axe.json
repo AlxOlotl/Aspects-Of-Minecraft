@@ -2,11 +2,19 @@
   "values": [
     "aspects:boebo_planks",
     "aspects:boebo_stairs",
-    "aspects:boebo_stairs",
+    "aspects:boebo_slabs",
+    "aspects:boebo_fence",
+    "aspects:boebo_fence_gate",
+    "aspects:boebo_door",
+    "aspects:boebo_trapdoor",
     "aspects:boebo_wood",
     "aspects:stripped_boebo_wood",
     "aspects:charred_planks",
     "aspects:charred_stairs",
-    "aspects:charred_slabs"
+    "aspects:charred_slabs",
+    "aspects:charred_fence",
+    "aspects:charred_fence_gate",
+    "aspects:charred_door",
+    "aspects:charred_trapdoor"
   ]
 }

@@ -44,16 +44,35 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.BOEBO_PLANKS.get(),
                         ModBlocks.BOEBO_STAIRS.get(),
-                        ModBlocks.BOEBO_STAIRS.get(),
+                        ModBlocks.BOEBO_SLABS.get(),
+                        ModBlocks.BOEBO_FENCE.get(),
+                        ModBlocks.BOEBO_FENCE_GATE.get(),
+                        ModBlocks.BOEBO_DOOR.get(),
+                        ModBlocks.BOEBO_TRAPDOOR.get(),
                         ModBlocks.BOEBO_WOOD.get(),
                         ModBlocks.STRIPPED_BOEBO_WOOD.get(),
                         ModBlocks.CHARRED_PLANKS.get(),
                         ModBlocks.CHARRED_STAIRS.get(),
-                        ModBlocks.CHARRED_SLABS.get());
+                        ModBlocks.CHARRED_SLABS.get(),
+                        ModBlocks.CHARRED_FENCE.get(),
+                        ModBlocks.CHARRED_FENCE_GATE.get(),
+                        ModBlocks.CHARRED_DOOR.get(),
+                        ModBlocks.CHARRED_TRAPDOOR.get());
 
         this.tag(BlockTags.MINEABLE_WITH_HOE)
                 .add(ModBlocks.HAG_GOO_BLOCK.get(),
                         ModBlocks.HAG_GOO_LAYER.get());
+
+        this.tag(BlockTags.FENCES)
+                .add(ModBlocks.CHARRED_FENCE.get(),
+                        ModBlocks.BOEBO_FENCE.get());
+
+        this.tag(BlockTags.WALLS);
+
+
+        this.tag(BlockTags.FENCE_GATES)
+                .add(ModBlocks.CHARRED_FENCE_GATE.get(),
+                        ModBlocks.BOEBO_FENCE_GATE.get());
     }
 
     @Override

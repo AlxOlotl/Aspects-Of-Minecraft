@@ -23,19 +23,29 @@
   "block.aspects.cobalt_ore": "Cobalt Ore",
   "block.aspects.deepslate_cobalt_ore": "Deepslate Cobalt Ore",
 
-  "block.aspects.charred_planks": "Charred Planks",
-  "block.aspects.charred_stairs": "Charred Stairs",
-  "block.aspects.charred_slabs": "Charred Slabs",
-  "block.aspects.charred_pressure_plate": "Charred Pressure Plater",
-  "block.aspects.charred_button": "Charred Button",
-
   "block.aspects.boebo_planks": "Boebo Planks",
   "block.aspects.boebo_stairs": "Boebo Stairs",
   "block.aspects.boebo_slabs": "Boebo Slabs",
+  "block.aspects.boebo_fence": "Boebo Fence",
+  "block.aspects.boebo_fence_gate": "Boebo Fence Gate",
+  "block.aspects.boebo_door": "Boebo Door",
+  "block.aspects.boebo_trapdoor": "Boebo Trapdoor",
   "block.aspects.boebo_pressure_plate": "Boebo Pressure Plate",
   "block.aspects.boebo_button": "Boebo Button",
   "block.aspects.boebo_wood": "Boebo Wood",
   "block.aspects.stripped_boebo_wood": "Stipped Boebo Wood",
+
+  "block.aspects.charred_planks": "Charred Planks",
+  "block.aspects.charred_stairs": "Charred Stairs",
+  "block.aspects.charred_slabs": "Charred Slabs",
+  "block.aspects.charred_fence": "Charred Fence",
+  "block.aspects.charred_fence_gate": "Charred Fence Gate",
+  "block.aspects.charred_door": "Charred Door",
+  "block.aspects.charred_trapdoor": "Charred Trapdoor",
+  "block.aspects.charred_pressure_plate": "Charred Pressure Plater",
+  "block.aspects.charred_button": "Charred Button",
+
+
 
   "item.aspects.luminous_tendril": "Luminous Tendril",
   "item.aspects.yeti_crab_leg": "Yeti Crab Leg",

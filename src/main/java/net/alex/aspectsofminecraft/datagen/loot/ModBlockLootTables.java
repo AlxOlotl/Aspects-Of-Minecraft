@@ -21,16 +21,22 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         // Drop themselves
         this.dropSelf(ModBlocks.COBALT_BLOCK.get());
         this.dropSelf(ModBlocks.RAW_COBALT_BLOCK.get());
-        this.dropSelf(ModBlocks.CHARRED_PLANKS.get());
-        this.dropSelf(ModBlocks.CHARRED_STAIRS.get());
-        this.dropSelf(ModBlocks.CHARRED_PRESSURE_PLATE.get());
-        this.dropSelf(ModBlocks.CHARRED_BUTTON.get());
         this.dropSelf(ModBlocks.BOEBO_PLANKS.get());
         this.dropSelf(ModBlocks.BOEBO_STAIRS.get());
+        this.dropSelf(ModBlocks.BOEBO_FENCE.get());
+        this.dropSelf(ModBlocks.BOEBO_FENCE_GATE.get());
+        this.dropSelf(ModBlocks.BOEBO_TRAPDOOR.get());
         this.dropSelf(ModBlocks.BOEBO_PRESSURE_PLATE.get());
         this.dropSelf(ModBlocks.BOEBO_BUTTON.get());
         this.dropSelf(ModBlocks.BOEBO_WOOD.get());
         this.dropSelf(ModBlocks.STRIPPED_BOEBO_WOOD.get());
+        this.dropSelf(ModBlocks.CHARRED_PLANKS.get());
+        this.dropSelf(ModBlocks.CHARRED_STAIRS.get());
+        this.dropSelf(ModBlocks.CHARRED_FENCE.get());
+        this.dropSelf(ModBlocks.CHARRED_FENCE_GATE.get());
+        this.dropSelf(ModBlocks.CHARRED_TRAPDOOR.get());
+        this.dropSelf(ModBlocks.CHARRED_PRESSURE_PLATE.get());
+        this.dropSelf(ModBlocks.CHARRED_BUTTON.get());
         this.dropSelf(ModBlocks.BAMBOO_CORAL_BLOCK.get());
         this.dropSelf(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get());
         this.dropSelf(ModBlocks.SHELF_CORAL_BLOCK.get());
@@ -39,7 +45,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.NAUTILUS_BLOCK.get());
 
         this.add(ModBlocks.CHARRED_SLABS.get(), block -> createSlabItemTable(ModBlocks.CHARRED_SLABS.get()));
+        this.add(ModBlocks.CHARRED_DOOR.get(), block -> createDoorTable(ModBlocks.CHARRED_DOOR.get()));
         this.add(ModBlocks.BOEBO_SLABS.get(), block -> createSlabItemTable(ModBlocks.BOEBO_SLABS.get()));
+        this.add(ModBlocks.BOEBO_DOOR.get(), block -> createDoorTable(ModBlocks.BOEBO_DOOR.get()));
 
         this.add(ModBlocks.HAG_GOO_LAYER.get(), block -> createOreDrop(ModBlocks.HAG_GOO_LAYER.get(), ModItems.HAG_GOO.get()));
         this.add(ModBlocks.COBALT_ORE.get(), block -> createOreDrop(ModBlocks.COBALT_ORE.get(), ModItems.RAW_COBALT.get()));

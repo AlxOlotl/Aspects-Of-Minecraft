@@ -34,6 +34,10 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.CHARRED_PLANKS.get());
                         output.accept(ModBlocks.CHARRED_STAIRS.get());
                         output.accept(ModBlocks.CHARRED_SLABS.get());
+                        output.accept(ModBlocks.CHARRED_FENCE.get());
+                        output.accept(ModBlocks.CHARRED_FENCE_GATE.get());
+                        output.accept(ModBlocks.CHARRED_DOOR.get());
+                        output.accept(ModBlocks.CHARRED_TRAPDOOR.get());
                         output.accept(ModBlocks.CHARRED_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.CHARRED_BUTTON.get());
                         output.accept(ModBlocks.BOEBO_WOOD.get());
@@ -41,10 +45,13 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.BOEBO_PLANKS.get());
                         output.accept(ModBlocks.BOEBO_STAIRS.get());
                         output.accept(ModBlocks.BOEBO_SLABS.get());
+                        output.accept(ModBlocks.BOEBO_FENCE.get());
+                        output.accept(ModBlocks.BOEBO_FENCE_GATE.get());
+                        output.accept(ModBlocks.BOEBO_DOOR.get());
+                        output.accept(ModBlocks.BOEBO_TRAPDOOR.get());
                         output.accept(ModBlocks.BOEBO_PRESSURE_PLATE.get());
                         output.accept(ModBlocks.BOEBO_BUTTON.get());
-                    })
-                    .build()
+                    }).build()
     );
 
     // --- ITEMS TAB ---
@@ -61,8 +68,7 @@ public class ModCreativeModeTab {
                         output.accept(ModItems.YETI_CRAB_LEG.get());
                         output.accept(ModItems.YETI_CRAB_SETAE.get());
                         output.accept(ModItems.HAG_GOO.get());
-                    })
-                    .build()
+                    }).build()
     );
 
     // --- MOBS TAB ---
@@ -72,8 +78,7 @@ public class ModCreativeModeTab {
                     .title(Component.translatable("creativetab.aspects_mobs_tab"))
                     .displayItems((parameters, output) -> {
                         // Add mobs or spawn eggs here later
-                    })
-                    .build()
+                    }).build()
     );
 
     public static void register(IEventBus eventBus) {

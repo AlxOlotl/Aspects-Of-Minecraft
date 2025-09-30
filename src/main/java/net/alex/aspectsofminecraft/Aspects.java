@@ -61,11 +61,15 @@ public class Aspects
             event.accept(ModBlocks.BOEBO_PLANKS);
             event.accept(ModBlocks.BOEBO_STAIRS);
             event.accept(ModBlocks.BOEBO_SLABS);
+            event.accept(ModBlocks.BOEBO_FENCE);
+            event.accept(ModBlocks.BOEBO_FENCE_GATE);
             event.accept(ModBlocks.BOEBO_PRESSURE_PLATE);
             event.accept(ModBlocks.BOEBO_BUTTON);
             event.accept(ModBlocks.CHARRED_PLANKS);
             event.accept(ModBlocks.CHARRED_STAIRS);
             event.accept(ModBlocks.CHARRED_SLABS);
+            event.accept(ModBlocks.CHARRED_FENCE);
+            event.accept(ModBlocks.CHARRED_FENCE_GATE);
             event.accept(ModBlocks.CHARRED_PRESSURE_PLATE);
             event.accept(ModBlocks.CHARRED_BUTTON);
             event.accept(ModBlocks.STRIPPED_BOEBO_WOOD);
@@ -95,10 +99,16 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.REDSTONE_BLOCKS) {
-            event.accept(ModBlocks.CHARRED_PRESSURE_PLATE);
-            event.accept(ModBlocks.CHARRED_BUTTON);
+            event.accept(ModBlocks.BOEBO_FENCE_GATE);
+            event.accept(ModBlocks.BOEBO_DOOR);
+            event.accept(ModBlocks.BOEBO_TRAPDOOR);
             event.accept(ModBlocks.BOEBO_PRESSURE_PLATE);
             event.accept(ModBlocks.BOEBO_BUTTON);
+            event.accept(ModBlocks.CHARRED_FENCE_GATE);
+            event.accept(ModBlocks.CHARRED_DOOR);
+            event.accept(ModBlocks.CHARRED_TRAPDOOR);
+            event.accept(ModBlocks.CHARRED_PRESSURE_PLATE);
+            event.accept(ModBlocks.CHARRED_BUTTON);
             event.accept(ModBlocks.HAG_GOO_BLOCK);
             event.accept(ModBlocks.NAUTILUS_BLOCK);
 

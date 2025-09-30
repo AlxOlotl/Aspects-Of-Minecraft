@@ -26,17 +26,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.COBALT_ORE);
         blockWithItem(ModBlocks.DEEPSLATE_COBALT_ORE);
 
-        blockWithItem(ModBlocks.CHARRED_PLANKS);
-        stairsBlock((StairBlock) ModBlocks.CHARRED_STAIRS.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
-        slabBlock(((SlabBlock) ModBlocks.CHARRED_SLABS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
-        buttonBlock((ButtonBlock) ModBlocks.CHARRED_BUTTON.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
-        pressurePlateBlock((PressurePlateBlock) ModBlocks.CHARRED_PRESSURE_PLATE.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
-
         blockWithItem(ModBlocks.BOEBO_PLANKS);
         stairsBlock((StairBlock) ModBlocks.BOEBO_STAIRS.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
         slabBlock(((SlabBlock) ModBlocks.BOEBO_SLABS.get()), blockTexture(ModBlocks.BOEBO_PLANKS.get()), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
         buttonBlock((ButtonBlock) ModBlocks.BOEBO_BUTTON.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
         pressurePlateBlock((PressurePlateBlock) ModBlocks.BOEBO_PRESSURE_PLATE.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
+        fenceBlock((FenceBlock) ModBlocks.BOEBO_FENCE.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.BOEBO_FENCE_GATE.get(), blockTexture(ModBlocks.BOEBO_PLANKS.get()));
+        doorBlockWithRenderType((DoorBlock)ModBlocks.BOEBO_DOOR.get(), modLoc("block/boebo_door_bottom"), modLoc("block/boebo_door_top"),"cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock)ModBlocks.BOEBO_TRAPDOOR.get(), modLoc("block/boebo_trapdoor"),true,"cutout");
         axisBlock((RotatedPillarBlock) ModBlocks.BOEBO_WOOD.get(),
                 new ResourceLocation("aspects", "block/boebo_log"),
                 new ResourceLocation("aspects", "block/boebo_log"));
@@ -51,6 +49,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 new ResourceLocation("aspects", "block/stripped_boebo_log"),
                 new ResourceLocation("aspects", "block/stripped_boebo_log"));
 
+        blockWithItem(ModBlocks.CHARRED_PLANKS);
+        stairsBlock((StairBlock) ModBlocks.CHARRED_STAIRS.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        slabBlock(((SlabBlock) ModBlocks.CHARRED_SLABS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        buttonBlock((ButtonBlock) ModBlocks.CHARRED_BUTTON.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        pressurePlateBlock((PressurePlateBlock) ModBlocks.CHARRED_PRESSURE_PLATE.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        fenceBlock((FenceBlock) ModBlocks.CHARRED_FENCE.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        fenceGateBlock((FenceGateBlock) ModBlocks.CHARRED_FENCE_GATE.get(), blockTexture(ModBlocks.CHARRED_PLANKS.get()));
+        doorBlockWithRenderType((DoorBlock)ModBlocks.CHARRED_DOOR.get(), modLoc("block/charred_door_bottom"), modLoc("block/charred_door_top"),"cutout");
+        trapdoorBlockWithRenderType((TrapDoorBlock)ModBlocks.CHARRED_TRAPDOOR.get(), modLoc("block/charred_trapdoor"),true,"cutout");
 
 
         blockWithItem(ModBlocks.BAMBOO_CORAL_BLOCK);
@@ -58,14 +65,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.SHELF_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_SHELF_CORAL_BLOCK);
 
-        blockItem(ModBlocks.CHARRED_STAIRS);
-        blockItem(ModBlocks.CHARRED_SLABS);
-        blockItem(ModBlocks.CHARRED_PRESSURE_PLATE);
         blockItem(ModBlocks.BOEBO_STAIRS);
         blockItem(ModBlocks.BOEBO_SLABS);
+        blockItem(ModBlocks.BOEBO_FENCE_GATE);
+        blockItem(ModBlocks.BOEBO_TRAPDOOR, "_bottom");
         blockItem(ModBlocks.BOEBO_PRESSURE_PLATE);
         blockItem(ModBlocks.BOEBO_WOOD);
         blockItem(ModBlocks.STRIPPED_BOEBO_WOOD);
+        blockItem(ModBlocks.CHARRED_STAIRS);
+        blockItem(ModBlocks.CHARRED_SLABS);
+        blockItem(ModBlocks.CHARRED_FENCE_GATE);
+        blockItem(ModBlocks.CHARRED_TRAPDOOR, "_bottom");
+        blockItem(ModBlocks.CHARRED_PRESSURE_PLATE);
 
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
@@ -75,12 +86,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     }
 
+
+    private void blockItem(RegistryObject<Block> blockRegistryObject, String appendix) {
+        simpleBlockItem(blockRegistryObject.get(),
+                new ModelFile.UncheckedModelFile(modLoc("block/" +
+                        ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()+appendix)));
+    }
+
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockItem(blockRegistryObject.get(),
                 new ModelFile.UncheckedModelFile(modLoc("block/" +
                         ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath())));
     }
-
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject){
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
@@ -140,6 +157,5 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
         itemModels().withExistingParent("nautilus_block", modLoc("block/nautilus_block"));
     }
-
 
 }

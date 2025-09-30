@@ -66,28 +66,30 @@ public class NautilusBlock extends Block {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         BlockState below = level.getBlockState(pos.below());
+        Direction facing = state.getValue(FACING);
+
+        double x = pos.getX() + 0.5 + facing.getStepX() * 0.6;
+        double y = pos.getY() + 0.5;
+        double z = pos.getZ() + 0.5 + facing.getStepZ() * 0.6;
+        double spread = 0.2;
+
         if (below.is(Blocks.FIRE) || below.is(Blocks.SOUL_FIRE)) {
-            Direction facing = state.getValue(FACING);
-            double x = pos.getX() + 0.5 + facing.getStepX() * 0.6;
-            double y = pos.getY() + 0.5;
-            double z = pos.getZ() + 0.5 + facing.getStepZ() * 0.6;
-            double spread = 0.2;
-            double speed = 0.1 + random.nextDouble() * 0.15;
-
             for (int i = 0; i < 5; i++) {
-                double offsetX = x + (random.nextDouble() - 0.5) * spread;
-                double offsetY = y + (random.nextDouble() - 0.5) * spread;
-                double offsetZ = z + (random.nextDouble() - 0.5) * spread;
-
-                if (level.getFluidState(pos).isEmpty()) {
-                    level.addParticle(ParticleTypes.CLOUD,
-                            offsetX, offsetY, offsetZ,
-                            facing.getStepX() * speed, 0, facing.getStepZ() * speed);
-                } else {
-                    level.addParticle(ParticleTypes.BUBBLE,
-                            offsetX, offsetY, offsetZ,
-                            facing.getStepX() * speed, 0, facing.getStepZ() * speed);
-                }
+                level.addParticle(ParticleTypes.CLOUD,
+                        x + (random.nextDouble() - 0.5) * spread,
+                        y + (random.nextDouble() - 0.5) * spread,
+                        z + (random.nextDouble() - 0.5) * spread,
+                        facing.getStepX() * 0.1, 0, facing.getStepZ() * 0.1);
+            }
+        } else if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            for (int i = 0; i < 5; i++) {
+                level.addParticle(ParticleTypes.BUBBLE,
+                        x + (random.nextDouble() - 0.5) * spread,
+                        y + (random.nextDouble() - 0.5) * spread,
+                        z + (random.nextDouble() - 0.5) * spread,
+                        facing.getStepX() * 0.05,
+                        random.nextDouble() * 0.02,
+                        facing.getStepZ() * 0.05);
             }
         }
     }

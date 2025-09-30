@@ -46,8 +46,6 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     //blocks
-    public static final RegistryObject<Item> BOEBO_DOOR = ITEMS.register("boebo_door",
-            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAG_GOO_LAYER = ITEMS.register("hag_goo_layer",
             () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(),
                     new Item.Properties()));
