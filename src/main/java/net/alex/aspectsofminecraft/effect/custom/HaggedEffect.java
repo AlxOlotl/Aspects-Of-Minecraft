@@ -32,7 +32,7 @@ public class HaggedEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        int cappedAmp = Math.min(amplifier, 3);
+        int cappedAmp = Math.min(amplifier, 2);
 
         RandomSource random = entity.getRandom();
 

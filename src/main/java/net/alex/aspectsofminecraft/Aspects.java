@@ -1,6 +1,8 @@
 package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
+import net.alex.aspectsofminecraft.entity.custom.HagfishRenderer;
+import software.bernie.geckolib.GeckoLib;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.entity.ModEntities;
@@ -23,7 +25,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Aspects.MOD_ID)
 public class Aspects
 {
@@ -31,6 +32,7 @@ public class Aspects
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public Aspects() {
+        GeckoLib.initialize();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModCreativeModeTab.register(modEventBus);
@@ -40,11 +42,9 @@ public class Aspects
         ModEffects.MOB_EFFECTS.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
-
-        MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
-
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -155,9 +155,10 @@ public class Aspects
         }
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(ModEntities.HAG_GOO_PROJECTILE.get(),
-                    ThrownItemRenderer::new);
+            event.registerEntityRenderer(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
+            event.registerEntityRenderer(ModEntities.HAGFISH.get(), HagfishRenderer::new);
         }
+
 
     }
 }

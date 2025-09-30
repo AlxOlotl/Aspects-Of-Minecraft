@@ -23,14 +23,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.ASPECT);
         simpleItem(ModItems.OF);
         simpleItem(ModItems.MINECRAFT);
+
         simpleItem(ModItems.RAW_COBALT);
         simpleItem(ModItems.COBALT_INGOT);
+
         simpleItem(ModItems.LUMINOUS_TENDRIL);
         simpleItem(ModItems.YETI_CRAB_LEG);
         simpleItem(ModItems.YETI_CRAB_SETAE);
         simpleItem(ModItems.SPECKLEREY);
         simpleItem(ModItems.SPECKLEREY_SEEDS);
         simpleItem(ModItems.HAG_GOO);
+        basicItem(ModItems.HAGFISH_SPAWN_EGG.get());
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
         simpleBlockItem(ModBlocks.BOEBO_DOOR);
         simpleBlockItem(ModBlocks.CHARRED_DOOR);

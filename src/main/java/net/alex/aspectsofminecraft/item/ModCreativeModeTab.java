@@ -77,7 +77,7 @@ public class ModCreativeModeTab {
                     .icon(() -> new ItemStack(ModItems.MINECRAFT.get()))
                     .title(Component.translatable("creativetab.aspects_mobs_tab"))
                     .displayItems((parameters, output) -> {
-                        // Add mobs or spawn eggs here later
+                        output.accept(ModItems.HAGFISH_SPAWN_EGG.get());
                     }).build()
     );
 
