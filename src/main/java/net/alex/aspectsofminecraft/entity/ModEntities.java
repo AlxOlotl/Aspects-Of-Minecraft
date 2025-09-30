@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft.entity;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.entity.custom.HagGooProjectileEntity;
 import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +22,7 @@ public class ModEntities {
                     () -> EntityType.Builder.of(HagfishEntity::new, MobCategory.WATER_CREATURE)
                             .sized(2f, 0.5f)
                             .build("hagfish"));
+
     //Hostiles
 
     //Neutrals

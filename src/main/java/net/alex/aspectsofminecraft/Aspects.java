@@ -1,7 +1,9 @@
 package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
+import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
 import net.alex.aspectsofminecraft.entity.custom.HagfishRenderer;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import software.bernie.geckolib.GeckoLib;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.effect.ModEffects;
@@ -159,6 +161,9 @@ public class Aspects
             event.registerEntityRenderer(ModEntities.HAGFISH.get(), HagfishRenderer::new);
         }
 
-
+        @SubscribeEvent
+        public static void registerAttributes(EntityAttributeCreationEvent event) {
+            event.put(ModEntities.HAGFISH.get(), HagfishEntity.createAttributes().build());
+        }
     }
 }

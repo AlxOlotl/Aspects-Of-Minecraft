@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft.entity.custom;
 
 import net.alex.aspectsofminecraft.effect.ModEffects;
+import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -150,6 +152,13 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
                 return state.setAndContinue(RawAnimation.begin().thenLoop("HAGFISH_IDLE"));
             }
         }));
+    }
+
+    public static void registerEntitySpawns() {
+        SpawnPlacements.register(ModEntities.HAGFISH.get(),
+                SpawnPlacements.Type.IN_WATER,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                WaterAnimal::checkSurfaceWaterAnimalSpawnRules);
     }
 
     @Override
