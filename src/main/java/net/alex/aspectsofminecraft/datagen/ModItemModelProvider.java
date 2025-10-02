@@ -33,7 +33,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SPECKLEREY);
         simpleItem(ModItems.SPECKLEREY_SEEDS);
         simpleItem(ModItems.HAG_GOO);
-        basicItem(ModItems.HAGFISH_SPAWN_EGG.get());
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
         simpleBlockItem(ModBlocks.BOEBO_DOOR);
         simpleBlockItem(ModBlocks.CHARRED_DOOR);
@@ -41,6 +40,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         fenceItem(ModBlocks.CHARRED_FENCE, ModBlocks.CHARRED_PLANKS);
         buttonItem(ModBlocks.BOEBO_BUTTON, ModBlocks.BOEBO_PLANKS);
         fenceItem(ModBlocks.BOEBO_FENCE, ModBlocks.BOEBO_PLANKS);
+
+        withExistingParent(ModItems.HAGFISH_SPAWN_EGG.getId().getPath(), modLoc("item/hagfish_spawn_egg"));
     }
 
 

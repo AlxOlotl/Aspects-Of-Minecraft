@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"HAGFISH_IDLE": {
+		"animation.hagfish.idle": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -45,7 +45,7 @@
 				}
 			}
 		},
-		"HAGFISH_SWIM": {
+		"animation.hagfish.swim": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -89,7 +89,7 @@
 				}
 			}
 		},
-		"HAGFISH_CURL": {
+		"animation.hagfish.curl": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {

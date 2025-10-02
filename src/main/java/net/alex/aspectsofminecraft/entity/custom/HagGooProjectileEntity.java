@@ -92,11 +92,11 @@ public class HagGooProjectileEntity extends ThrowableItemProjectile {
     private void bounce(Direction hitDir) {
         Vec3 motion = this.getDeltaMovement();
         if (hitDir == Direction.UP || hitDir == Direction.DOWN) {
-            motion = new Vec3(motion.x, -motion.y * 0.7, motion.z);
+            motion = new Vec3(motion.x, -motion.y * 0.2, motion.z);
         } else if (hitDir == Direction.EAST || hitDir == Direction.WEST) {
-            motion = new Vec3(-motion.x * 0.7, motion.y, motion.z);
+            motion = new Vec3(-motion.x * 0.2, motion.y, motion.z);
         } else if (hitDir == Direction.NORTH || hitDir == Direction.SOUTH) {
-            motion = new Vec3(motion.x, motion.y, -motion.z * 0.7);
+            motion = new Vec3(motion.x, motion.y, -motion.z * 0.2);
         }
         this.setDeltaMovement(motion);
         this.setPos(

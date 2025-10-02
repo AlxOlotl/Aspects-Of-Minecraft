@@ -47,7 +47,7 @@ public class ModItems {
     public static final RegistryObject<Item> MAMMOTITAN_SPAWN_EGG = ITEMS.register("mammotitan_spawn_egg",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAGFISH_SPAWN_EGG = ITEMS.register("hagfish_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.HAGFISH, 0x5E006A, 0x9B59B6, // colors
+            () -> new ForgeSpawnEggItem(ModEntities.HAGFISH,0xfca0ff, 0x3e76a3,
                     new Item.Properties()));
 
     //blocks

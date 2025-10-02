@@ -1,9 +1,8 @@
 package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
-import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
-import net.alex.aspectsofminecraft.entity.custom.HagfishRenderer;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import software.bernie.geckolib.GeckoLib;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.effect.ModEffects;
@@ -38,10 +37,10 @@ public class Aspects
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModCreativeModeTab.register(modEventBus);
-        ModEntities.ENTITIES.register(modEventBus);
+        ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-        ModEffects.MOB_EFFECTS.register(modEventBus);
+        ModEffects.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
@@ -49,8 +48,7 @@ public class Aspects
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
+    private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
     //putting stuff in vanilla creative tab
@@ -136,7 +134,10 @@ public class Aspects
             event.accept(ModItems.COBALT_INGOT);
             event.accept(ModItems.HAG_GOO);
         }
-        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS);
+        if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS){
+            event.accept(ModItems.HAGFISH_SPAWN_EGG);
+
+        }
 
     }
 
@@ -153,17 +154,9 @@ public class Aspects
         {
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
-
-        }
-        @SubscribeEvent
-        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerEntityRenderer(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
-            event.registerEntityRenderer(ModEntities.HAGFISH.get(), HagfishRenderer::new);
-        }
-
-        @SubscribeEvent
-        public static void registerAttributes(EntityAttributeCreationEvent event) {
-            event.put(ModEntities.HAGFISH.get(), HagfishEntity.createAttributes().build());
+            EntityRenderers.register(ModEntities.HAGFISH.get(), HagfishRenderer::new);
+            EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
         }
     }
+
 }
