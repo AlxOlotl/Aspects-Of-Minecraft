@@ -21,7 +21,7 @@ public class ModEntities {
             ENTITY_TYPES.register("hagfish",
                     () -> EntityType.Builder.of(HagfishEntity::new, MobCategory.WATER_CREATURE)
                             .sized(0.5f, 0.5f)
-                            .build(new ResourceLocation(Aspects.MOD_ID, "hagfish").toString()));
+                            .build("hagfish"));
 
     //Hostiles
 

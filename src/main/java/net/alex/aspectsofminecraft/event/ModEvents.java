@@ -15,11 +15,6 @@ import net.alex.aspectsofminecraft.item.ModItems;
 public class ModEvents {
 
     @SubscribeEvent
-    public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-        event.put(ModEntities.HAGFISH.get(), HagfishEntity.createAttributes().build());
-    }
-
-    @SubscribeEvent
     public static void onFoodEaten(LivingEntityUseItemEvent.Finish event) {
         ItemStack stack = event.getItem();
         LivingEntity entity = event.getEntity();
