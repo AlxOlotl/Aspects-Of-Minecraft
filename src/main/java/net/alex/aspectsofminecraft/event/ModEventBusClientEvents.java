@@ -1,8 +1,8 @@
 package net.alex.aspectsofminecraft.event;
 
 import net.alex.aspectsofminecraft.Aspects;
-import net.alex.aspectsofminecraft.entity.client.HagfishModel;
-import net.alex.aspectsofminecraft.entity.client.ModModelLayers;
+import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
+import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,12 +13,13 @@ public class ModEventBusClientEvents {
 
     //Passive
     @SubscribeEvent
-    public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event){
-        event.registerLayerDefinition(ModModelLayers.HAGFISH_LAYER, HagfishModel::createBodyLayer);
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntities.HAGFISH.get(), HagfishRenderer::new);
     }
 
 
     //Hostile
 
     //Bosses
+
 }

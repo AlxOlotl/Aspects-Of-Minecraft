@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft.item;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.entity.ModEntities;
+import net.alex.aspectsofminecraft.item.custom.CustomSpawnEggItem;
 import net.alex.aspectsofminecraft.item.custom.HagGooItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -47,8 +48,7 @@ public class ModItems {
     public static final RegistryObject<Item> MAMMOTITAN_SPAWN_EGG = ITEMS.register("mammotitan_spawn_egg",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAGFISH_SPAWN_EGG = ITEMS.register("hagfish_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.HAGFISH,0xfca0ff, 0x3e76a3,
-                    new Item.Properties()));
+            () -> new CustomSpawnEggItem(ModEntities.HAGFISH, new Item.Properties()));
 
     //blocks
     public static final RegistryObject<Item> HAG_GOO_LAYER = ITEMS.register("hag_goo_layer",

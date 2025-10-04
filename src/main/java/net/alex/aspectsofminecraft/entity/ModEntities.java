@@ -19,9 +19,9 @@ public class ModEntities {
     //Passives
     public static final RegistryObject<EntityType<HagfishEntity>> HAGFISH =
             ENTITY_TYPES.register("hagfish",
-                    () -> EntityType.Builder.of(HagfishEntity::new, MobCategory.WATER_CREATURE)
-                            .sized(0.5f, 0.5f)
-                            .build("hagfish"));
+                    () -> EntityType.Builder.<HagfishEntity>of(HagfishEntity::new, MobCategory.WATER_CREATURE)
+                            .sized(0.6F, 0.4F)
+                            .build(new ResourceLocation(Aspects.MOD_ID, "hagfish").toString()));
 
     //Hostiles
 

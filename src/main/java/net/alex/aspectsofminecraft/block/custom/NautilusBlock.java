@@ -43,7 +43,6 @@ public class NautilusBlock extends Block {
 
     @Override
     public FluidState getFluidState(BlockState state) {
-        // prevents water overlay
         return state.getValue(BlockStateProperties.WATERLOGGED)
                 ? Fluids.WATER.getSource(false)
                 : super.getFluidState(state);
@@ -51,7 +50,6 @@ public class NautilusBlock extends Block {
 
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentState, Direction side) {
-        // hide faces when next to another NautilusBlock
         if (adjacentState.getBlock() instanceof NautilusBlock) {
             return true;
         }
@@ -68,10 +66,10 @@ public class NautilusBlock extends Block {
         BlockState below = level.getBlockState(pos.below());
         Direction facing = state.getValue(FACING);
 
-        double x = pos.getX() + 0.5 + facing.getStepX() * 0.6;
-        double y = pos.getY() + 0.5;
-        double z = pos.getZ() + 0.5 + facing.getStepZ() * 0.6;
-        double spread = 0.2;
+        double x = pos.getX() + 0.5 - facing.getStepX() * 0.6;
+        double y = pos.getY() + 0.2;
+        double z = pos.getZ() + 0.5 - facing.getStepZ() * 0.6;
+        double spread = 0.5;
 
         if (below.is(Blocks.FIRE) || below.is(Blocks.SOUL_FIRE)) {
             for (int i = 0; i < 5; i++) {

@@ -24,6 +24,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.OF);
         simpleItem(ModItems.MINECRAFT);
 
+        customSpawnEgg(ModItems.HAGFISH_SPAWN_EGG, "hagfish_spawn_egg");
+
         simpleItem(ModItems.RAW_COBALT);
         simpleItem(ModItems.COBALT_INGOT);
 
@@ -41,7 +43,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         buttonItem(ModBlocks.BOEBO_BUTTON, ModBlocks.BOEBO_PLANKS);
         fenceItem(ModBlocks.BOEBO_FENCE, ModBlocks.BOEBO_PLANKS);
 
-        withExistingParent(ModItems.HAGFISH_SPAWN_EGG.getId().getPath(), modLoc("item/hagfish_spawn_egg"));
+        basicItem(ModItems.HAGFISH_SPAWN_EGG.get());
+
     }
 
 
@@ -71,5 +74,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(Aspects.MOD_ID,"item/" +item.getId().getPath()));
+    }
+
+    private void customSpawnEgg(RegistryObject<Item> item, String textureName) {
+        getBuilder(item.getId().getPath())
+                .parent(getExistingFile(mcLoc("item/generated")))
+                .texture("layer0", modLoc("item/" + textureName));
     }
 }

@@ -36,9 +36,9 @@ public class Aspects
         GeckoLib.initialize();
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModCreativeModeTab.register(modEventBus);
         ModEntities.register(modEventBus);
         ModItems.register(modEventBus);
+        ModCreativeModeTab.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEffects.register(modEventBus);
 
