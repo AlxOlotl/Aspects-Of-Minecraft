@@ -3,11 +3,10 @@ package net.alex.aspectsofminecraft.item;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.entity.ModEntities;
-import net.alex.aspectsofminecraft.item.custom.CustomSpawnEggItem;
 import net.alex.aspectsofminecraft.item.custom.HagGooItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -51,7 +50,7 @@ public class ModItems {
             () -> new CustomSpawnEggItem(ModEntities.HAGFISH, new Item.Properties()));
 
     //blocks
-    public static final RegistryObject<Item> HAG_GOO_LAYER = ITEMS.register("hag_goo_layer",
+    public static final RegistryObject<BlockItem> HAG_GOO_LAYER = ITEMS.register("hag_goo_layer",
             () -> new BlockItem(ModBlocks.HAG_GOO_LAYER.get(),
                     new Item.Properties()));
     public static final RegistryObject<Item> NAUTILUS_BLOCK_ITEM = ITEMS.register("nautilus_block",

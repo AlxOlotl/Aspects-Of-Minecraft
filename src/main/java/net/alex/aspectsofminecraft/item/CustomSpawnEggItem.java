@@ -1,4 +1,4 @@
-package net.alex.aspectsofminecraft.item.custom;
+package net.alex.aspectsofminecraft.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

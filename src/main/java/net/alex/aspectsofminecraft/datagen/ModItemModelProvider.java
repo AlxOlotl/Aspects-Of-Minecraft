@@ -6,6 +6,7 @@ import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -44,7 +45,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         fenceItem(ModBlocks.BOEBO_FENCE, ModBlocks.BOEBO_PLANKS);
 
         basicItem(ModItems.HAGFISH_SPAWN_EGG.get());
-
+        hagGooLayerItem(ModBlocks.HAG_GOO_LAYER.get());
     }
 
 
@@ -63,6 +64,41 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("texture", new ResourceLocation(Aspects.MOD_ID,"block/" + ForgeRegistries.BLOCKS.getKey(baseBlock.get()).getPath()));
     }
 
+    private void hagGooLayerItem(Block block) {
+        String baseName = ForgeRegistries.BLOCKS.getKey(block).getPath();
+
+        getBuilder(baseName)
+                .parent(getExistingFile(modLoc("block/" + baseName + "_layer_1")))
+                .texture("all", modLoc("block/hag_goo_block"))
+                .transforms()
+                .transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
+                .rotation(0, 45, 0)
+                .translation(0, 4, 0)
+                .scale(0.4f, 0.4f, 0.4f)
+                .end()
+                .transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND)
+                .rotation(0, 45, 0)
+                .translation(0, 4, 0)
+                .scale(0.4f, 0.4f, 0.4f)
+                .end()
+                .transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND)
+                .rotation(75, 45, 0)
+                .translation(0, 2.75f, 2.25f)
+                .scale(0.375F, 0.375F, 0.375F)
+                .end()
+                .transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND)
+                .rotation(75, 45, 0)
+                .translation(0, 2.75f, 2.25f)
+                .scale(0.375F, 0.375F, 0.375F)
+                .end()
+                .end();
+    }
+
+    private ItemModelBuilder handHeldItem(RegistryObject<Item> item) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(Aspects.MOD_ID, "item/" + item.getId().getPath()));
+    }
     private ItemModelBuilder simpleBlockItem(RegistryObject<Block> blockRegistryObject) {
         return withExistingParent(
                 ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
@@ -81,4 +117,5 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .parent(getExistingFile(mcLoc("item/generated")))
                 .texture("layer0", modLoc("item/" + textureName));
     }
+
 }

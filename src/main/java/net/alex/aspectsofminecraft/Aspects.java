@@ -49,7 +49,9 @@ public class Aspects
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+
     }
+
 
     //putting stuff in vanilla creative tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {

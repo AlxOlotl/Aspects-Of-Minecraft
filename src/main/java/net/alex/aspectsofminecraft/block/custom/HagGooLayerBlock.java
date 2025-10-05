@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -28,46 +30,54 @@ import java.util.Collections;
 import java.util.List;
 
 public class HagGooLayerBlock extends FallingBlock implements SimpleWaterloggedBlock {
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 2, 16);
-
-    // NEW: marker property for projectile-placed goo
+    public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
     public static final BooleanProperty PROJECTILE_PLACED = BooleanProperty.create("projectile_placed");
 
+    private static final VoxelShape[] SHAPES = new VoxelShape[8];
+    static {
+        for (int i = 0; i < 8; i++) {
+            SHAPES[i] = Block.box(0, 0, 0, 16, (i + 1) * 2, 16);
+        }
+    }
+
     public HagGooLayerBlock(BlockBehaviour.Properties props) {
-        super(props.noCollission().noOcclusion());
+        super(props.strength(0.2F).noOcclusion().noCollission());
         this.registerDefaultState(this.stateDefinition.any()
+                .setValue(LAYERS, 1)
                 .setValue(BlockStateProperties.WATERLOGGED, false)
-                .setValue(PROJECTILE_PLACED, false)); // default = not projectile-placed
+                .setValue(PROJECTILE_PLACED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.WATERLOGGED, PROJECTILE_PLACED);
+        builder.add(LAYERS, BlockStateProperties.WATERLOGGED, PROJECTILE_PLACED);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext ctx) {
-        return SHAPE;
+        return SHAPES[state.getValue(LAYERS) - 1];
     }
 
     @Override
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!level.isClientSide && entity instanceof LivingEntity living) {
-            living.addEffect(new MobEffectInstance(ModEffects.HAGGED.get(), 200)); // 10s
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockPos pos = context.getClickedPos();
+        Level level = context.getLevel();
+        BlockState existing = level.getBlockState(pos);
+
+        if (existing.is(this)) {
+            int current = existing.getValue(LAYERS);
+            return existing.setValue(LAYERS, Math.min(8, current + 1));
         }
+
+        FluidState fluid = level.getFluidState(pos);
+        return this.defaultBlockState()
+                .setValue(BlockStateProperties.WATERLOGGED, fluid.getType() == Fluids.WATER);
     }
 
     @Override
-    public BlockState updateShape(BlockState state,
-                                  Direction direction,
-                                  BlockState neighborState,
-                                  LevelAccessor level,
-                                  BlockPos pos,
-                                  BlockPos neighborPos) {
-        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
-            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        int layers = state.getValue(LAYERS);
+        return context.getItemInHand().is(this.asItem()) && layers < 8;
     }
 
     @Override
@@ -76,24 +86,36 @@ public class HagGooLayerBlock extends FallingBlock implements SimpleWaterloggedB
                 ? Fluids.WATER.getSource(false)
                 : super.getFluidState(state);
     }
+
     @Override
-    public void onLand(Level level,
-                       BlockPos pos,
-                       BlockState fallingState,
-                       BlockState hitState,
-                       FallingBlockEntity fallingEntity) {
-        if (hitState.getBlock() instanceof HagGooLayerBlock) {
-            level.setBlockAndUpdate(pos.below(), this.defaultBlockState()
-                    .setValue(BlockStateProperties.WATERLOGGED,
-                            hitState.getValue(BlockStateProperties.WATERLOGGED))
-                    .setValue(PROJECTILE_PLACED, false));
+    public BlockState updateShape(BlockState state, Direction dir, BlockState neighbor, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+        return super.updateShape(state, dir, neighbor, level, pos, neighborPos);
+    }
+
+    @Override
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (!level.isClientSide && entity instanceof LivingEntity living) {
+            living.addEffect(new MobEffectInstance(ModEffects.HAGGED.get(), 200));
+        }
+    }
+
+    // When the falling goo lands
+    @Override
+    public void onLand(Level level, BlockPos pos, BlockState fallingState, BlockState hitState, FallingBlockEntity fallingEntity) {
+        if (!level.isClientSide && hitState.is(this)) {
+            int belowLayers = hitState.getValue(LAYERS);
+            int fallingLayers = fallingState.getValue(LAYERS);
+            int total = Math.min(8, belowLayers + fallingLayers);
+
+            level.setBlockAndUpdate(pos, hitState.setValue(LAYERS, total));
             fallingEntity.discard();
         } else {
             super.onLand(level, pos, fallingState, hitState, fallingEntity);
         }
     }
-
-
 
     @Override
     public List<ItemStack> getDrops(BlockState state, net.minecraft.world.level.storage.loot.LootParams.Builder builder) {

@@ -29,9 +29,6 @@ public class HagfishRenderer extends GeoEntityRenderer<HagfishEntity> {
             poseStack.scale(0.2f, 0.2f, 0.2f);
         }
 
-        float interpolatedPitch = Mth.lerp(partialTick, entity.prevRenderPitch, entity.renderPitch);
-        poseStack.mulPose(Axis.XP.rotationDegrees(interpolatedPitch));
-
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 

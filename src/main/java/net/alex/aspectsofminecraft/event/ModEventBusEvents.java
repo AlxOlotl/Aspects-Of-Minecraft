@@ -4,6 +4,8 @@ import net.alex.aspectsofminecraft.Aspects;
 
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -22,4 +24,7 @@ public class ModEventBusEvents {
     //Hostile
 
     //Bosses
+
+    //Other
+
 }

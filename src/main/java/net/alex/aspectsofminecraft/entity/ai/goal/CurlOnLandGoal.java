@@ -26,9 +26,11 @@ public class CurlOnLandGoal extends Goal {
 
     @Override
     public void tick() {
-        hagfish.setDeltaMovement(0, 0, 0);
+        var motion = hagfish.getDeltaMovement();
+        hagfish.setDeltaMovement(0, motion.y - 0.08D, 0);
         hagfish.curlTicks++;
     }
+
 
     @Override
     public boolean canContinueToUse() {

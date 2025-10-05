@@ -5,6 +5,7 @@ import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
@@ -104,24 +105,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void hagGooLayer(Block block) {
-        simpleBlock(block, models().getBuilder("hag_goo_layer")
-                .parent(models().getExistingFile(mcLoc("block/block")))
-                .texture("all", modLoc("block/hag_goo_block"))
-                .texture("particle", modLoc("block/hag_goo_block"))
-                .element()
-                .from(0, 0, 0).to(16, 2, 16)
-                .face(Direction.UP).texture("#all").end()
-                .face(Direction.DOWN).texture("#all").end()
-                .face(Direction.NORTH).texture("#all").cullface(Direction.NORTH).end()
-                .face(Direction.SOUTH).texture("#all").cullface(Direction.SOUTH).end()
-                .face(Direction.WEST).texture("#all").cullface(Direction.WEST).end()
-                .face(Direction.EAST).texture("#all").cullface(Direction.EAST).end()
-                .end()
-        );
+        String baseName = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        String texture = "block/hag_goo_block";
+        for (int i = 1; i <= 8; i++) {
+            float height = 2.0f * i;
+            models().getBuilder(baseName + "_layer_" + i)
+                    .parent(models().getExistingFile(mcLoc("block/block"))).texture("all", modLoc(texture)).texture("particle", modLoc(texture)).element().from(0.0f, 0.0f, 0.0f).to(16.0f, height, 16.0f).face(Direction.UP).texture("#all").end().face(Direction.DOWN).texture("#all").end().face(Direction.NORTH).texture("#all").end().face(Direction.SOUTH).texture("#all").end().face(Direction.WEST).texture("#all").end().face(Direction.EAST).texture("#all").end().end();
+        }
+        getVariantBuilder(block).forAllStates(state -> {
+            int layers = state.getValue(BlockStateProperties.LAYERS);
+            return ConfiguredModel.builder()
+                    .modelFile(models().getExistingFile(modLoc("block/" + baseName + "_layer_" + layers))).build();
+        });
+        itemModels().getBuilder(baseName)
+                .parent(models().getExistingFile(modLoc("block/" + baseName + "_layer_1"))).transforms().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, -10, 0).translation(0, 3.5F, 1.0F).scale(0.9F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0, 10, 0).translation(0, 3.5F, 1.0F).scale(0.9F).end().end();
 
-        itemModels().getBuilder(ForgeRegistries.BLOCKS.getKey(block).getPath())
-                .parent(models().getExistingFile(modLoc("block/hag_goo_layer")));
     }
+
 
     private void nautilusBlock(Block block) {
         ModelFile nautilusModel = models().getBuilder("nautilus_block")

@@ -98,12 +98,12 @@
 						"vector": [-5, "-77.5+Math.sin(query.anim_time * 90)*-2", 0]
 					},
 					"position": {
-						"vector": [0, 0, 12]
+						"vector": [0, 0, 13]
 					}
 				},
 				"tail": {
 					"rotation": {
-						"vector": [-2.5, "45+Math.sin(query.anim_time * 90)*3", -2.5]
+						"vector": [-2.5, "47.5+Math.sin(query.anim_time * 90)*3", -2.5]
 					}
 				},
 				"tail2": {

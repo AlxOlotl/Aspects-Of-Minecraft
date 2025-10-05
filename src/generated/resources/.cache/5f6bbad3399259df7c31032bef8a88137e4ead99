@@ -1,4 +1,4 @@
-// 1.20.1	2025-09-30T11:39:06.4254499	Block States: aspects
+// 1.20.1	2025-10-05T11:42:01.6292705	Block States: aspects
 8a464c98af63cb5ea07be52191cd030f2a3c9e64 assets/aspects/blockstates/bamboo_coral_block.json
 e1bdb4957d311f5398a560ed34c5055cd1f55441 assets/aspects/blockstates/boebo_button.json
 8ccd4739a0ec623dc1edb78ae0666b365a6403a6 assets/aspects/blockstates/boebo_door.json
@@ -25,7 +25,7 @@ c3f6d8fd24abd3a5f8a8b665c704d4e1ce5eca9f assets/aspects/blockstates/charred_stai
 549cded6e7bbc6c6b77ae871e6294d44fde410da assets/aspects/blockstates/dead_shelf_coral_block.json
 f8c2d117219dbc661f6dadb3f45aa211f9d3d3a8 assets/aspects/blockstates/deepslate_cobalt_ore.json
 f31cdd9e9fc40de3067d68e62656ef62e12f39ed assets/aspects/blockstates/hag_goo_block.json
-e53995493512c0a2f0685a0424c48462b993d3c9 assets/aspects/blockstates/hag_goo_layer.json
+f6e305140cb968c18642101afeca6473d846ba97 assets/aspects/blockstates/hag_goo_layer.json
 208c9e662c46bea9eef1b93145448f466101136e assets/aspects/blockstates/nautilus_block.json
 46e9d5b181f54231109302892f063e4891bdd4c3 assets/aspects/blockstates/raw_cobalt_block.json
 9ae8bb97968e52f6faaf86c0c6b63fe246af2fd2 assets/aspects/blockstates/shelf_coral_block.json
@@ -93,7 +93,14 @@ fb6283a8d17ac305de93b1b65b82445743ea034c assets/aspects/models/block/cobalt_ore.
 811c7c0a7a77539c33976fd688447126c2e8734b assets/aspects/models/block/dead_shelf_coral_block.json
 221d92db22ff07266e7cfca8cc8683bea0936a02 assets/aspects/models/block/deepslate_cobalt_ore.json
 1aa7f14b39011e5473a58553dcbc9f9131eb4a9b assets/aspects/models/block/hag_goo_block.json
-cee3d20978844dde25916750a692317cae833200 assets/aspects/models/block/hag_goo_layer.json
+da6cace77eb3e5cda2db351a1c7aae1bb45e74a0 assets/aspects/models/block/hag_goo_layer_layer_1.json
+52bba848e1b6ecc854c899636351b3e3e0e13165 assets/aspects/models/block/hag_goo_layer_layer_2.json
+c1c4f96929ad0095576e850edfa529eaedc9f10e assets/aspects/models/block/hag_goo_layer_layer_3.json
+11e54f0c835682c7d4c9a23d1b6d60debd34a64a assets/aspects/models/block/hag_goo_layer_layer_4.json
+b60678ed28c4dd846c4a725056ccfcaf04ea8b3a assets/aspects/models/block/hag_goo_layer_layer_5.json
+09589f40897e2dbd683c239caba0a12ec0c86f94 assets/aspects/models/block/hag_goo_layer_layer_6.json
+b26a74f6eea351b87da847d7baf13a744554b8ba assets/aspects/models/block/hag_goo_layer_layer_7.json
+052213efc3c67020f52864d5978d66180015e0f8 assets/aspects/models/block/hag_goo_layer_layer_8.json
 4ede0807679a789595ef93418f5e6e7821ab82b3 assets/aspects/models/block/nautilus_block.json
 21efa62721e5a1c36d145208811702eed767263a assets/aspects/models/block/raw_cobalt_block.json
 f00ae608a85b50aa2fe926207889b974bc6d1ac0 assets/aspects/models/block/shelf_coral_block.json
@@ -119,7 +126,7 @@ fb5593f898a5756969782dd35a223e8ebb0860e3 assets/aspects/models/item/charred_trap
 6308485e18c934b6cb3f909d81f2b2a180d23b8e assets/aspects/models/item/dead_shelf_coral_block.json
 bf5362c90ab38a25a362fd7dc562860a86ac8eb4 assets/aspects/models/item/deepslate_cobalt_ore.json
 d974834d9a4c75a109006a43f53afe34b66c6b8f assets/aspects/models/item/hag_goo_block.json
-4e3da0112a3b96ca1541bf6836aee493f583c4b6 assets/aspects/models/item/hag_goo_layer.json
+5923acfd432f8cc065b2dd6ce0949f7a841eef7f assets/aspects/models/item/hag_goo_layer.json
 63e909b97ff68e9956b551f2e71af27cf8d5cb27 assets/aspects/models/item/nautilus_block.json
 72698a30ec35b2812ee407f5c2b02a3a2932400d assets/aspects/models/item/raw_cobalt_block.json
 46691e3cd74c1eb2a3210dd95f1a96f4cb7c116a assets/aspects/models/item/shelf_coral_block.json

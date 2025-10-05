@@ -18,12 +18,14 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -36,7 +38,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.EnumSet;
 
-public class HagfishEntity extends Animal implements GeoEntity {
+public class HagfishEntity extends WaterAnimal implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     private int outOfWaterTicks = 0;
@@ -49,16 +51,17 @@ public class HagfishEntity extends Animal implements GeoEntity {
     public float prevTurnAmount = 0.0F;
     public float turnAmount = 0.0F;
 
-    public HagfishEntity(EntityType<? extends Animal> type, Level level) {
-        super(type, level);
+    public HagfishEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
         this.moveControl = new HagfishMoveControl(this);
     }
+
 
     // --- Attributes ---
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 8.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3)
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.5)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0);
@@ -72,23 +75,23 @@ public class HagfishEntity extends Animal implements GeoEntity {
     // --- Goals ---
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new RandomSwimmingGoal(this, 1.0D, 40));
-        this.goalSelector.addGoal(1, new CurlOnLandGoal(this));
+        this.goalSelector.addGoal(0, new RandomSwimmingGoal(this, 1.0D, 20));
+        this.goalSelector.addGoal(5, new CurlOnLandGoal(this));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.75D, Ingredient.of(Items.ROTTEN_FLESH), false));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Dolphin.class, 10.0F, 1.2D, 1.5D));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Axolotl.class, 10.0F, 1.2D, 1.5D));
         this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Guardian.class, 10.0F, 1.2D, 1.5D));
-        this.goalSelector.addGoal(3, new CurlAtBottomGoal(this));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, false) {
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.5D, false) {
             @Override
             protected double getAttackReachSqr(LivingEntity target) {
                 return 1.5F + target.getBbWidth();
             }
         });
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
         // Targeting
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Drowned.class, true));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Drowned.class, true));
     }
 
     // --- Tick ---
@@ -96,7 +99,6 @@ public class HagfishEntity extends Animal implements GeoEntity {
     public void tick() {
         super.tick();
 
-        // Turning interpolation
         float deltaYaw = Mth.wrapDegrees(this.getYRot() - this.yRotO);
         prevTurnAmount = turnAmount;
         turnAmount = Mth.clamp(deltaYaw / 45F, -1F, 1F);
@@ -115,18 +117,10 @@ public class HagfishEntity extends Animal implements GeoEntity {
             this.setCurled(false);
         }
 
-        // Render pitch (axolotl-like tilt)
         this.prevRenderPitch = this.renderPitch;
-        if (inWater && !this.isCurled() && motion.lengthSqr() > 0.0001) {
-            float horizontalSpeed = (float)Math.sqrt(motion.x * motion.x + motion.z * motion.z);
-            float targetPitch = (float)(-(Mth.atan2(motion.y, horizontalSpeed) * (180F / Math.PI)));
-            this.renderPitch = Mth.lerp(0.1F, this.renderPitch, targetPitch);
-            this.setXRot(this.renderPitch);
-        } else {
-            this.renderPitch = Mth.lerp(0.1F, this.renderPitch, 0.0F);
-        }
+        this.renderPitch = 0.0F;
+        this.setXRot(0.0F);
 
-        // Out-of-water survival logic (slower damage)
         if (!inWater) {
             outOfWaterTicks++;
             if (outOfWaterTicks > 7200) { // 6 minutes
@@ -158,8 +152,6 @@ public class HagfishEntity extends Animal implements GeoEntity {
     }
 
     @Override public AnimatableInstanceCache getAnimatableInstanceCache() { return cache; }
-    @Override public boolean isFood(ItemStack stack) { return stack.is(Items.ROTTEN_FLESH); }
-    @Override public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) { return ModEntities.HAGFISH.get().create(level); }
 
     // --- Utility ---
     public boolean isCurled() { return this.curled; }
@@ -175,30 +167,84 @@ public class HagfishEntity extends Animal implements GeoEntity {
     // --- Move Control ---
     static class HagfishMoveControl extends MoveControl {
         private final HagfishEntity hagfish;
-        public HagfishMoveControl(HagfishEntity hagfish) { super(hagfish); this.hagfish = hagfish; }
+
+        public HagfishMoveControl(HagfishEntity hagfish) {
+            super(hagfish);
+            this.hagfish = hagfish;
+        }
 
         @Override
         public void tick() {
+            Vec3 motion = hagfish.getDeltaMovement();
+
             if (hagfish.isInWater() && !hagfish.isCurled()) {
+                double buoyancy = 0.0D;
+                if (motion.y < -0.02D) buoyancy = 0.02D;
+                else if (motion.y > 0.02D) buoyancy = -0.02D;
+
                 if (this.operation == Operation.MOVE_TO && !hagfish.getNavigation().isDone()) {
                     double dx = this.wantedX - hagfish.getX();
                     double dy = this.wantedY - hagfish.getY();
                     double dz = this.wantedZ - hagfish.getZ();
                     double dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
                     if (dist > 1e-4) {
-                        float speed = (float)(this.speedModifier * hagfish.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                        hagfish.setDeltaMovement(hagfish.getDeltaMovement().add(
-                                dx / dist * speed * 0.05D,
-                                dy / dist * speed * 0.05D,
-                                dz / dist * speed * 0.05D
-                        ));
-                        hagfish.setYRot(-((float)Math.atan2(hagfish.getDeltaMovement().x, hagfish.getDeltaMovement().z)) * (180F / (float)Math.PI));
+                        hagfish.setYRot((float)(Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F);
                         hagfish.yBodyRot = hagfish.getYRot();
+                        float speed = (float)(this.speedModifier * hagfish.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                        hagfish.setDeltaMovement(
+                                motion.add(
+                                        (dx / dist) * speed * 0.05D,
+                                        (dy / dist) * speed * 0.05D + buoyancy,
+                                        (dz / dist) * speed * 0.05D
+                                )
+                        );
+                    }
+                } else {
+                    if (hagfish.tickCount % 60 == 0 || motion.lengthSqr() < 0.001D) {
+                        double angle = hagfish.getRandom().nextDouble() * 2 * Math.PI;
+                        double yDrift = (hagfish.getRandom().nextDouble() * 0.02D) - 0.01D;
+                        hagfish.setYRot((float)(angle * (180F / Math.PI)));
+                        hagfish.yBodyRot = hagfish.getYRot();
+                        hagfish.setDeltaMovement(
+                                0.08 * Math.cos(angle),
+                                yDrift + buoyancy,
+                                0.08 * Math.sin(angle)
+                        );
+                    } else {
+                        hagfish.setDeltaMovement(
+                                motion.x * 0.98D,
+                                motion.y * 0.9D + buoyancy,
+                                motion.z * 0.98D
+                        );
                     }
                 }
+
             } else {
-                hagfish.setDeltaMovement(Vec3.ZERO);
-                if (!hagfish.isCurled()) hagfish.setCurled(true);
+                double gravity = -0.08D;
+                hagfish.setDeltaMovement(
+                        motion.x * 0.9D,
+                        motion.y + gravity,
+                        motion.z * 0.9D
+                );
+
+                if (!hagfish.isCurled()) {
+                    if (hagfish.onGround() && hagfish.tickCount % 20 == 0) {
+                        double angle = hagfish.getRandom().nextDouble() * 2 * Math.PI;
+                        hagfish.setYRot((float)(angle * (180F / Math.PI)));
+                        hagfish.yBodyRot = hagfish.getYRot();
+                        hagfish.setDeltaMovement(
+                                0.2 * Math.cos(angle),
+                                0.25D,
+                                0.2 * Math.sin(angle)
+                        );
+                    }
+
+                    if (hagfish.tickCount % 60 == 0) {
+                        hagfish.setCurled(true);
+                    }
+                }
+
                 super.tick();
             }
         }
