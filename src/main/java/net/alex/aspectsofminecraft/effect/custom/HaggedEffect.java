@@ -36,7 +36,7 @@ public class HaggedEffect extends MobEffect {
 
         RandomSource random = entity.getRandom();
 
-        float dropChance = 0.005f + (0.05f * cappedAmp);
+        float dropChance = 0.005f + (0.005f * cappedAmp);
 
         ItemStack mainHand = entity.getMainHandItem();
         if (!mainHand.isEmpty() && random.nextFloat() < dropChance) {
@@ -61,7 +61,7 @@ public class HaggedEffect extends MobEffect {
         }
 
         if (entity.isAlive() && entity.onGround() && entity.getDeltaMovement().y > 0) {
-            double reduction = 1.0 - (0.25 * (cappedAmp + 1));
+            double reduction = 1.0 - (0.1 * (cappedAmp + 1));
             entity.setDeltaMovement(
                     entity.getDeltaMovement().x,
                     entity.getDeltaMovement().y * Math.max(reduction, 0.0),

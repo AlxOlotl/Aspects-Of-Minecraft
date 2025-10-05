@@ -45,27 +45,34 @@ public class HagGooProjectileEntity extends ThrowableItemProjectile {
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (this.level().isClientSide) return;
+
         if (result instanceof BlockHitResult bhr) {
             BlockPos hitPos = bhr.getBlockPos().relative(bhr.getDirection());
+
+            // Place goo underwater immediately
             if (this.isInWaterOrBubble()) {
                 placeGoo(hitPos);
-                this.discard();
+                this.remove(RemovalReason.KILLED);
                 return;
             }
+
             if (bounceCount == 0) {
                 placeGoo(hitPos);
                 bounce(bhr.getDirection());
                 bounceCount++;
             } else if (bounceCount == 1) {
-                placeGoo(hitPos);
-                placeGoo(hitPos.north());
-                placeGoo(hitPos.south());
-                placeGoo(hitPos.east());
-                placeGoo(hitPos.west());
-                this.discard();}}
+                spreadGoo(hitPos);
+                this.remove(RemovalReason.KILLED);
+            }
+        }
     }
 
-
+    private void spreadGoo(BlockPos center) {
+        placeGoo(center);
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            placeGoo(center.relative(dir));
+        }
+    }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {

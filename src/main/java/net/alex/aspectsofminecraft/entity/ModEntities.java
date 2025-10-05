@@ -20,7 +20,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<HagfishEntity>> HAGFISH =
             ENTITY_TYPES.register("hagfish",
                     () -> EntityType.Builder.<HagfishEntity>of(HagfishEntity::new, MobCategory.WATER_CREATURE)
-                            .sized(0.6F, 0.4F)
+                            .sized(0.8F, 0.6F)
                             .build(new ResourceLocation(Aspects.MOD_ID, "hagfish").toString()));
 
     //Hostiles
