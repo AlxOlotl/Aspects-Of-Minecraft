@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft;
 
 import com.mojang.logging.LogUtils;
+import net.alex.aspectsofminecraft.enchantment.ModEnchantments;
 import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import software.bernie.geckolib.GeckoLib;
@@ -41,7 +42,7 @@ public class Aspects
         ModCreativeModeTab.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModEffects.register(modEventBus);
-
+        ModEnchantments.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
 
@@ -152,12 +153,15 @@ public class Aspects
     public static class ClientModEvents
     {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
-            ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
-            EntityRenderers.register(ModEntities.HAGFISH.get(), HagfishRenderer::new);
-            EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> {
+
+
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
+                EntityRenderers.register(ModEntities.HAGFISH.get(), HagfishRenderer::new);
+                EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
+            });
         }
     }
 
