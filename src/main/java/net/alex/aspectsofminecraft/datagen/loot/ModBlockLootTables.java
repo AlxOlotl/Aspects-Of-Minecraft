@@ -1,12 +1,16 @@
 package net.alex.aspectsofminecraft.datagen.loot;
 
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
 import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -49,13 +53,24 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.BOEBO_SLABS.get(), block -> createSlabItemTable(ModBlocks.BOEBO_SLABS.get()));
         this.add(ModBlocks.BOEBO_DOOR.get(), block -> createDoorTable(ModBlocks.BOEBO_DOOR.get()));
 
+        //Drops Different Stuff
         this.add(ModBlocks.HAG_GOO_LAYER.get(), block -> createOreDrop(ModBlocks.HAG_GOO_LAYER.get(), ModItems.HAG_GOO.get()));
         this.add(ModBlocks.COBALT_ORE.get(), block -> createOreDrop(ModBlocks.COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
         this.add(ModBlocks.DEEPSLATE_COBALT_ORE.get(), block -> createOreDrop(ModBlocks.DEEPSLATE_COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
+
+        //Crops
+        LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.SPECKLEREY_CROP.get())
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SpecklereyCropBlock.AGE, 4));
+        this.add(ModBlocks.SPECKLEREY_CROP.get(), this.createCropDrops(ModBlocks.SPECKLEREY_CROP.get(),
+                ModItems.SPECKLEREY.get(), ModItems.SPECKLEREY_SEEDS.get(), lootitemcondition$builder1));
+
+
+
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
     }
+
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "aspects:block/specklerey_stage0"
+    },
+    "age=1": {
+      "model": "aspects:block/specklerey_stage1"
+    },
+    "age=2": {
+      "model": "aspects:block/specklerey_stage2"
+    },
+    "age=3": {
+      "model": "aspects:block/specklerey_stage3"
+    },
+    "age=4": {
+      "model": "aspects:block/specklerey_stage4"
+    }
+  }
+}

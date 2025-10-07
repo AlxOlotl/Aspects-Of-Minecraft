@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-05T11:42:01.6292705	Block States: aspects
+// 1.20.1	2025-10-06T20:27:10.0754016	Block States: aspects
 8a464c98af63cb5ea07be52191cd030f2a3c9e64 assets/aspects/blockstates/bamboo_coral_block.json
 e1bdb4957d311f5398a560ed34c5055cd1f55441 assets/aspects/blockstates/boebo_button.json
 8ccd4739a0ec623dc1edb78ae0666b365a6403a6 assets/aspects/blockstates/boebo_door.json
@@ -29,6 +29,7 @@ f6e305140cb968c18642101afeca6473d846ba97 assets/aspects/blockstates/hag_goo_laye
 208c9e662c46bea9eef1b93145448f466101136e assets/aspects/blockstates/nautilus_block.json
 46e9d5b181f54231109302892f063e4891bdd4c3 assets/aspects/blockstates/raw_cobalt_block.json
 9ae8bb97968e52f6faaf86c0c6b63fe246af2fd2 assets/aspects/blockstates/shelf_coral_block.json
+2af4b129ed56b7200f337084fc0565046565214d assets/aspects/blockstates/specklerey_crop.json
 e9339a14f47453000f81fdcece6e991b055438d0 assets/aspects/blockstates/stripped_boebo_wood.json
 91d21d7b198a9c19d0b99b7c1cabdd5876b272ed assets/aspects/models/block/bamboo_coral_block.json
 ce7f7744f3eb786b0a5e751f4bc811f44dd4e46e assets/aspects/models/block/boebo_button.json
@@ -104,6 +105,11 @@ b26a74f6eea351b87da847d7baf13a744554b8ba assets/aspects/models/block/hag_goo_lay
 4ede0807679a789595ef93418f5e6e7821ab82b3 assets/aspects/models/block/nautilus_block.json
 21efa62721e5a1c36d145208811702eed767263a assets/aspects/models/block/raw_cobalt_block.json
 f00ae608a85b50aa2fe926207889b974bc6d1ac0 assets/aspects/models/block/shelf_coral_block.json
+5b04ba4ec81c314e5f6b1db8b19e6968369ddbd9 assets/aspects/models/block/specklerey_stage0.json
+62ab80e63b4af5ae8e67a89d20df6afd590e9946 assets/aspects/models/block/specklerey_stage1.json
+224aee72bfa1fa4d6995e9276360b30683e92b1a assets/aspects/models/block/specklerey_stage2.json
+6c252c843e33861f18e4a550c195d604f2f29c3d assets/aspects/models/block/specklerey_stage3.json
+7fe6bb182bcd9e051d982ef6ea4b70b39e80d767 assets/aspects/models/block/specklerey_stage4.json
 8ce79ee347522399655f9ef877e66cf7a23b3b40 assets/aspects/models/block/stripped_boebo_wood.json
 b38c94056aed120c2dbe9e9be2bb3ccd4e049689 assets/aspects/models/block/stripped_boebo_wood_horizontal.json
 2b9c5e4e5e31e3aa366cc82c95cb61dc0350a5a7 assets/aspects/models/item/bamboo_coral_block.json

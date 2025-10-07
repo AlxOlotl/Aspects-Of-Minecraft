@@ -4,6 +4,7 @@ import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.custom.HagGooBlock;
 import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
 import net.alex.aspectsofminecraft.block.custom.NautilusBlock;
+import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
 import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -79,6 +80,10 @@ public class ModBlocks {
             () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), BlockSetType.OAK));
     public static final RegistryObject<Block> CHARRED_TRAPDOOR = registerBlock("charred_trapdoor",
             () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.OAK_DOOR), BlockSetType.OAK));
+
+    //Crops
+    public static final RegistryObject<Block> SPECKLEREY_CROP = BLOCKS.register("specklerey_crop",
+            () -> new SpecklereyCropBlock(BlockBehaviour.Properties.copy(Blocks.BEETROOTS).noCollission().noOcclusion()));
 
     //Corals
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",

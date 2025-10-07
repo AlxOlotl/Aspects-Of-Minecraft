@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-05T14:13:54.5887318	Loot Tables
+// 1.20.1	2025-10-06T20:27:10.0793826	Loot Tables
 02d973b1639d01311b3ec8cd0f4d4c92c32dd800 data/aspects/loot_tables/blocks/bamboo_coral_block.json
 3b2cd044197d69e874d727a0a91641f453e30ed0 data/aspects/loot_tables/blocks/boebo_button.json
 2fd3744a753de2e02418e6dac851b17a9878478a data/aspects/loot_tables/blocks/boebo_door.json
@@ -29,4 +29,5 @@ f580b532d0a27fac09a2e7e13c998e27d5b7fc8f data/aspects/loot_tables/blocks/charred
 d3b7874bc1390b597b5f8c18da63e818f556d51f data/aspects/loot_tables/blocks/nautilus_block.json
 50f9505d3aa89c3cda0eb2a73a380f52d1fb1489 data/aspects/loot_tables/blocks/raw_cobalt_block.json
 1ecf6dcd5e7982b08000d2ad9325913b25ec1a08 data/aspects/loot_tables/blocks/shelf_coral_block.json
+345e68aa7c70e49f5b7b6881302bac8fec82fcf0 data/aspects/loot_tables/blocks/specklerey_crop.json
 36c2818cf73879d7d58f22a9f07c5e3f38f09293 data/aspects/loot_tables/blocks/stripped_boebo_wood.json
