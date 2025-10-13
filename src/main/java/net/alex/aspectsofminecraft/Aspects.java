@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.alex.aspectsofminecraft.enchantment.ModEnchantments;
 import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.level.block.ComposterBlock;
 import software.bernie.geckolib.GeckoLib;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.effect.ModEffects;
@@ -50,7 +51,10 @@ public class Aspects
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() ->{
+            ComposterBlock.COMPOSTABLES.put(ModItems.SPECKLEREY.get(),0.25f);
+            ComposterBlock.COMPOSTABLES.put(ModItems.SPECKLEREY_SEEDS.get(),0.4f);
+        });
     }
 
 

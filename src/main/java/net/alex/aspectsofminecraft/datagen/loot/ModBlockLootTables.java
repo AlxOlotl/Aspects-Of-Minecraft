@@ -9,8 +9,12 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.predicates.*;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Set;
@@ -64,13 +68,49 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.SPECKLEREY_CROP.get(), this.createCropDrops(ModBlocks.SPECKLEREY_CROP.get(),
                 ModItems.SPECKLEREY.get(), ModItems.SPECKLEREY_SEEDS.get(), lootitemcondition$builder1));
 
+        //Plants
+        this.add(ModBlocks.BUBBLECUP.get(),
+                block -> createSingleItemTable(ModBlocks.BUBBLECUP.get()));
+        this.add(ModBlocks.BUBBLECUP_BLOSSOM.get(), block ->
+                LootTable.lootTable().withPool(
+                        applyExplosionCondition(block,
+                                LootPool.lootPool()
+                                        .setRolls(ConstantValue.exactly(1))
+                                        .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP_BLOSSOM.get())
+                                                .when(MatchTool.toolMatches(
+                                                        net.minecraft.advancements.critereon.ItemPredicate.Builder.item()
+                                                                .of(net.minecraft.world.item.Items.SHEARS)
+                                                )))
+                        )
+                ));
 
+    }
 
+    private LootTable.Builder createConditionalTable(
+            Block block,
+            LootItemCondition.Builder blooming,
+            LootItemCondition.Builder usingShears
+    ) {
+        return LootTable.lootTable()
+                .withPool(applyExplosionCondition(block,
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+
+                                .add(LootItem.lootTableItem(ModItems.BUBBLECUP_BLOSSOM.get())
+                                        .when(AllOfCondition.allOf(blooming, usingShears)))
+
+                                .add(LootItem.lootTableItem(ModItems.BUBBLECUP.get())
+                                        .when(AnyOfCondition.anyOf(
+                                                InvertedLootItemCondition.invert(blooming),
+                                                InvertedLootItemCondition.invert(usingShears)
+                                        )))
+                ));
     }
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get)::iterator;
+
     }
 
 }

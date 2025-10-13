@@ -2,6 +2,7 @@ package net.alex.aspectsofminecraft.datagen;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.block.custom.BubblecupBlock;
 import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -86,6 +87,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
         nautilusBlock(ModBlocks.NAUTILUS_BLOCK.get());
+        bubblecup(ModBlocks.BUBBLECUP.get());
 
         makeCrop(((SpecklereyCropBlock) ModBlocks.SPECKLEREY_CROP.get()), "specklerey_stage", "specklerey_stage");
 
@@ -138,7 +140,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .parent(models().getExistingFile(modLoc("block/" + baseName + "_layer_1"))).transforms().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, -10, 0).translation(0, 3.5F, 1.0F).scale(0.9F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0, 10, 0).translation(0, 3.5F, 1.0F).scale(0.9F).end().end();
 
     }
-
+    private void bubblecup(Block block) {
+        ModelFile regular = models().cross("bubblecup",
+                new ResourceLocation(Aspects.MOD_ID, "block/bubblecup")).renderType("cutout");
+        ModelFile blossom = models().cross("bubblecup_blossom",
+                new ResourceLocation(Aspects.MOD_ID, "block/bubblecup_blossom")).renderType("cutout");
+        getVariantBuilder(ModBlocks.BUBBLECUP.get())
+                .partialState().with(BubblecupBlock.BLOOMING, false).addModels(new ConfiguredModel(regular))
+                .partialState().with(BubblecupBlock.BLOOMING, true).addModels(new ConfiguredModel(blossom));
+        simpleBlockItem(block, regular);
+    }
 
     private void nautilusBlock(Block block) {
         ModelFile nautilusModel = models().getBuilder("nautilus_block")

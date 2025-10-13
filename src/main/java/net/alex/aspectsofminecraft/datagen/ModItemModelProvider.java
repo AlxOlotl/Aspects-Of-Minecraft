@@ -37,6 +37,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SPECKLEREY_SEEDS);
         simpleItem(ModItems.HAG_GOO);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
+        simpleItem(ModItems.BUBBLECUP_BLOSSOM);
+        simpleItem(ModItems.BUBBLECUP);
         simpleBlockItem(ModBlocks.BOEBO_DOOR);
         simpleBlockItem(ModBlocks.CHARRED_DOOR);
         buttonItem(ModBlocks.CHARRED_BUTTON, ModBlocks.CHARRED_PLANKS);

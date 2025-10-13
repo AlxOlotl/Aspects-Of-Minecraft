@@ -56,7 +56,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         this.moveControl = new HagfishMoveControl(this);
     }
 
-
     // --- Attributes ---
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
@@ -161,7 +160,7 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
     @Override public boolean canBreatheUnderwater() { return true; }
     @Override public boolean removeWhenFarAway(double dist) { return false; }
     @Override protected boolean shouldDespawnInPeaceful() { return false; }
-    @Override public int getMaxAirSupply() { return 999999; }
+    @Override public int getMaxAirSupply() { return 300; }
     @Override protected int decreaseAirSupply(int airSupply) { return airSupply; }
 
     // --- Move Control ---
@@ -182,42 +181,44 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
                 if (motion.y < -0.02D) buoyancy = 0.02D;
                 else if (motion.y > 0.02D) buoyancy = -0.02D;
 
-                if (this.operation == Operation.MOVE_TO && !hagfish.getNavigation().isDone()) {
+                if (this.operation != Operation.MOVE_TO || hagfish.getNavigation().isDone() || motion.lengthSqr() < 0.0001D) {
+                    if (hagfish.tickCount % 20 == 0) {
+                        double angle = hagfish.getRandom().nextDouble() * 2 * Math.PI;
+                        double yDrift = (hagfish.getRandom().nextDouble() * 0.02D) - 0.01D;
+                        hagfish.setYRot((float)(angle * (180F / Math.PI)));
+                        hagfish.yBodyRot = hagfish.getYRot();
+                        double speed = 0.1D;
+                        hagfish.setDeltaMovement(
+                                speed * Math.cos(angle),
+                                yDrift + buoyancy,
+                                speed * Math.sin(angle)
+                        );
+                    } else {
+                        hagfish.setDeltaMovement(
+                                motion.x * 0.9D,
+                                motion.y * 0.9D + buoyancy,
+                                motion.z * 0.9D
+                        );
+                    }
+                } else {
                     double dx = this.wantedX - hagfish.getX();
                     double dy = this.wantedY - hagfish.getY();
                     double dz = this.wantedZ - hagfish.getZ();
                     double dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-                    if (dist > 1e-4) {
+                    if (dist > 1e-6) {
                         hagfish.setYRot((float)(Mth.atan2(dz, dx) * (180F / Math.PI)) - 90F);
                         hagfish.yBodyRot = hagfish.getYRot();
                         float speed = (float)(this.speedModifier * hagfish.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                        hagfish.setDeltaMovement(
-                                motion.add(
-                                        (dx / dist) * speed * 0.05D,
-                                        (dy / dist) * speed * 0.05D + buoyancy,
-                                        (dz / dist) * speed * 0.05D
-                                )
-                        );
+
+                        Vec3 desired = new Vec3(dx / dist * speed * 0.1D, dy / dist * speed * 0.1D + buoyancy, dz / dist * speed * 0.1D);
+                        hagfish.setDeltaMovement(motion.add(desired));
                     }
-                } else {
-                    if (hagfish.tickCount % 60 == 0 || motion.lengthSqr() < 0.001D) {
-                        double angle = hagfish.getRandom().nextDouble() * 2 * Math.PI;
-                        double yDrift = (hagfish.getRandom().nextDouble() * 0.02D) - 0.01D;
-                        hagfish.setYRot((float)(angle * (180F / Math.PI)));
-                        hagfish.yBodyRot = hagfish.getYRot();
-                        hagfish.setDeltaMovement(
-                                0.08 * Math.cos(angle),
-                                yDrift + buoyancy,
-                                0.08 * Math.sin(angle)
-                        );
-                    } else {
-                        hagfish.setDeltaMovement(
-                                motion.x * 0.98D,
-                                motion.y * 0.9D + buoyancy,
-                                motion.z * 0.98D
-                        );
-                    }
+                }
+
+                if (hagfish.horizontalCollision || hagfish.verticalCollision) {
+                    double angle = hagfish.getRandom().nextDouble() * 2 * Math.PI;
+                    hagfish.setDeltaMovement(0.2 * Math.cos(angle), 0.1, 0.2 * Math.sin(angle));
                 }
 
             } else {
@@ -227,24 +228,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
                         motion.y + gravity,
                         motion.z * 0.9D
                 );
-
-                if (!hagfish.isCurled()) {
-                    if (hagfish.onGround() && hagfish.tickCount % 20 == 0) {
-                        double angle = hagfish.getRandom().nextDouble() * 2 * Math.PI;
-                        hagfish.setYRot((float)(angle * (180F / Math.PI)));
-                        hagfish.yBodyRot = hagfish.getYRot();
-                        hagfish.setDeltaMovement(
-                                0.2 * Math.cos(angle),
-                                0.25D,
-                                0.2 * Math.sin(angle)
-                        );
-                    }
-
-                    if (hagfish.tickCount % 60 == 0) {
-                        hagfish.setCurled(true);
-                    }
-                }
-
                 super.tick();
             }
         }

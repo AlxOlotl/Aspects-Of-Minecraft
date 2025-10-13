@@ -1,16 +1,14 @@
 package net.alex.aspectsofminecraft.block;
 
 import net.alex.aspectsofminecraft.Aspects;
-import net.alex.aspectsofminecraft.block.custom.HagGooBlock;
-import net.alex.aspectsofminecraft.block.custom.HagGooLayerBlock;
-import net.alex.aspectsofminecraft.block.custom.NautilusBlock;
-import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
+import net.alex.aspectsofminecraft.block.custom.*;
 import net.alex.aspectsofminecraft.effect.ModEffects;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -84,6 +82,20 @@ public class ModBlocks {
     //Crops
     public static final RegistryObject<Block> SPECKLEREY_CROP = BLOCKS.register("specklerey_crop",
             () -> new SpecklereyCropBlock(BlockBehaviour.Properties.copy(Blocks.BEETROOTS).noCollission().noOcclusion()));
+
+    //Plants
+    public static final RegistryObject<Block> BUBBLECUP = BLOCKS.register("bubblecup",
+            () -> new BubblecupBlock(
+                    () -> MobEffects.WATER_BREATHING, 8,
+                    BlockBehaviour.Properties.copy(Blocks.DANDELION)
+                            .noCollission().instabreak().lightLevel(s -> s.getValue(BubblecupBlock.BLOOMING) ? 6 : 0))
+    );
+    public static final RegistryObject<Block> BUBBLECUP_BLOSSOM = BLOCKS.register("bubblecup_blossom",
+            () -> new FlowerBlock(
+                    () -> MobEffects.WATER_BREATHING, 8,
+                    BlockBehaviour.Properties.copy(Blocks.DANDELION)
+                            .noCollission().instabreak().lightLevel(s -> 8).emissiveRendering((s, r, p) -> true) // makes it glow softly
+            ));
 
     //Corals
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",

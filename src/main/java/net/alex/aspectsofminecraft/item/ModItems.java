@@ -2,11 +2,14 @@ package net.alex.aspectsofminecraft.item;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.block.custom.BubblecupBlock;
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.custom.HagGooItem;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -63,6 +66,27 @@ public class ModItems {
             () -> new Item(new Item.Properties().food(ModFoodProperties.SPECKLEREY)));
     public static final RegistryObject<Item> SPECKLEREY_SEEDS = ITEMS.register("specklerey_seeds",
             () -> new ItemNameBlockItem(ModBlocks.SPECKLEREY_CROP.get(), new  Item.Properties()));
+
+    //Plants
+    public static final RegistryObject<Item> BUBBLECUP =
+            ITEMS.register("bubblecup", () ->
+                    new BlockItem(ModBlocks.BUBBLECUP.get(),
+                            new Item.Properties()));
+
+    public static final RegistryObject<Item> BUBBLECUP_BLOSSOM =
+            ITEMS.register("bubblecup_blossom", () ->
+                    new BlockItem(ModBlocks.BUBBLECUP_BLOSSOM.get(), new Item.Properties()) {
+                        @Override
+                        public InteractionResult place(BlockPlaceContext context) {
+                            InteractionResult result = super.place(context);
+                            if (result.consumesAction()) {
+                                context.getLevel().setBlock(context.getClickedPos(),
+                                        ModBlocks.BUBBLECUP_BLOSSOM.get().defaultBlockState()
+                                                .setValue(BubblecupBlock.BLOOMING, true), 3);
+                            }
+                            return result;
+                        }
+                    });
 
 
 

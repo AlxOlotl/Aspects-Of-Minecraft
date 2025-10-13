@@ -1,8 +1,10 @@
-// 1.20.1	2025-10-05T14:25:20.9717047	Item Models: aspects
+// 1.20.1	2025-10-12T19:33:47.5860481	Item Models: aspects
 677cc4fd6ec62f124f54e14cd29b2f380c2c9cdd assets/aspects/models/item/aspect.json
 90d11f7eac3718636e5da04439451f69a7852aa5 assets/aspects/models/item/boebo_button.json
 5085ff10bec6a9719b4268a7e45a1695dbff5801 assets/aspects/models/item/boebo_door.json
 f17327189dcd56da5cff075fe5f3484153cc6c64 assets/aspects/models/item/boebo_fence.json
+e2fe942f3d9fe649939c24a4758e77be72ac4966 assets/aspects/models/item/bubblecup.json
+66f4272caea62fc296109cb81a52e484e9020b6c assets/aspects/models/item/bubblecup_blossom.json
 2dd659ba2d772afebe3acc866a44b507657ccd93 assets/aspects/models/item/charred_button.json
 e76d3284bd6a11207e97adec145cf19fa3266da2 assets/aspects/models/item/charred_door.json
 e746628b51618467f4c9e94a5ef026ac931cf9b0 assets/aspects/models/item/charred_fence.json

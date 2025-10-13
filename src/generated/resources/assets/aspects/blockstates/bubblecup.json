@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "blooming=false": {
+      "model": "aspects:block/bubblecup"
+    },
+    "blooming=true": {
+      "model": "aspects:block/bubblecup_blossom"
+    }
+  }
+}
