@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft.entity;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.entity.custom.HagGooProjectileEntity;
 import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
+import net.alex.aspectsofminecraft.entity.custom.RootMoleEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -22,6 +23,13 @@ public class ModEntities {
                     () -> EntityType.Builder.<HagfishEntity>of(HagfishEntity::new, MobCategory.WATER_CREATURE)
                             .sized(0.8F, 0.6F)
                             .build(new ResourceLocation(Aspects.MOD_ID, "hagfish").toString()));
+
+    public static final RegistryObject<EntityType<RootMoleEntity>> ROOT_MOLE =
+            ENTITY_TYPES.register("root_mole",
+                    () -> EntityType.Builder.of(RootMoleEntity::new, MobCategory.CREATURE)
+                            .sized(0.6F, 0.6F)
+                            .build("root_mole"));
+
 
     //Hostiles
 

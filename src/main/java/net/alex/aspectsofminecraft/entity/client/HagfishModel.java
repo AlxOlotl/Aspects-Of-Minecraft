@@ -28,10 +28,12 @@ public class HagfishModel extends GeoModel<HagfishEntity> {
 
         float partialTick = state.getPartialTick();
         float turn = Mth.lerp(partialTick, entity.prevTurnAmount, entity.turnAmount);
-        getBone("segment1").ifPresent(b -> b.setRotY(turn * 0.1F));
-        getBone("segment2").ifPresent(b -> b.setRotY(turn * 0.2F));
-        getBone("segment3").ifPresent(b -> b.setRotY(turn * 0.3F));
-        getBone("tail").ifPresent(b -> b.setRotY(turn * 0.4F));
+        getBone("tail").ifPresent(b -> b.setRotY(turn * 0.1F));
+        getBone("tail2").ifPresent(b -> b.setRotY(turn * 0.2F));
+        getBone("tail3").ifPresent(b -> b.setRotY(turn * 0.3F));
+        getBone("tail4").ifPresent(b -> b.setRotY(turn * 0.4F));
+        getBone("tail5").ifPresent(b -> b.setRotY(turn * 0.5F));
+        getBone("tail6").ifPresent(b -> b.setRotY(turn * 0.6F));
     }
 
 }

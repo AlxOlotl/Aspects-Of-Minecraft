@@ -5,7 +5,11 @@ import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.entity.ai.goal.CurlOnLandGoal;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -23,6 +27,7 @@ import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Guardian;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -65,6 +70,22 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0);
     }
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack held = player.getItemInHand(hand);
+        if (held.is(Items.WATER_BUCKET) && this.isAlive()) {
+            if (!this.level().isClientSide) {
+                held.shrink(1);
+                ItemStack bucket = new ItemStack(ModItems.HAGFISH_BUCKET.get());
+                player.addItem(bucket);
+                this.discard();
+                this.level().playSound(null, this, SoundEvents.BUCKET_FILL_FISH,
+                        SoundSource.NEUTRAL, 1.0F, 1.0F);
+            }
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+        return super.mobInteract(player, hand);
+    }
 
     @Override
     protected PathNavigation createNavigation(Level level) {
@@ -99,8 +120,8 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         super.tick();
 
         float deltaYaw = Mth.wrapDegrees(this.getYRot() - this.yRotO);
-        prevTurnAmount = turnAmount;
-        turnAmount = Mth.clamp(deltaYaw / 45F, -1F, 1F);
+        this.prevTurnAmount = this.turnAmount;
+        this.turnAmount += (Mth.clamp(deltaYaw / 45F, -10F, 10F) - this.turnAmount) * 0.3F;
 
         boolean inWater = this.isInWaterRainOrBubble();
         Vec3 motion = this.getDeltaMovement();

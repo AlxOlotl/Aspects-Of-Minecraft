@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft;
 import com.mojang.logging.LogUtils;
 import net.alex.aspectsofminecraft.enchantment.ModEnchantments;
 import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
+import net.alex.aspectsofminecraft.entity.client.RootMoleRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.ComposterBlock;
 import software.bernie.geckolib.GeckoLib;
@@ -99,6 +100,7 @@ public class Aspects
             event.accept(ModBlocks.SHELF_CORAL_BLOCK);
             event.accept(ModBlocks.DEAD_SHELF_CORAL_BLOCK);
             event.accept(ModBlocks.HAG_GOO_BLOCK);
+            event.accept(ModBlocks.HAG_GOO_LAYER);
         }
 
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
@@ -140,6 +142,10 @@ public class Aspects
             event.accept(ModItems.RAW_COBALT);
             event.accept(ModItems.COBALT_INGOT);
             event.accept(ModItems.HAG_GOO);
+            event.accept(ModItems.SCALY_PLUME);
+            event.accept(ModItems.SCORCHED_MANE);
+            event.accept(ModItems.STARRY_SCHNOZ);
+
         }
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS){
             event.accept(ModItems.HAGFISH_SPAWN_EGG);
@@ -163,6 +169,7 @@ public class Aspects
 
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
+                EntityRenderers.register(ModEntities.ROOT_MOLE.get(), RootMoleRenderer::new);
                 EntityRenderers.register(ModEntities.HAGFISH.get(), HagfishRenderer::new);
                 EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
             });

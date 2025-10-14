@@ -5,10 +5,12 @@ import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.block.custom.BubblecupBlock;
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.custom.HagGooItem;
+import net.alex.aspectsofminecraft.item.custom.HagfishBucketItem;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,6 +35,12 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     //mob drops
+    public static final RegistryObject<Item> SCALY_PLUME = ITEMS.register("scaly_plume",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SCORCHED_MANE = ITEMS.register("scorched_mane",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> STARRY_SCHNOZ = ITEMS.register("starry_schnoz",
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LUMINOUS_TENDRIL = ITEMS.register("luminous_tendril",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> YETI_CRAB_LEG = ITEMS.register("yeti_crab_leg",
@@ -41,6 +49,11 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> HAG_GOO = ITEMS.register("hag_goo",
             () -> new HagGooItem(new Item.Properties().stacksTo(32)));
+    public static final RegistryObject<Item> HAGFISH_BUCKET = ITEMS.register("hagfish_bucket",
+            () -> new HagfishBucketItem(
+                    new Item.Properties().stacksTo(1)
+                            .craftRemainder(Items.BUCKET)
+            ));
 
 
     //tools

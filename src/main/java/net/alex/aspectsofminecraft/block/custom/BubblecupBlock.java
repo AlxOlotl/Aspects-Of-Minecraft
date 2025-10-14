@@ -53,31 +53,42 @@ public class BubblecupBlock extends FlowerBlock {
         if (!blooming && raining) {
             level.setBlock(pos, state.setValue(BLOOMING, true), 3);
 
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.FISHING_BOBBER_SPLASH,
+                    net.minecraft.sounds.SoundSource.BLOCKS, 0.6F, 1.2F);
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.BUCKET_FILL,
+                    net.minecraft.sounds.SoundSource.BLOCKS, 0.3F, 1.5F);
+
             for (int i = 0; i < 12; i++) {
                 double x = pos.getX() + 0.5;
-                double y = pos.getY() + 0.4 + random.nextDouble() * 0.4;
+                double y = pos.getY() + 0.6 + random.nextDouble() * 0.3;
                 double z = pos.getZ() + 0.5;
-
-                double vx = (random.nextDouble() - 0.5) * 0.4;
-                double vy = random.nextDouble() * 0.1;
-                double vz = (random.nextDouble() - 0.5) * 0.4;
-                level.sendParticles(ParticleTypes.DRIPPING_WATER, x, y, z, 0, vx, vy, vz, 1.0);
+                double vx = (random.nextDouble() - 0.5) * 0.5;
+                double vy = random.nextDouble() * 0.05;
+                double vz = (random.nextDouble() - 0.5) * 0.5;
+                level.sendParticles(ParticleTypes.SPLASH, x, y, z, 1, vx, vy, vz, 0.0);
             }
         }
 
         else if (blooming && !raining) {
             level.setBlock(pos, state.setValue(BLOOMING, false), 3);
 
+            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.WET_GRASS_STEP,
+                    net.minecraft.sounds.SoundSource.BLOCKS, 0.5F, 1.3F);
+
             for (int i = 0; i < 6; i++) {
-                double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.4;
-                double y = pos.getY() + 0.7 + random.nextDouble() * 0.4;
-                double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.4;
-                level.sendParticles(ParticleTypes.SPLASH, x, y, z, 1, 0, -0.05, 0, 0.02);
+                double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.3;
+                double y = pos.getY() + 0.9 + random.nextDouble() * 0.2;
+                double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.3;
+                double vx = 0;
+                double vy = -0.08 - random.nextDouble() * 0.03;
+                double vz = 0;
+                level.sendParticles(ParticleTypes.DRIPPING_WATER, x, y, z, 1, vx, vy, vz, 0.0);
             }
         }
 
         level.scheduleTick(pos, this, CHECK_TICKS);
     }
+
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {

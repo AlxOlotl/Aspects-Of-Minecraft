@@ -33,9 +33,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.LUMINOUS_TENDRIL);
         simpleItem(ModItems.YETI_CRAB_LEG);
         simpleItem(ModItems.YETI_CRAB_SETAE);
+        simpleItem(ModItems.SCALY_PLUME);
+        simpleItem(ModItems.SCORCHED_MANE);
+        simpleItem(ModItems.STARRY_SCHNOZ);
         simpleItem(ModItems.SPECKLEREY);
         simpleItem(ModItems.SPECKLEREY_SEEDS);
         simpleItem(ModItems.HAG_GOO);
+        simpleItem(ModItems.HAGFISH_BUCKET);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
         simpleItem(ModItems.BUBBLECUP_BLOSSOM);
         simpleItem(ModItems.BUBBLECUP);

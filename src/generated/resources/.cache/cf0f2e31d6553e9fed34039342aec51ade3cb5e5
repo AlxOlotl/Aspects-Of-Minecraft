@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-12T19:33:47.5860481	Item Models: aspects
+// 1.20.1	2025-10-14T13:11:56.3355546	Item Models: aspects
 677cc4fd6ec62f124f54e14cd29b2f380c2c9cdd assets/aspects/models/item/aspect.json
 90d11f7eac3718636e5da04439451f69a7852aa5 assets/aspects/models/item/boebo_button.json
 5085ff10bec6a9719b4268a7e45a1695dbff5801 assets/aspects/models/item/boebo_door.json
@@ -9,6 +9,7 @@ e2fe942f3d9fe649939c24a4758e77be72ac4966 assets/aspects/models/item/bubblecup.js
 e76d3284bd6a11207e97adec145cf19fa3266da2 assets/aspects/models/item/charred_door.json
 e746628b51618467f4c9e94a5ef026ac931cf9b0 assets/aspects/models/item/charred_fence.json
 89b999d651bbdd0c30835e46f8da9c0ba6057e12 assets/aspects/models/item/cobalt_ingot.json
+2052d0525a1e8767d7aaf656727aa15da3264f50 assets/aspects/models/item/hagfish_bucket.json
 bf802e9fb40f9db692bfa985d7880f815e2aadd5 assets/aspects/models/item/hagfish_spawn_egg.json
 c31dd1c5fa6c87735f3f3c54ff1bfd1884f8517a assets/aspects/models/item/hag_goo.json
 0a1d96cc9e255901cb9840e46546321d6a581ac2 assets/aspects/models/item/hag_goo_layer.json
@@ -17,7 +18,10 @@ c31dd1c5fa6c87735f3f3c54ff1bfd1884f8517a assets/aspects/models/item/hag_goo.json
 706721bb4cca0d6e2d2e9f10cd687b77d33847f3 assets/aspects/models/item/minecraft.json
 68550b38f7f465dd559b608cf625a6ba3147c311 assets/aspects/models/item/of.json
 fe1fa5d6fb0ba851bb20c87d9d49ecc68d2d4a49 assets/aspects/models/item/raw_cobalt.json
+2d975e95e35c25230478e03757e3fc50577095e0 assets/aspects/models/item/scaly_plume.json
+7b011efbf3dd01179361d510c622ec8af3f46fbb assets/aspects/models/item/scorched_mane.json
 5f4a647785a95b6e53739bed7a4a91e5ca55556e assets/aspects/models/item/specklerey.json
 077aa838a9e0def068f36fbfd35e73a869335f39 assets/aspects/models/item/specklerey_seeds.json
+0444d6021eb8c5ddaf928698e7cdc9414cc0e96a assets/aspects/models/item/starry_schnoz.json
 e8d417355f46f42e0a3b0f3b1ea04790a9c5a24e assets/aspects/models/item/yeti_crab_leg.json
 658a230c7a2d5af77e0964f41a5a8da0c6383bdb assets/aspects/models/item/yeti_crab_setae.json

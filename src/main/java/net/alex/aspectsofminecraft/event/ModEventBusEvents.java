@@ -4,8 +4,7 @@ import net.alex.aspectsofminecraft.Aspects;
 
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.alex.aspectsofminecraft.entity.custom.RootMoleEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,8 +16,8 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.HAGFISH.get(), HagfishEntity.createAttributes().build());
+        event.put(ModEntities.ROOT_MOLE.get(), RootMoleEntity.createAttributes().build());
     }
-
 
 
     //Hostile

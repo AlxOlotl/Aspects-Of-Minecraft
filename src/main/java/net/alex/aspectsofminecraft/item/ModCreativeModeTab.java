@@ -31,6 +31,8 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.SHELF_CORAL_BLOCK.get());
                         output.accept(ModBlocks.DEAD_SHELF_CORAL_BLOCK.get());
+                        output.accept(ModBlocks.BUBBLECUP.get());
+                        output.accept(ModBlocks.BUBBLECUP_BLOSSOM.get());
                         output.accept(ModBlocks.CHARRED_PLANKS.get());
                         output.accept(ModBlocks.CHARRED_STAIRS.get());
                         output.accept(ModBlocks.CHARRED_SLABS.get());
@@ -68,6 +70,9 @@ public class ModCreativeModeTab {
                         output.accept(ModItems.YETI_CRAB_LEG.get());
                         output.accept(ModItems.YETI_CRAB_SETAE.get());
                         output.accept(ModItems.HAG_GOO.get());
+                        output.accept(ModItems.SCALY_PLUME.get());
+                        output.accept(ModItems.SCORCHED_MANE.get());
+                        output.accept(ModItems.STARRY_SCHNOZ.get());
                     }).build()
     );
 
