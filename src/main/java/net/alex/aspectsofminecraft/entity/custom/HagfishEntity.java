@@ -1,10 +1,8 @@
 package net.alex.aspectsofminecraft.entity.custom;
 
 import net.alex.aspectsofminecraft.effect.ModEffects;
-import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.entity.ai.goal.CurlOnLandGoal;
 import net.alex.aspectsofminecraft.item.ModItems;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -21,7 +19,6 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.animal.Dolphin;
@@ -55,6 +52,10 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
     public float renderPitch = 0.0F;
     public float prevTurnAmount = 0.0F;
     public float turnAmount = 0.0F;
+    public static final int TURN_HISTORY_LENGTH = 5;
+    public final float[] turnHistory = new float[TURN_HISTORY_LENGTH];
+    public int turnHistoryIndex = 0;
+
 
     public HagfishEntity(EntityType<? extends WaterAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -119,14 +120,19 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
     public void tick() {
         super.tick();
 
+        // --- Smooth turning ---
         float deltaYaw = Mth.wrapDegrees(this.getYRot() - this.yRotO);
         this.prevTurnAmount = this.turnAmount;
         this.turnAmount += (Mth.clamp(deltaYaw / 45F, -10F, 10F) - this.turnAmount) * 0.3F;
 
+        // Record turn history for tail lag
+        turnHistory[turnHistoryIndex] = this.turnAmount;
+        turnHistoryIndex = (turnHistoryIndex + 1) % TURN_HISTORY_LENGTH;
+
+        // --- Curl behavior ---
         boolean inWater = this.isInWaterRainOrBubble();
         Vec3 motion = this.getDeltaMovement();
 
-        // Curl state transitions
         if (!inWater) curlProgress = Math.min(1.0F, curlProgress + CURL_SPEED);
         else curlProgress = Math.max(0.0F, curlProgress - CURL_SPEED);
 
@@ -141,6 +147,7 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         this.renderPitch = 0.0F;
         this.setXRot(0.0F);
 
+        // --- Drowning timer ---
         if (!inWater) {
             outOfWaterTicks++;
             if (outOfWaterTicks > 7200) { // 6 minutes
@@ -151,6 +158,7 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
             outOfWaterTicks = 0;
         }
     }
+
 
     // --- Animation setup ---
     @Override

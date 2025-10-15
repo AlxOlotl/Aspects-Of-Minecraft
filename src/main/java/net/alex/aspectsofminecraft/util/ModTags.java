@@ -1,6 +1,7 @@
 package net.alex.aspectsofminecraft.util;
 
 import net.alex.aspectsofminecraft.Aspects;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -23,7 +24,8 @@ public class ModTags {
 
     public static class Blocks {
 
-
+        public static final TagKey<Block> ROOT_MOLE_DIGGABLE =
+                TagKey.create(Registries.BLOCK, new ResourceLocation(Aspects.MOD_ID, "root_mole_diggable"));
 
         private static TagKey<Block> tag(String name){
             return BlockTags.create(new ResourceLocation(Aspects.MOD_ID, name));

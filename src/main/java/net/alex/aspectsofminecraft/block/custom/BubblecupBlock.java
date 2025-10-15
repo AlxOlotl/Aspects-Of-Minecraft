@@ -75,19 +75,24 @@ public class BubblecupBlock extends FlowerBlock {
             level.playSound(null, pos, net.minecraft.sounds.SoundEvents.WET_GRASS_STEP,
                     net.minecraft.sounds.SoundSource.BLOCKS, 0.5F, 1.3F);
 
-            for (int i = 0; i < 6; i++) {
-                double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.3;
-                double y = pos.getY() + 0.9 + random.nextDouble() * 0.2;
-                double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.3;
-                double vx = 0;
-                double vy = -0.08 - random.nextDouble() * 0.03;
-                double vz = 0;
-                level.sendParticles(ParticleTypes.DRIPPING_WATER, x, y, z, 1, vx, vy, vz, 0.0);
+            for (int i = 0; i < 10; i++) {
+                double x = pos.getX() + 0.5;
+                double y = pos.getY() + 0.7 + random.nextDouble() * 0.2;
+                double z = pos.getZ() + 0.5;
+
+                double angle = random.nextDouble() * 2 * Math.PI;
+                double speed = 0.15 + random.nextDouble() * 0.05;
+                double vx = Math.cos(angle) * speed;
+                double vy = 0.05 + random.nextDouble() * 0.02;
+                double vz = Math.sin(angle) * speed;
+
+                level.sendParticles(ParticleTypes.SPLASH, x, y, z, 1, vx, vy, vz, 0.0);
             }
         }
 
         level.scheduleTick(pos, this, CHECK_TICKS);
     }
+
 
 
     @Override

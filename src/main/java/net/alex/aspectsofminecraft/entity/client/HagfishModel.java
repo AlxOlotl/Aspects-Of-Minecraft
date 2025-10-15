@@ -27,13 +27,22 @@ public class HagfishModel extends GeoModel<HagfishEntity> {
         super.setCustomAnimations(entity, uniqueID, state);
 
         float partialTick = state.getPartialTick();
-        float turn = Mth.lerp(partialTick, entity.prevTurnAmount, entity.turnAmount);
-        getBone("tail").ifPresent(b -> b.setRotY(turn * 0.1F));
-        getBone("tail2").ifPresent(b -> b.setRotY(turn * 0.2F));
-        getBone("tail3").ifPresent(b -> b.setRotY(turn * 0.3F));
-        getBone("tail4").ifPresent(b -> b.setRotY(turn * 0.4F));
-        getBone("tail5").ifPresent(b -> b.setRotY(turn * 0.5F));
-        getBone("tail6").ifPresent(b -> b.setRotY(turn * 0.6F));
-    }
+        float baseTurn = Mth.lerp(partialTick, entity.prevTurnAmount, entity.turnAmount);
 
+        int len = entity.turnHistory.length;
+        for (int i = 0; i < len; i++) {
+            int index = (entity.turnHistoryIndex - 1 - i + len) % len;
+            float delayedTurn = entity.turnHistory[index];
+            float strength = 0.05F * (i + 1);
+
+            switch (i) {
+                case 0 -> getBone("tail").ifPresent(b -> b.setRotY(b.getRotY() + delayedTurn * strength));
+                case 1 -> getBone("tail2").ifPresent(b -> b.setRotY(b.getRotY() + delayedTurn * strength));
+                case 2 -> getBone("tail3").ifPresent(b -> b.setRotY(b.getRotY() + delayedTurn * strength));
+                case 3 -> getBone("tail4").ifPresent(b -> b.setRotY(b.getRotY() + delayedTurn * strength));
+                case 4 -> getBone("tail5").ifPresent(b -> b.setRotY(b.getRotY() + delayedTurn * strength));
+                case 5 -> getBone("tail6").ifPresent(b -> b.setRotY(b.getRotY() + delayedTurn * strength));
+            }
+        }
+    }
 }

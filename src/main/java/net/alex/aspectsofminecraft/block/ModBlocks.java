@@ -91,10 +91,10 @@ public class ModBlocks {
                             .noCollission().instabreak().lightLevel(s -> s.getValue(BubblecupBlock.BLOOMING) ? 6 : 0))
     );
     public static final RegistryObject<Block> BUBBLECUP_BLOSSOM = BLOCKS.register("bubblecup_blossom",
-            () -> new FlowerBlock(
+            () -> new BubblecupBlossomBlock(
                     () -> MobEffects.WATER_BREATHING, 8,
                     BlockBehaviour.Properties.copy(Blocks.DANDELION)
-                            .noCollission().instabreak().lightLevel(s -> 8).emissiveRendering((s, r, p) -> true) // makes it glow softly
+                            .noCollission().instabreak().lightLevel(s -> 8).emissiveRendering((s, r, p) -> true)
             ));
 
     //Corals
