@@ -138,7 +138,7 @@ public class RootMoleDigGoal extends Goal {
             mole.setPos(mole.getX(), mole.getY() + 1.0D, mole.getZ());
         }
 
-        if (timer >= 70) {
+        if (timer >= 80) {
             mole.setDiggingUp(false);
             mole.setInvisible(false);
             mole.noPhysics = false;
@@ -146,10 +146,8 @@ public class RootMoleDigGoal extends Goal {
             phase = DigPhase.NONE;
             timer = 0;
 
-            mole.level().scheduleTick(mole.blockPosition(),
-                    mole.level().getBlockState(mole.blockPosition()).getBlock(), 1);
-
-            mole.triggerAnim("controller", "reset_idle");
+            mole.clearAnimationCache();
+            mole.triggerAnim(RootMoleEntity.CONTROLLER_NAME, "reset_idle");
         }
     }
 }

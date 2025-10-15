@@ -18,6 +18,7 @@ import software.bernie.geckolib.core.object.PlayState;
 
 public class RootMoleEntity extends PathfinderMob implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    public static final String CONTROLLER_NAME = "controller";
     private boolean underground = false;
     private boolean diggingDown = false;
     private boolean diggingUp = false;
@@ -26,6 +27,12 @@ public class RootMoleEntity extends PathfinderMob implements GeoEntity {
         super(type, level);
         this.noCulling = true;
         this.setPersistenceRequired();
+    }
+    public void clearAnimationCache() {
+        var manager = this.getAnimatableInstanceCache().getManagerForId(this.getId());
+        if (manager != null && manager.getAnimationControllers().containsKey(CONTROLLER_NAME)) {
+            manager.getAnimationControllers().get(CONTROLLER_NAME).forceAnimationReset();
+        }
     }
 
     // --- Attributes ---
@@ -100,31 +107,28 @@ public class RootMoleEntity extends PathfinderMob implements GeoEntity {
                 controller.getCurrentAnimation().animation() != null) {
 
             String name = controller.getCurrentAnimation().animation().name();
-            if (name.contains("dig_up") || name.contains("dig_down")) {
+            if ((name.contains("dig_up") || name.contains("dig_down")) &&
+                    !controller.hasAnimationFinished()) {
                 return PlayState.CONTINUE;
             }
         }
 
         if (isUnderground()) {
             controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.dig", Animation.LoopType.LOOP)
-            );
+                    RawAnimation.begin().then("animation.root_mole.dig", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
         if (state.isMoving()) {
             controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.walk", Animation.LoopType.LOOP)
-            );
+                    RawAnimation.begin().then("animation.root_mole.walk", Animation.LoopType.LOOP));
         } else {
             controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP)
-            );
+                    RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP));
         }
 
         return PlayState.CONTINUE;
     }
-
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
