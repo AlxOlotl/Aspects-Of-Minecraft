@@ -41,8 +41,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HAG_GOO);
         simpleItem(ModItems.HAGFISH_BUCKET);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
-        simpleItem(ModItems.BUBBLECUP_BLOSSOM);
-        simpleItem(ModItems.BUBBLECUP);
+        simpleBlockItem(ModBlocks.BUBBLECUP);
+        simpleBlockItem(ModBlocks.BUBBLECUP_BLOSSOM);
         simpleBlockItem(ModBlocks.BOEBO_DOOR);
         simpleBlockItem(ModBlocks.CHARRED_DOOR);
         buttonItem(ModBlocks.CHARRED_BUTTON, ModBlocks.CHARRED_PLANKS);

@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-12T18:35:02.2310212	Block States: aspects
+// 1.20.1	2025-10-15T14:58:48.481707	Block States: aspects
 8a464c98af63cb5ea07be52191cd030f2a3c9e64 assets/aspects/blockstates/bamboo_coral_block.json
 e1bdb4957d311f5398a560ed34c5055cd1f55441 assets/aspects/blockstates/boebo_button.json
 8ccd4739a0ec623dc1edb78ae0666b365a6403a6 assets/aspects/blockstates/boebo_door.json
@@ -10,7 +10,8 @@ c01e55fb94fd5d9398edb7e86bb3ce99010916f5 assets/aspects/blockstates/boebo_fence_
 505a826c4f4e867fb42509f4a38e855718555ae5 assets/aspects/blockstates/boebo_stairs.json
 55a7fb3ab94aac0c71fc4beedf6edef47cd56135 assets/aspects/blockstates/boebo_trapdoor.json
 1482bae5f2c7a02811b1a8e559ef43153f56652b assets/aspects/blockstates/boebo_wood.json
-e7342b0b16b4c3328d10408370458cbf387c0596 assets/aspects/blockstates/bubblecup.json
+422c3f92893c813d53f43414494cbb67c1729f81 assets/aspects/blockstates/bubblecup.json
+2b8c5d4bc10800fa4d3477095c27e6a2b03f2bbd assets/aspects/blockstates/bubblecup_blossom.json
 5f5063fbd13c619b6331d26a8a8777e28039e763 assets/aspects/blockstates/charred_button.json
 bc8e7a7deb1bb497f86abd261aff346f509eaa20 assets/aspects/blockstates/charred_door.json
 13bec147e230daf79b0f5b2d765d3464eca2a9b2 assets/aspects/blockstates/charred_fence.json
@@ -124,6 +125,7 @@ a88fbed535377dd8ef7fbe1c200a0e7a5e92c915 assets/aspects/models/item/boebo_slabs.
 aded97758b1c3349112386379a0df3f50800778d assets/aspects/models/item/boebo_trapdoor.json
 3cf2e7f9ad9bb878defbb3d7143dbc26b9fe7861 assets/aspects/models/item/boebo_wood.json
 ad474accaab535d44be02af6bc4fb4cef9c734a1 assets/aspects/models/item/bubblecup.json
+7ee394538f8083d6f016de782b70b8b959ffdb7a assets/aspects/models/item/bubblecup_blossom.json
 54f73853cbaf5268d9d92763f63214161f47dc77 assets/aspects/models/item/charred_fence_gate.json
 e4930ff6ea384415689a08f881e853464a4bb168 assets/aspects/models/item/charred_planks.json
 bb92b6d6498f7685ac53196adfc12670872dfbef assets/aspects/models/item/charred_pressure_plate.json

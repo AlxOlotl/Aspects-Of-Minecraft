@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft.item;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.block.custom.BubblecupBlock;
+import net.alex.aspectsofminecraft.block.custom.BubblecupBlossomBlock;
 import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.custom.HagGooItem;
 import net.alex.aspectsofminecraft.item.custom.HagfishBucketItem;
@@ -81,26 +82,6 @@ public class ModItems {
             () -> new ItemNameBlockItem(ModBlocks.SPECKLEREY_CROP.get(), new  Item.Properties()));
 
     //Plants
-    public static final RegistryObject<Item> BUBBLECUP =
-            ITEMS.register("bubblecup", () ->
-                    new BlockItem(ModBlocks.BUBBLECUP.get(),
-                            new Item.Properties()));
-
-    public static final RegistryObject<Item> BUBBLECUP_BLOSSOM =
-            ITEMS.register("bubblecup_blossom", () ->
-                    new BlockItem(ModBlocks.BUBBLECUP_BLOSSOM.get(), new Item.Properties()) {
-                        @Override
-                        public InteractionResult place(BlockPlaceContext context) {
-                            InteractionResult result = super.place(context);
-                            if (result.consumesAction()) {
-                                context.getLevel().setBlock(context.getClickedPos(),
-                                        ModBlocks.BUBBLECUP_BLOSSOM.get().defaultBlockState()
-                                                .setValue(BubblecupBlock.BLOOMING, true), 3);
-                            }
-                            return result;
-                        }
-                    });
-
 
 
     public static void register(IEventBus eventBus) {

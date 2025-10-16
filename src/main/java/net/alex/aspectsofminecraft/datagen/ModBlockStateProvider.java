@@ -87,8 +87,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
         nautilusBlock(ModBlocks.NAUTILUS_BLOCK.get());
-        bubblecup(ModBlocks.BUBBLECUP.get());
-
+        crossFlower(ModBlocks.BUBBLECUP.get(), "bubblecup");
+        crossFlower(ModBlocks.BUBBLECUP_BLOSSOM.get(), "bubblecup_blossom");
         makeCrop(((SpecklereyCropBlock) ModBlocks.SPECKLEREY_CROP.get()), "specklerey_stage", "specklerey_stage");
 
     }
@@ -140,15 +140,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .parent(models().getExistingFile(modLoc("block/" + baseName + "_layer_1"))).transforms().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, -10, 0).translation(0, 3.5F, 1.0F).scale(0.9F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0, 10, 0).translation(0, 3.5F, 1.0F).scale(0.9F).end().end();
 
     }
-    private void bubblecup(Block block) {
-        ModelFile regular = models().cross("bubblecup",
-                new ResourceLocation(Aspects.MOD_ID, "block/bubblecup")).renderType("cutout");
-        ModelFile blossom = models().cross("bubblecup_blossom",
-                new ResourceLocation(Aspects.MOD_ID, "block/bubblecup_blossom")).renderType("cutout");
-        getVariantBuilder(ModBlocks.BUBBLECUP.get())
-                .partialState().with(BubblecupBlock.BLOOMING, false).addModels(new ConfiguredModel(regular))
-                .partialState().with(BubblecupBlock.BLOOMING, true).addModels(new ConfiguredModel(blossom));
-        simpleBlockItem(block, regular);
+
+    private void crossFlower(Block block, String name) {
+        ModelFile cross = models().cross(name, new ResourceLocation(Aspects.MOD_ID, "block/" + name))
+                .renderType("cutout");
+        simpleBlock(block, cross);
+        simpleBlockItem(block, cross);
     }
 
     private void nautilusBlock(Block block) {

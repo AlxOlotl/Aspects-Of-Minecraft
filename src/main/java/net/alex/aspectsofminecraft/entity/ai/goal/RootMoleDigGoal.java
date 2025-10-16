@@ -138,7 +138,7 @@ public class RootMoleDigGoal extends Goal {
             mole.setPos(mole.getX(), mole.getY() + 1.0D, mole.getZ());
         }
 
-        if (timer >= 80) {
+        if (timer >= 70) {
             mole.setDiggingUp(false);
             mole.setInvisible(false);
             mole.noPhysics = false;

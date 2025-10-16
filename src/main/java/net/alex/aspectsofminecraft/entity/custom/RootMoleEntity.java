@@ -28,6 +28,7 @@ public class RootMoleEntity extends PathfinderMob implements GeoEntity {
         this.noCulling = true;
         this.setPersistenceRequired();
     }
+
     public void clearAnimationCache() {
         var manager = this.getAnimatableInstanceCache().getManagerForId(this.getId());
         if (manager != null && manager.getAnimationControllers().containsKey(CONTROLLER_NAME)) {
@@ -38,7 +39,7 @@ public class RootMoleEntity extends PathfinderMob implements GeoEntity {
     // --- Attributes ---
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 20.0D)
+                .add(Attributes.MAX_HEALTH, 8.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.FOLLOW_RANGE, 12.0D);
     }
@@ -88,7 +89,9 @@ public class RootMoleEntity extends PathfinderMob implements GeoEntity {
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         AnimationController<RootMoleEntity> controller =
-                new AnimationController<>(this, "controller", 5, this::predicate);
+                new AnimationController<>(this, CONTROLLER_NAME, 0, this::predicate);
+
+        controller.setTransitionLength(0);
 
         controller.triggerableAnim("reset_idle",
                 RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP));
@@ -100,33 +103,27 @@ public class RootMoleEntity extends PathfinderMob implements GeoEntity {
         controllerRegistrar.add(controller);
     }
 
+
     private <T extends GeoEntity> PlayState predicate(AnimationState<T> state) {
         var controller = state.getController();
 
-        if (controller.getCurrentAnimation() != null &&
-                controller.getCurrentAnimation().animation() != null) {
-
+        if (controller.getCurrentAnimation() != null) {
             String name = controller.getCurrentAnimation().animation().name();
-            if ((name.contains("dig_up") || name.contains("dig_down")) &&
-                    !controller.hasAnimationFinished()) {
+            if (name.contains("dig_up") || name.contains("dig_down")) {
                 return PlayState.CONTINUE;
             }
         }
 
         if (isUnderground()) {
-            controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.dig", Animation.LoopType.LOOP));
+            controller.setAnimation(RawAnimation.begin().then("animation.root_mole.dig", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
 
         if (state.isMoving()) {
-            controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.walk", Animation.LoopType.LOOP));
+            controller.setAnimation(RawAnimation.begin().then("animation.root_mole.walk", Animation.LoopType.LOOP));
         } else {
-            controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP));
+            controller.setAnimation(RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP));
         }
-
         return PlayState.CONTINUE;
     }
 

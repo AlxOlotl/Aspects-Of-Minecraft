@@ -84,18 +84,10 @@ public class ModBlocks {
             () -> new SpecklereyCropBlock(BlockBehaviour.Properties.copy(Blocks.BEETROOTS).noCollission().noOcclusion()));
 
     //Plants
-    public static final RegistryObject<Block> BUBBLECUP = BLOCKS.register("bubblecup",
-            () -> new BubblecupBlock(
-                    () -> MobEffects.WATER_BREATHING, 8,
-                    BlockBehaviour.Properties.copy(Blocks.DANDELION)
-                            .noCollission().instabreak().lightLevel(s -> s.getValue(BubblecupBlock.BLOOMING) ? 6 : 0))
-    );
-    public static final RegistryObject<Block> BUBBLECUP_BLOSSOM = BLOCKS.register("bubblecup_blossom",
-            () -> new BubblecupBlossomBlock(
-                    () -> MobEffects.WATER_BREATHING, 8,
-                    BlockBehaviour.Properties.copy(Blocks.DANDELION)
-                            .noCollission().instabreak().lightLevel(s -> 8).emissiveRendering((s, r, p) -> true)
-            ));
+    public static final RegistryObject<Block> BUBBLECUP = registerBlock("bubblecup",
+            () -> new BubblecupBlock(() -> MobEffects.WATER_BREATHING, 5, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion().instabreak()));
+    public static final RegistryObject<Block> BUBBLECUP_BLOSSOM = registerBlock("bubblecup_blossom",
+            () -> new BubblecupBlossomBlock(() -> MobEffects.REGENERATION, 5, BlockBehaviour.Properties.copy(Blocks.DANDELION).noCollission().instabreak()));
 
     //Corals
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",

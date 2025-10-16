@@ -3,11 +3,13 @@ package net.alex.aspectsofminecraft.datagen.loot;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
 import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -78,12 +80,15 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                                         .setRolls(ConstantValue.exactly(1))
                                         .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP_BLOSSOM.get())
                                                 .when(MatchTool.toolMatches(
-                                                        net.minecraft.advancements.critereon.ItemPredicate.Builder.item()
-                                                                .of(net.minecraft.world.item.Items.SHEARS)
+                                                        ItemPredicate.Builder.item().of(Items.SHEARS)
                                                 )))
+                                        .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP.get())
+                                                .when(MatchTool.toolMatches(
+                                                        ItemPredicate.Builder.item().of(Items.SHEARS)
+                                                ).invert()))
                         )
-                ));
-
+                )
+        );
     }
 
     private LootTable.Builder createConditionalTable(
@@ -96,10 +101,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                         LootPool.lootPool()
                                 .setRolls(ConstantValue.exactly(1))
 
-                                .add(LootItem.lootTableItem(ModItems.BUBBLECUP_BLOSSOM.get())
+                                .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP_BLOSSOM.get())
                                         .when(AllOfCondition.allOf(blooming, usingShears)))
 
-                                .add(LootItem.lootTableItem(ModItems.BUBBLECUP.get())
+                                .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP.get())
                                         .when(AnyOfCondition.anyOf(
                                                 InvertedLootItemCondition.invert(blooming),
                                                 InvertedLootItemCondition.invert(usingShears)
