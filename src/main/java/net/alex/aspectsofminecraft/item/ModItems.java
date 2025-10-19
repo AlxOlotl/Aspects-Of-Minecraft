@@ -82,8 +82,8 @@ public class ModItems {
             () -> new ItemNameBlockItem(ModBlocks.SPECKLEREY_CROP.get(), new  Item.Properties()));
 
     //Plants
-
-
+    public static final RegistryObject<Item> BUBBLECUP_DEWDROP = ITEMS.register("bubblecup_dewdrop",
+            () -> new Item(new Item.Properties()));
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

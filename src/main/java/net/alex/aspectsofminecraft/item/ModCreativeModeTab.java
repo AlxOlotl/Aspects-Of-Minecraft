@@ -66,6 +66,7 @@ public class ModCreativeModeTab {
                         output.accept(ModItems.COBALT_INGOT.get());
                         output.accept(ModItems.SPECKLEREY_SEEDS.get());
                         output.accept(ModItems.SPECKLEREY.get());
+                        output.accept(ModItems.BUBBLECUP_DEWDROP.get());
                         output.accept(ModItems.LUMINOUS_TENDRIL.get());
                         output.accept(ModItems.YETI_CRAB_LEG.get());
                         output.accept(ModItems.YETI_CRAB_SETAE.get());

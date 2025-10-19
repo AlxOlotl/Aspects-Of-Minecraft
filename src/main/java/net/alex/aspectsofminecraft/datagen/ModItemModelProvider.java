@@ -38,6 +38,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.STARRY_SCHNOZ);
         simpleItem(ModItems.SPECKLEREY);
         simpleItem(ModItems.SPECKLEREY_SEEDS);
+        simpleItem(ModItems.BUBBLECUP_DEWDROP);
         simpleItem(ModItems.HAG_GOO);
         simpleItem(ModItems.HAGFISH_BUCKET);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);

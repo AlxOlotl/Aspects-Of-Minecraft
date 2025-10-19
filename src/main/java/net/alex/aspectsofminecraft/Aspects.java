@@ -95,6 +95,8 @@ public class Aspects
             event.accept(ModBlocks.DEEPSLATE_COBALT_ORE);
             event.accept(ModBlocks.RAW_COBALT_BLOCK);
             event.accept(ModItems.SPECKLEREY_SEEDS);
+            event.accept(ModBlocks.BUBBLECUP);
+            event.accept(ModBlocks.BUBBLECUP_BLOSSOM);
             event.accept(ModBlocks.BAMBOO_CORAL_BLOCK);
             event.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
             event.accept(ModBlocks.SHELF_CORAL_BLOCK);
@@ -134,6 +136,7 @@ public class Aspects
 
         if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS) {
             event.accept(ModItems.SPECKLEREY);
+            event.accept(ModItems.BUBBLECUP_DEWDROP);
             event.accept(ModItems.LUMINOUS_TENDRIL);
             event.accept(ModItems.YETI_CRAB_LEG);
             event.accept(ModItems.YETI_CRAB_SETAE);
@@ -141,6 +144,7 @@ public class Aspects
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_COBALT);
             event.accept(ModItems.COBALT_INGOT);
+            event.accept(ModItems.BUBBLECUP_DEWDROP);
             event.accept(ModItems.HAG_GOO);
             event.accept(ModItems.SCALY_PLUME);
             event.accept(ModItems.SCORCHED_MANE);
