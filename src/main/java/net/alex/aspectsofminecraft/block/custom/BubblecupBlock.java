@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -32,10 +31,8 @@ public class BubblecupBlock extends FlowerBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.isRainingAt(pos.above())) {
-            // 🌧️ turn into blossom
             level.setBlock(pos, ModBlocks.BUBBLECUP_BLOSSOM.get().defaultBlockState(), 3);
 
-            // 💧 spawn splash particles
             for (int i = 0; i < 8; i++) {
                 double x = pos.getX() + 0.3 + random.nextDouble() * 0.4;
                 double y = pos.getY() + 0.2 + random.nextDouble() * 0.3;

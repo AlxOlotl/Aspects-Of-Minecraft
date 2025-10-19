@@ -16,10 +16,31 @@
   "item.aspects.cobalt_ingot": "Cobalt Ingot",
 
   "item.aspects.scaly_plume": "Scaly Plume",
+  "entity.aspects.draco_do": "Draco-Do",
+  "item.aspects.draco_do_spawn_egg": "Draco-Do Spawn Egg",
+
+  "item.aspects.raw_catfish": "Raw Catfish",
+  "entity.aspects.catfish": "Catfish",
+  "item.aspects.catfish_spawn_egg": "Catfish Spawn Egg",
+  "item.aspects.catfish_bucket": "Bucket of Catfish",
+
+  "item.aspects.raw_bluegill": "Raw Bluegill",
+  "entity.aspects.bluegill": "Bluegill",
+  "item.aspects.bluegill_spawn_egg": "Bluegill Spawn Egg",
+  "item.aspects.bluegill_bucket": "Bucket of Bluegill",
+
+  "item.aspects.raw_bass": "Raw Bass",
+  "entity.aspects.bass": "Bass",
+  "item.aspects.bass_spawn_egg": "Bass Spawn Egg",
+  "item.aspects.bass_bucket": "Bucket of Bass",
+
   "item.aspects.scorched_mane": "Scorched Mane",
+  "entity.aspects.mantroodon": "Mantroodon",
+  "item.aspects.mantroodon_spawn_egg": "Mantroodon Spawn Egg",
 
   "item.aspects.starry_schnoz": "Starry Schnoz",
   "entity.aspects.root_mole": "Root Mole",
+  "item.aspects.root_mole_spawn_egg": "Root Mole Spawn Egg",
 
   "item.aspects.specklerey": "Specklerey",
   "item.aspects.specklerey_seeds": "Specklerey Seeds",

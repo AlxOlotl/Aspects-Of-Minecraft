@@ -7,7 +7,6 @@ import net.alex.aspectsofminecraft.entity.ModEntities;
 import net.alex.aspectsofminecraft.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

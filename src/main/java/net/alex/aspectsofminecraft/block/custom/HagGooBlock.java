@@ -63,7 +63,6 @@ public class HagGooBlock extends Block implements SimpleWaterloggedBlock {
     }
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentState, Direction side) {
-        // Don’t render faces between two Hag Goo Blocks
         if (adjacentState.is(this)) {
             return true;
         }

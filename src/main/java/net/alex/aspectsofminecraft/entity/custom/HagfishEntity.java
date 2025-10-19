@@ -24,6 +24,8 @@ import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.animal.Dolphin;
 import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.monster.Guardian;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -93,7 +95,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         return new WaterBoundPathNavigation(this, level);
     }
 
-    // --- Goals ---
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new RandomSwimmingGoal(this, 1.0D, 20));
@@ -110,26 +111,23 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         });
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 
-        // Targeting
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Drowned.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Zombie.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, ZombifiedPiglin.class, true));
     }
 
-    // --- Tick ---
     @Override
     public void tick() {
         super.tick();
 
-        // --- Smooth turning ---
         float deltaYaw = Mth.wrapDegrees(this.getYRot() - this.yRotO);
         this.prevTurnAmount = this.turnAmount;
         this.turnAmount += (Mth.clamp(deltaYaw / 45F, -10F, 10F) - this.turnAmount) * 0.3F;
 
-        // Record turn history for tail lag
         turnHistory[turnHistoryIndex] = this.turnAmount;
         turnHistoryIndex = (turnHistoryIndex + 1) % TURN_HISTORY_LENGTH;
 
-        // --- Curl behavior ---
         boolean inWater = this.isInWaterRainOrBubble();
         Vec3 motion = this.getDeltaMovement();
 
@@ -147,7 +145,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         this.renderPitch = 0.0F;
         this.setXRot(0.0F);
 
-        // --- Drowning timer ---
         if (!inWater) {
             outOfWaterTicks++;
             if (outOfWaterTicks > 7200) { // 6 minutes
@@ -160,7 +157,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
     }
 
 
-    // --- Animation setup ---
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
@@ -181,7 +177,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
 
     @Override public AnimatableInstanceCache getAnimatableInstanceCache() { return cache; }
 
-    // --- Utility ---
     public boolean isCurled() { return this.curled; }
     public void setCurled(boolean curled) { this.curled = curled; this.curlTicks = 0; }
 
@@ -192,7 +187,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
     @Override public int getMaxAirSupply() { return 300; }
     @Override protected int decreaseAirSupply(int airSupply) { return airSupply; }
 
-    // --- Move Control ---
     static class HagfishMoveControl extends MoveControl {
         private final HagfishEntity hagfish;
 
@@ -262,7 +256,6 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
         }
     }
 
-    // --- Curl At Bottom Goal ---
     static class CurlAtBottomGoal extends Goal {
         private final HagfishEntity hagfish;
         private int duration;

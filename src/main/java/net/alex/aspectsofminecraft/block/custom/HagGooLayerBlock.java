@@ -102,7 +102,6 @@ public class HagGooLayerBlock extends FallingBlock implements SimpleWaterloggedB
         }
     }
 
-    // When the falling goo lands
     @Override
     public void onLand(Level level, BlockPos pos, BlockState fallingState, BlockState hitState, FallingBlockEntity fallingEntity) {
         if (!level.isClientSide && hitState.is(this)) {

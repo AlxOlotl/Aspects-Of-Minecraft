@@ -2,7 +2,6 @@ package net.alex.aspectsofminecraft.datagen;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
-import net.alex.aspectsofminecraft.block.custom.BubblecupBlock;
 import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
