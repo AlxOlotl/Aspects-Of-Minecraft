@@ -24,8 +24,8 @@ public class ModTags {
 
     public static class Blocks {
 
-        public static final TagKey<Block> ROOT_MOLE_DIGGABLE =
-                TagKey.create(Registries.BLOCK, new ResourceLocation(Aspects.MOD_ID, "root_mole_diggable"));
+        public static final TagKey<Block> DIGGABLE =
+                BlockTags.create(new ResourceLocation(Aspects.MOD_ID, "diggable"));
 
         private static TagKey<Block> tag(String name){
             return BlockTags.create(new ResourceLocation(Aspects.MOD_ID, name));

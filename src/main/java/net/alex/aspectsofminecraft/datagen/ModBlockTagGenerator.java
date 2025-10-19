@@ -76,7 +76,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(ModBlocks.CHARRED_FENCE_GATE.get(),
                         ModBlocks.BOEBO_FENCE_GATE.get());
 
-        this.tag(ModTags.Blocks.ROOT_MOLE_DIGGABLE)
+        this.tag(ModTags.Blocks.DIGGABLE)
                 .add(Blocks.DIRT)
                 .add(Blocks.COARSE_DIRT)
                 .add(Blocks.ROOTED_DIRT)
