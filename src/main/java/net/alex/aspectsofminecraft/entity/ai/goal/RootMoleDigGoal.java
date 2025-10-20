@@ -7,7 +7,6 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -43,11 +42,9 @@ public class RootMoleDigGoal extends Goal {
         mole.setDiggingDown(true);
         mole.setDiggingUp(false);
         mole.setUnderground(false);
-
         mole.noPhysics = true;
         mole.setNoGravity(true);
         mole.setDeltaMovement(Vec3.ZERO);
-
         mole.triggerAnim("controller", "dig_down");
         mole.setInvisible(false);
         timer = 0;
@@ -59,9 +56,9 @@ public class RootMoleDigGoal extends Goal {
         mole.setUnderground(false);
         mole.setDiggingUp(false);
         mole.setInvisible(false);
-
         mole.noPhysics = false;
         mole.setNoGravity(false);
+        mole.setDeltaMovement(Vec3.ZERO);
         timer = 0;
     }
 
@@ -70,7 +67,7 @@ public class RootMoleDigGoal extends Goal {
         if (mole.isDiggingDown()) {
             timer++;
 
-            double sinkSpeed = 0.02D;
+            double sinkSpeed = 0.015D;
             mole.setPos(mole.getX(), mole.getY() - sinkSpeed, mole.getZ());
 
             if (mole.level() instanceof ServerLevel server && timer % 5 == 0) {
@@ -84,6 +81,7 @@ public class RootMoleDigGoal extends Goal {
                 mole.setDiggingDown(false);
                 mole.setUnderground(true);
                 mole.setInvisible(true);
+                mole.triggerAnim("controller", "dig");
                 timer = 0;
             }
         }
@@ -122,10 +120,10 @@ public class RootMoleDigGoal extends Goal {
         else if (mole.isDiggingUp()) {
             timer++;
 
-            double riseSpeed = 0.01D;
+            double riseSpeed = 0.015D;
             mole.setPos(mole.getX(), mole.getY() + riseSpeed, mole.getZ());
 
-            if (timer >= 120) {
+            if (timer >= 80) {
                 mole.setDiggingUp(false);
                 mole.noPhysics = false;
                 mole.setNoGravity(false);
@@ -133,4 +131,5 @@ public class RootMoleDigGoal extends Goal {
             }
         }
     }
+
 }

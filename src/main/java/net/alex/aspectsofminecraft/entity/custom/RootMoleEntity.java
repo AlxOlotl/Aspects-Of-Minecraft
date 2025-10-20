@@ -43,17 +43,17 @@ public class RootMoleEntity extends Animal implements GeoEntity {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.25D)
+                .add(Attributes.MOVEMENT_SPEED, 0.2D)
                 .add(Attributes.FOLLOW_RANGE, 12.0D);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.25D));
-        this.goalSelector.addGoal(2, new RootMoleDigGoal(this)); // Digging logic
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.2D));
+        this.goalSelector.addGoal(2, new RootMoleDigGoal(this));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.of(Items.POTATO), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 0.5D, Ingredient.of(Items.POTATO), false));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(6, new RandomStrollGoal(this, 0.8D));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -97,11 +97,24 @@ public class RootMoleEntity extends Animal implements GeoEntity {
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
+        AnimationController<RootMoleEntity> controller =
+                new AnimationController<>(this, "controller", 5, this::predicate);
+        controller.triggerableAnim("dig_down",
+                RawAnimation.begin().then("animation.root_mole.dig_down", Animation.LoopType.PLAY_ONCE));
+        controller.triggerableAnim("dig",
+                RawAnimation.begin().then("animation.root_mole.dig", Animation.LoopType.LOOP));
+        controller.triggerableAnim("dig_up",
+                RawAnimation.begin().then("animation.root_mole.dig_up", Animation.LoopType.PLAY_ONCE));
+
+        controllerRegistrar.add(controller);
     }
 
     private <T extends GeoEntity> PlayState predicate(AnimationState<T> state) {
         var controller = state.getController();
+
+        if (controller.isPlayingTriggeredAnimation()) {
+            return PlayState.CONTINUE;
+        }
 
         if (this.isDiggingDown()) {
             controller.setAnimation(
@@ -125,9 +138,14 @@ public class RootMoleEntity extends Animal implements GeoEntity {
         }
 
         if (state.isMoving()) {
-            controller.setAnimation(
-                    RawAnimation.begin().then("animation.root_mole.walk", Animation.LoopType.LOOP)
-            );
+            controller.setAnimation(RawAnimation.begin().then("animation.root_mole.walk", Animation.LoopType.LOOP));
+
+            double speed = this.getDeltaMovement().horizontalDistanceSqr();
+            if (speed > 0.001) {
+                controller.setAnimationSpeed((float) Math.min(2.0, Math.max(0.6, speed * 100)));
+            } else {
+                controller.setAnimationSpeed(1.0f);
+            }
         } else {
             controller.setAnimation(
                     RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP)
@@ -163,7 +181,6 @@ public class RootMoleEntity extends Animal implements GeoEntity {
         return super.isInvulnerableTo(source);
     }
 
-    //  Drops & Sounds
     @Override
     protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
         super.dropCustomDeathLoot(source, looting, recentlyHit);
@@ -189,4 +206,47 @@ public class RootMoleEntity extends Animal implements GeoEntity {
     protected SoundEvent getDeathSound() {
         return SoundEvents.RABBIT_DEATH;
     }
+
+    @Override
+    public void addAdditionalSaveData(net.minecraft.nbt.CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("DiggingDown", this.diggingDown);
+        tag.putBoolean("DiggingUp", this.diggingUp);
+        tag.putBoolean("Underground", this.underground);
+    }
+
+    @Override
+    public void readAdditionalSaveData(net.minecraft.nbt.CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.diggingDown = tag.getBoolean("DiggingDown");
+        this.diggingUp = tag.getBoolean("DiggingUp");
+        this.underground = tag.getBoolean("Underground");
+    }
+    @Override
+    public void onAddedToWorld() {
+        super.onAddedToWorld();
+
+        if (this.isUnderground() || this.isDiggingDown() || this.isDiggingUp()) {
+            this.noPhysics = true;
+            this.setNoGravity(true);
+            this.setInvisible(true);
+        } else {
+            this.noPhysics = false;
+            this.setNoGravity(false);
+            this.setInvisible(false);
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if ((this.isUnderground() || this.isDiggingDown()) && !this.level().isClientSide) {
+            if (!this.level().getBlockState(this.blockPosition()).isAir()) {
+                this.noPhysics = true;
+                this.setNoGravity(true);
+            }
+        }
+    }
+
 }
