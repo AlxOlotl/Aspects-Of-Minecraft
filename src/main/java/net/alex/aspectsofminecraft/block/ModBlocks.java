@@ -88,6 +88,10 @@ public class ModBlocks {
             () -> new BubblecupBlock(() -> MobEffects.WATER_BREATHING, 5, BlockBehaviour.Properties.copy(Blocks.DANDELION).noOcclusion().instabreak()));
     public static final RegistryObject<Block> BUBBLECUP_BLOSSOM = registerBlock("bubblecup_blossom",
             () -> new BubblecupBlossomBlock(() -> MobEffects.REGENERATION, 5, BlockBehaviour.Properties.copy(Blocks.DANDELION).noCollission().instabreak()));
+    public static final RegistryObject<Block> POTTED_BUBBLECUP = BLOCKS.register("potted_bubblecup",
+            () -> new FlowerPotBlock((()->(FlowerPotBlock)Blocks.FLOWER_POT), BUBBLECUP,  BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION)));
+    public static final RegistryObject<Block> POTTED_BUBBLECUP_BLOSSOM = BLOCKS.register("potted_bubblecup_blossom",
+            () -> new FlowerPotBlock((()->(FlowerPotBlock)Blocks.FLOWER_POT), BUBBLECUP_BLOSSOM,  BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION)));
 
     //Corals
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",

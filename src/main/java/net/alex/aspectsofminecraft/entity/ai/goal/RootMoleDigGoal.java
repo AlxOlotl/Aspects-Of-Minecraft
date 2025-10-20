@@ -67,7 +67,7 @@ public class RootMoleDigGoal extends Goal {
         if (mole.isDiggingDown()) {
             timer++;
 
-            double sinkSpeed = 0.015D;
+            double sinkSpeed = 0.01D;
             mole.setPos(mole.getX(), mole.getY() - sinkSpeed, mole.getZ());
 
             if (mole.level() instanceof ServerLevel server && timer % 5 == 0) {
@@ -77,7 +77,7 @@ public class RootMoleDigGoal extends Goal {
                         3, 0.2, 0.1, 0.2, 0.03);
             }
 
-            if (timer >= 40) {
+            if (timer >= 60) {
                 mole.setDiggingDown(false);
                 mole.setUnderground(true);
                 mole.setInvisible(true);
@@ -120,10 +120,10 @@ public class RootMoleDigGoal extends Goal {
         else if (mole.isDiggingUp()) {
             timer++;
 
-            double riseSpeed = 0.015D;
+            double riseSpeed = 0.01D;
             mole.setPos(mole.getX(), mole.getY() + riseSpeed, mole.getZ());
 
-            if (timer >= 80) {
+            if (timer >= 60) {
                 mole.setDiggingUp(false);
                 mole.noPhysics = false;
                 mole.setNoGravity(false);
@@ -131,5 +131,4 @@ public class RootMoleDigGoal extends Goal {
             }
         }
     }
-
 }
