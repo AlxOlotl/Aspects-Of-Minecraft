@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft.entity;
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.entity.custom.HagGooProjectileEntity;
 import net.alex.aspectsofminecraft.entity.custom.HagfishEntity;
+import net.alex.aspectsofminecraft.entity.custom.MantroodonEntity;
 import net.alex.aspectsofminecraft.entity.custom.RootMoleEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -34,6 +35,11 @@ public class ModEntities {
     //Hostiles
 
     //Neutrals
+    public static final RegistryObject<EntityType<MantroodonEntity>> MANTROODON =
+            ENTITY_TYPES.register("mantroodon",
+                    () -> EntityType.Builder.of(MantroodonEntity::new, MobCategory.CREATURE)
+                            .sized(0.9F, 1.5F)
+                            .build("mantroodon"));
 
     //Bosses
 

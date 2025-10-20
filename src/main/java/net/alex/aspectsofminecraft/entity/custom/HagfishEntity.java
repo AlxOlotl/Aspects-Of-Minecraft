@@ -67,7 +67,7 @@ public class HagfishEntity extends WaterAnimal implements GeoEntity {
     // --- Attributes ---
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 8.0)
+                .add(Attributes.MAX_HEALTH, 20.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.5)
                 .add(Attributes.ATTACK_DAMAGE, 1.5)
                 .add(Attributes.FOLLOW_RANGE, 32.0)

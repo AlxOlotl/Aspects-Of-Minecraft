@@ -11,7 +11,6 @@ import net.minecraft.util.Mth;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class HagfishRenderer extends GeoEntityRenderer<HagfishEntity> {
-
     public HagfishRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new HagfishModel());
         this.shadowRadius = 0.5f; // size of shadow under entity

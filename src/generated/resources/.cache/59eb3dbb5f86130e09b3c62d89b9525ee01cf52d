@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-19T22:30:49.6523137	Loot Tables
+// 1.20.1	2025-10-20T10:51:59.333686	Loot Tables
 02d973b1639d01311b3ec8cd0f4d4c92c32dd800 data/aspects/loot_tables/blocks/bamboo_coral_block.json
 3b2cd044197d69e874d727a0a91641f453e30ed0 data/aspects/loot_tables/blocks/boebo_button.json
 2fd3744a753de2e02418e6dac851b17a9878478a data/aspects/loot_tables/blocks/boebo_door.json
@@ -29,7 +29,7 @@ f580b532d0a27fac09a2e7e13c998e27d5b7fc8f data/aspects/loot_tables/blocks/charred
 1dcbdadc77a262323d9565e152ec85780ae360e7 data/aspects/loot_tables/blocks/hag_goo_block.json
 44bf918b08cf4059d189772c75565ad8dda8b6d5 data/aspects/loot_tables/blocks/hag_goo_layer.json
 d3b7874bc1390b597b5f8c18da63e818f556d51f data/aspects/loot_tables/blocks/nautilus_block.json
-cf5e84ba585a5d9ed0cfd6d8a0cae80f647f4782 data/aspects/loot_tables/blocks/potted_bubblecup.json.json
+66f23d381f74014a45d88e00919532fff969e8ea data/aspects/loot_tables/blocks/potted_bubblecup.json
 67e506636ca2a7dff4d5845b295eddf3058f65c3 data/aspects/loot_tables/blocks/potted_bubblecup_blossom.json
 50f9505d3aa89c3cda0eb2a73a380f52d1fb1489 data/aspects/loot_tables/blocks/raw_cobalt_block.json
 1ecf6dcd5e7982b08000d2ad9325913b25ec1a08 data/aspects/loot_tables/blocks/shelf_coral_block.json

@@ -1,0 +1,213 @@
+package net.alex.aspectsofminecraft.entity.custom;
+
+import net.alex.aspectsofminecraft.entity.ModEntities;
+import net.alex.aspectsofminecraft.item.ModItems;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+
+public class MantroodonEntity extends TamableAnimal implements GeoEntity, Shearable {
+    private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+
+    private static final EntityDataAccessor<Boolean> SHEARED =
+            SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> RESTING =
+            SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> COLLAR_COLOR =
+            SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.INT);
+
+    public MantroodonEntity(EntityType<? extends TamableAnimal> type, Level level) {
+        super(type, level);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 24.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
+                .add(Attributes.FOLLOW_RANGE, 14.0D);
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(SHEARED, false);
+        this.entityData.define(RESTING, false);
+        this.entityData.define(COLLAR_COLOR, DyeColor.RED.getId());
+    }
+
+    @Override
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
+        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 5.0F, 2.0F, false));
+        this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new TemptGoal(this, 0.8D, Ingredient.of(Items.COOKED_BEEF), false));
+        this.goalSelector.addGoal(6, new RandomStrollGoal(this, 0.8D));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
+    }
+
+
+    @Override
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (stack.getItem() instanceof ShearsItem && this.readyForShearing()) {
+            this.shear(SoundSource.PLAYERS);
+            stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
+        }
+
+        if (!this.isTame() && stack.is(Items.COOKED_BEEF)) {
+            if (!player.getAbilities().instabuild) stack.shrink(1);
+            if (this.random.nextInt(3) == 0) {
+                this.tame(player);
+                this.level().broadcastEntityEvent(this, (byte)7);
+            } else {
+                this.level().broadcastEntityEvent(this, (byte)6);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        if (this.isTame() && stack.getItem() instanceof DyeItem dye) {
+            this.setCollarColor(dye.getDyeColor().getId());
+            if (!player.getAbilities().instabuild) stack.shrink(1);
+            return InteractionResult.SUCCESS;
+        }
+
+        if (this.isTame() && stack.isEmpty() && !player.isShiftKeyDown()) {
+            this.setResting(!this.isResting());
+            this.getNavigation().stop();
+            return InteractionResult.SUCCESS;
+        }
+
+        return super.mobInteract(player, hand);
+    }
+
+    @Override
+    public boolean readyForShearing() {
+        return !this.isSheared() && this.isAlive();
+    }
+
+    @Override
+    public void shear(SoundSource source) {
+        this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
+        this.gameEvent(GameEvent.SHEAR, this);
+        this.setSheared(true);
+
+        if (!this.level().isClientSide) {
+            int dropCount = 1 + this.random.nextInt(2);
+            this.spawnAtLocation(ModItems.SCORCHED_MANE.get(), dropCount);
+        }
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        if (this.isSheared() && this.random.nextInt(6000) == 0) {
+            this.setSheared(false);
+        }
+
+        if (this.isResting()) {
+            this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
+            this.getNavigation().stop();
+        }
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
+
+    private <T extends GeoEntity> PlayState predicate(AnimationState<T> state) {
+        var controller = state.getController();
+
+        if (this.isResting()) {
+            controller.setAnimation(RawAnimation.begin()
+                    .then("animation.mantroodon.rest", Animation.LoopType.HOLD_ON_LAST_FRAME));
+            return PlayState.CONTINUE;
+        }
+
+        if (state.isMoving()) {
+            controller.setAnimation(RawAnimation.begin()
+                    .then("animation.mantroodon.walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        controller.setAnimation(RawAnimation.begin()
+                .then("animation.mantroodon.idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    public boolean isResting() { return this.entityData.get(RESTING); }
+    public void setResting(boolean resting) { this.entityData.set(RESTING, resting); }
+
+    public boolean isSheared() { return this.entityData.get(SHEARED); }
+    public void setSheared(boolean sheared) { this.entityData.set(SHEARED, sheared); }
+
+    public int getCollarColor() { return this.entityData.get(COLLAR_COLOR); }
+    public void setCollarColor(int color) { this.entityData.set(COLLAR_COLOR, color); }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("Sheared", this.isSheared());
+        tag.putBoolean("Resting", this.isResting());
+        tag.putInt("CollarColor", this.getCollarColor());
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.setSheared(tag.getBoolean("Sheared"));
+        this.setResting(tag.getBoolean("Resting"));
+        this.setCollarColor(tag.getInt("CollarColor"));
+    }
+
+    @Nullable
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
+        return ModEntities.MANTROODON.get().create(level);
+    }
+}

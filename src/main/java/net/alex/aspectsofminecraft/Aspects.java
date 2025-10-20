@@ -3,6 +3,7 @@ package net.alex.aspectsofminecraft;
 import com.mojang.logging.LogUtils;
 import net.alex.aspectsofminecraft.enchantment.ModEnchantments;
 import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
+import net.alex.aspectsofminecraft.entity.client.MantroodonRenderer;
 import net.alex.aspectsofminecraft.entity.client.RootMoleRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.level.block.Blocks;
@@ -177,6 +178,7 @@ public class Aspects
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
                 EntityRenderers.register(ModEntities.ROOT_MOLE.get(), RootMoleRenderer::new);
+                EntityRenderers.register(ModEntities.MANTROODON.get(), MantroodonRenderer::new);
                 EntityRenderers.register(ModEntities.HAGFISH.get(), HagfishRenderer::new);
                 EntityRenderers.register(ModEntities.HAG_GOO_PROJECTILE.get(), ThrownItemRenderer::new);
             });

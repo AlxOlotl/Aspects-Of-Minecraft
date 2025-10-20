@@ -151,7 +151,6 @@ public class RootMoleEntity extends Animal implements GeoEntity {
                     RawAnimation.begin().then("animation.root_mole.idle", Animation.LoopType.LOOP)
             );
         }
-
         return PlayState.CONTINUE;
     }
 
@@ -185,7 +184,7 @@ public class RootMoleEntity extends Animal implements GeoEntity {
     protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
         super.dropCustomDeathLoot(source, looting, recentlyHit);
         if (!this.level().isClientSide) {
-            double dropChance = 0.05 + (looting * 0.02);
+            double dropChance = 0.05 + (looting * 0.05);
             if (this.random.nextDouble() < dropChance) {
                 this.spawnAtLocation(ModItems.STARRY_SCHNOZ.get());
             }
@@ -248,5 +247,4 @@ public class RootMoleEntity extends Animal implements GeoEntity {
             }
         }
     }
-
 }

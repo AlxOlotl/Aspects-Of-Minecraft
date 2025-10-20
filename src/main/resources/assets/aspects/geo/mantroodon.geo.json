@@ -6,7 +6,7 @@
 				"identifier": "geometry.mantroodon",
 				"texture_width": 96,
 				"texture_height": 96,
-				"visible_bounds_width": 5,
+				"visible_bounds_width": 7,
 				"visible_bounds_height": 3.5,
 				"visible_bounds_offset": [0, 1.25, 0]
 			},
@@ -82,8 +82,9 @@
 					"parent": "mantroodon",
 					"pivot": [-0.5, 13, -7],
 					"cubes": [
-						{"origin": [-3.5, 13, -9], "size": [7, 9, 7], "uv": [0, 48]},
-						{"origin": [-3.5, 10, -9], "size": [7, 3, 7], "uv": [13, 24]}
+						{"origin": [-3.5, 14, -9], "size": [7, 9, 7], "uv": [0, 48]},
+						{"origin": [-1.5, 13, -7], "size": [3, 9, 3], "uv": [4, 81]},
+						{"origin": [-3.5, 11, -9], "size": [7, 3, 7], "uv": [13, 24]}
 					]
 				},
 				{
