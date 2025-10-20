@@ -5,7 +5,9 @@ import net.alex.aspectsofminecraft.enchantment.ModEnchantments;
 import net.alex.aspectsofminecraft.entity.client.HagfishRenderer;
 import net.alex.aspectsofminecraft.entity.client.RootMoleRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import software.bernie.geckolib.GeckoLib;
 import net.alex.aspectsofminecraft.block.ModBlocks;
 import net.alex.aspectsofminecraft.effect.ModEffects;
@@ -54,6 +56,9 @@ public class Aspects
         event.enqueueWork(() ->{
             ComposterBlock.COMPOSTABLES.put(ModItems.SPECKLEREY.get(),0.25f);
             ComposterBlock.COMPOSTABLES.put(ModItems.SPECKLEREY_SEEDS.get(),0.4f);
+
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BUBBLECUP.getId(),ModBlocks.POTTED_BUBBLECUP);
+            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BUBBLECUP_BLOSSOM.getId(),ModBlocks.POTTED_BUBBLECUP_BLOSSOM);
         });
     }
 

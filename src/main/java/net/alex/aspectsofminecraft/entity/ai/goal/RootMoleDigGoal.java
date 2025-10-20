@@ -67,7 +67,7 @@ public class RootMoleDigGoal extends Goal {
         if (mole.isDiggingDown()) {
             timer++;
 
-            double sinkSpeed = 0.01D;
+            double sinkSpeed = 0.02D;
             mole.setPos(mole.getX(), mole.getY() - sinkSpeed, mole.getZ());
 
             if (mole.level() instanceof ServerLevel server && timer % 5 == 0) {

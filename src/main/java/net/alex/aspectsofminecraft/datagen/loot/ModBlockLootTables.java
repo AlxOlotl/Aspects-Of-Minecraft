@@ -71,21 +71,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.BUBBLECUP.get(),
                 block -> createSingleItemTable(ModBlocks.BUBBLECUP.get()));
         this.add(ModBlocks.BUBBLECUP_BLOSSOM.get(), block ->
-                LootTable.lootTable().withPool(
-                        applyExplosionCondition(block,
-                                LootPool.lootPool()
-                                        .setRolls(ConstantValue.exactly(1))
-                                        .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP_BLOSSOM.get())
-                                                .when(MatchTool.toolMatches(
-                                                        ItemPredicate.Builder.item().of(Items.SHEARS)
-                                                )))
-                                        .add(LootItem.lootTableItem(ModBlocks.BUBBLECUP.get())
-                                                .when(MatchTool.toolMatches(
-                                                        ItemPredicate.Builder.item().of(Items.SHEARS)
-                                                ).invert()))
-                        )
-                )
-        );
+                LootTable.lootTable().withPool(applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(ModBlocks.BUBBLECUP_BLOSSOM.get()).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)))).add(LootItem.lootTableItem(ModBlocks.BUBBLECUP.get()).when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS)).invert())))));
+        this.add(ModBlocks.POTTED_BUBBLECUP.get(), createPotFlowerItemTable(ModBlocks.POTTED_BUBBLECUP.get()));
+        this.add(ModBlocks.POTTED_BUBBLECUP_BLOSSOM.get(), createPotFlowerItemTable(ModBlocks.POTTED_BUBBLECUP_BLOSSOM.get()));
     }
 
     private LootTable.Builder createConditionalTable(
