@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-20T10:51:59.333686	Loot Tables
+// 1.20.1	2025-10-20T18:40:20.5850989	Loot Tables
 02d973b1639d01311b3ec8cd0f4d4c92c32dd800 data/aspects/loot_tables/blocks/bamboo_coral_block.json
 3b2cd044197d69e874d727a0a91641f453e30ed0 data/aspects/loot_tables/blocks/boebo_button.json
 2fd3744a753de2e02418e6dac851b17a9878478a data/aspects/loot_tables/blocks/boebo_door.json
@@ -26,6 +26,7 @@ f580b532d0a27fac09a2e7e13c998e27d5b7fc8f data/aspects/loot_tables/blocks/charred
 70cab872c3658638fd125b54129d54301a05c4e2 data/aspects/loot_tables/blocks/dead_bamboo_coral_block.json
 2a807f1a9edd2dc651df54fdfb693bdfc05301ff data/aspects/loot_tables/blocks/dead_shelf_coral_block.json
 0412067b1f90f477a6d65030b4a6a13aebe73474 data/aspects/loot_tables/blocks/deepslate_cobalt_ore.json
+38d787aaf8308b7ffb6e582f7e32f2f91992468a data/aspects/loot_tables/blocks/giant_clam.json
 1dcbdadc77a262323d9565e152ec85780ae360e7 data/aspects/loot_tables/blocks/hag_goo_block.json
 44bf918b08cf4059d189772c75565ad8dda8b6d5 data/aspects/loot_tables/blocks/hag_goo_layer.json
 d3b7874bc1390b597b5f8c18da63e818f556d51f data/aspects/loot_tables/blocks/nautilus_block.json

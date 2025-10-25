@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-15T14:58:48.481707	Block States: aspects
+// 1.20.1	2025-10-24T18:44:04.8734547	Block States: aspects
 8a464c98af63cb5ea07be52191cd030f2a3c9e64 assets/aspects/blockstates/bamboo_coral_block.json
 e1bdb4957d311f5398a560ed34c5055cd1f55441 assets/aspects/blockstates/boebo_button.json
 8ccd4739a0ec623dc1edb78ae0666b365a6403a6 assets/aspects/blockstates/boebo_door.json
@@ -10,8 +10,6 @@ c01e55fb94fd5d9398edb7e86bb3ce99010916f5 assets/aspects/blockstates/boebo_fence_
 505a826c4f4e867fb42509f4a38e855718555ae5 assets/aspects/blockstates/boebo_stairs.json
 55a7fb3ab94aac0c71fc4beedf6edef47cd56135 assets/aspects/blockstates/boebo_trapdoor.json
 1482bae5f2c7a02811b1a8e559ef43153f56652b assets/aspects/blockstates/boebo_wood.json
-422c3f92893c813d53f43414494cbb67c1729f81 assets/aspects/blockstates/bubblecup.json
-2b8c5d4bc10800fa4d3477095c27e6a2b03f2bbd assets/aspects/blockstates/bubblecup_blossom.json
 5f5063fbd13c619b6331d26a8a8777e28039e763 assets/aspects/blockstates/charred_button.json
 bc8e7a7deb1bb497f86abd261aff346f509eaa20 assets/aspects/blockstates/charred_door.json
 13bec147e230daf79b0f5b2d765d3464eca2a9b2 assets/aspects/blockstates/charred_fence.json
@@ -26,6 +24,7 @@ c3f6d8fd24abd3a5f8a8b665c704d4e1ce5eca9f assets/aspects/blockstates/charred_stai
 5546a4f3dbde033b08c99253bbc2530852d1e905 assets/aspects/blockstates/dead_bamboo_coral_block.json
 549cded6e7bbc6c6b77ae871e6294d44fde410da assets/aspects/blockstates/dead_shelf_coral_block.json
 f8c2d117219dbc661f6dadb3f45aa211f9d3d3a8 assets/aspects/blockstates/deepslate_cobalt_ore.json
+1e1c3477bacf1fc56d2a0d24a4465308ec5fa5b0 assets/aspects/blockstates/giant_clam.json
 f31cdd9e9fc40de3067d68e62656ef62e12f39ed assets/aspects/blockstates/hag_goo_block.json
 f6e305140cb968c18642101afeca6473d846ba97 assets/aspects/blockstates/hag_goo_layer.json
 208c9e662c46bea9eef1b93145448f466101136e assets/aspects/blockstates/nautilus_block.json
@@ -107,6 +106,7 @@ b60678ed28c4dd846c4a725056ccfcaf04ea8b3a assets/aspects/models/block/hag_goo_lay
 b26a74f6eea351b87da847d7baf13a744554b8ba assets/aspects/models/block/hag_goo_layer_layer_7.json
 052213efc3c67020f52864d5978d66180015e0f8 assets/aspects/models/block/hag_goo_layer_layer_8.json
 4ede0807679a789595ef93418f5e6e7821ab82b3 assets/aspects/models/block/nautilus_block.json
+3e8d31f476522586fbef67dd6ca4889673e78f65 assets/aspects/models/block/potted_bubblecup.json
 21efa62721e5a1c36d145208811702eed767263a assets/aspects/models/block/raw_cobalt_block.json
 f00ae608a85b50aa2fe926207889b974bc6d1ac0 assets/aspects/models/block/shelf_coral_block.json
 5b04ba4ec81c314e5f6b1db8b19e6968369ddbd9 assets/aspects/models/block/specklerey_stage0.json
@@ -124,8 +124,6 @@ a88fbed535377dd8ef7fbe1c200a0e7a5e92c915 assets/aspects/models/item/boebo_slabs.
 2caf1c49d9c90e44ff01085ead2dbf30e5172923 assets/aspects/models/item/boebo_stairs.json
 aded97758b1c3349112386379a0df3f50800778d assets/aspects/models/item/boebo_trapdoor.json
 3cf2e7f9ad9bb878defbb3d7143dbc26b9fe7861 assets/aspects/models/item/boebo_wood.json
-ad474accaab535d44be02af6bc4fb4cef9c734a1 assets/aspects/models/item/bubblecup.json
-7ee394538f8083d6f016de782b70b8b959ffdb7a assets/aspects/models/item/bubblecup_blossom.json
 54f73853cbaf5268d9d92763f63214161f47dc77 assets/aspects/models/item/charred_fence_gate.json
 e4930ff6ea384415689a08f881e853464a4bb168 assets/aspects/models/item/charred_planks.json
 bb92b6d6498f7685ac53196adfc12670872dfbef assets/aspects/models/item/charred_pressure_plate.json

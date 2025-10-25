@@ -27,6 +27,7 @@ public class ModCreativeModeTab {
                         output.accept(ModBlocks.NAUTILUS_BLOCK.get());
                         output.accept(ModBlocks.HAG_GOO_BLOCK.get());
                         output.accept(ModBlocks.HAG_GOO_LAYER.get());
+                        output.accept(ModBlocks.GIANT_CLAM.get());
                         output.accept(ModBlocks.BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get());
                         output.accept(ModBlocks.SHELF_CORAL_BLOCK.get());
@@ -64,6 +65,8 @@ public class ModCreativeModeTab {
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.RAW_COBALT.get());
                         output.accept(ModItems.COBALT_INGOT.get());
+                        output.accept(ModItems.PINK_PEARL.get());
+                        output.accept(ModItems.GOLD_PEARL.get());
                         output.accept(ModItems.SPECKLEREY_SEEDS.get());
                         output.accept(ModItems.SPECKLEREY.get());
                         output.accept(ModItems.BUBBLECUP_DEWDROP.get());
@@ -83,7 +86,9 @@ public class ModCreativeModeTab {
                     .icon(() -> new ItemStack(ModItems.MINECRAFT.get()))
                     .title(Component.translatable("creativetab.aspects_mobs_tab"))
                     .displayItems((parameters, output) -> {
+                        output.accept(ModBlocks.GIANT_CLAM.get());
                         output.accept(ModItems.HAGFISH_SPAWN_EGG.get());
+                        output.accept(ModItems.HAGFISH_BUCKET.get());
                     }).build()
     );
 

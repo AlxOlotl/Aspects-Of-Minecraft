@@ -61,6 +61,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(ModBlocks.COBALT_ORE.get(), block -> createOreDrop(ModBlocks.COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
         this.add(ModBlocks.DEEPSLATE_COBALT_ORE.get(), block -> createOreDrop(ModBlocks.DEEPSLATE_COBALT_ORE.get(), ModItems.RAW_COBALT.get()));
 
+        //Drops itself and maybe something else
+        this.add(ModBlocks.GIANT_CLAM.get(), block ->
+                LootTable.lootTable().withPool(
+                        LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1))
+                                .add(LootItem.lootTableItem(ModBlocks.GIANT_CLAM.get()))
+                                .add(LootItem.lootTableItem(ModItems.PINK_PEARL.get())
+                                        .when(LootItemRandomChanceCondition.randomChance(0.10f)))
+                                .add(LootItem.lootTableItem(ModItems.GOLD_PEARL.get())
+                                        .when(LootItemRandomChanceCondition.randomChance(0.01f)))
+                ));
+
         //Crops
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(ModBlocks.SPECKLEREY_CROP.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(SpecklereyCropBlock.AGE, 4));

@@ -36,6 +36,10 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     //mob drops
+    public static final RegistryObject<Item> PINK_PEARL = ITEMS.register("pink_pearl",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> GOLD_PEARL = ITEMS.register("gold_pearl",
+            () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCALY_PLUME = ITEMS.register("scaly_plume",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> SCORCHED_MANE = ITEMS.register("scorched_mane",

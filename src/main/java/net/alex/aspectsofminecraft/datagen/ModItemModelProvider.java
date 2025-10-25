@@ -29,7 +29,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ModItems.RAW_COBALT);
         simpleItem(ModItems.COBALT_INGOT);
-
+        simpleItem(ModItems.PINK_PEARL);
+        simpleItem(ModItems.GOLD_PEARL);
         simpleItem(ModItems.LUMINOUS_TENDRIL);
         simpleItem(ModItems.YETI_CRAB_LEG);
         simpleItem(ModItems.YETI_CRAB_SETAE);
@@ -42,16 +43,21 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HAG_GOO);
         simpleItem(ModItems.HAGFISH_BUCKET);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
-        simpleBlockItem(ModBlocks.BUBBLECUP);
-        simpleBlockItem(ModBlocks.BUBBLECUP_BLOSSOM);
+
+        simpleBlockItemBlockTexture(ModBlocks.BUBBLECUP);
+        simpleBlockItemBlockTexture(ModBlocks.BUBBLECUP_BLOSSOM);
+
         simpleBlockItem(ModBlocks.BOEBO_DOOR);
         simpleBlockItem(ModBlocks.CHARRED_DOOR);
+
+        customBlockItemBlockModel(ModBlocks.GIANT_CLAM);
+
         buttonItem(ModBlocks.CHARRED_BUTTON, ModBlocks.CHARRED_PLANKS);
-        fenceItem(ModBlocks.CHARRED_FENCE, ModBlocks.CHARRED_PLANKS);
         buttonItem(ModBlocks.BOEBO_BUTTON, ModBlocks.BOEBO_PLANKS);
+
+        fenceItem(ModBlocks.CHARRED_FENCE, ModBlocks.CHARRED_PLANKS);
         fenceItem(ModBlocks.BOEBO_FENCE, ModBlocks.BOEBO_PLANKS);
 
-        basicItem(ModItems.HAGFISH_SPAWN_EGG.get());
         hagGooLayerItem(ModBlocks.HAG_GOO_LAYER.get());
     }
 
@@ -112,6 +118,12 @@ public class ModItemModelProvider extends ItemModelProvider {
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(Aspects.MOD_ID, "item/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
+    private ItemModelBuilder simpleBlockItemBlockTexture(RegistryObject<Block> blockRegistryObject) {
+        return withExistingParent(
+                ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(Aspects.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
+    }
 
     private ItemModelBuilder simpleItem(RegistryObject<Item> item){
         return withExistingParent(item.getId().getPath(),
@@ -125,4 +137,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 .texture("layer0", modLoc("item/" + textureName));
     }
 
+    private void customBlockItemBlockModel(RegistryObject<Block> block) {
+        withExistingParent(ForgeRegistries.BLOCKS.getKey(block.get()).getPath(),
+                new ResourceLocation(Aspects.MOD_ID, "block/" + ForgeRegistries.BLOCKS.getKey(block.get()).getPath()));
+    }
 }

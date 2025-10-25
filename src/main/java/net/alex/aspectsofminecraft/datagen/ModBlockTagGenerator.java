@@ -27,6 +27,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                         ModBlocks.COBALT_BLOCK.get(),
                         ModBlocks.COBALT_ORE.get(),
                         ModBlocks.DEEPSLATE_COBALT_ORE.get(),
+                        ModBlocks.GIANT_CLAM.get(),
                         ModBlocks.BAMBOO_CORAL_BLOCK.get(),
                         ModBlocks.DEAD_BAMBOO_CORAL_BLOCK.get(),
                         ModBlocks.SHELF_CORAL_BLOCK.get(),

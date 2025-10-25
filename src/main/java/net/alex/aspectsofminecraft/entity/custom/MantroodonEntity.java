@@ -27,7 +27,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -71,17 +70,37 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(2, new SitWhenOrderedToGoal(this));
-        this.goalSelector.addGoal(3, new FollowOwnerGoal(this, 1.0D, 5.0F, 2.0F, false));
-        this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new TemptGoal(this, 0.8D, Ingredient.of(Items.COOKED_BEEF), false));
-        this.goalSelector.addGoal(6, new RandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-    }
+        this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.2D, true));
+        this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1.0D, 5.0F, 2.0F, false) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !MantroodonEntity.this.isResting();
+            }
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !MantroodonEntity.this.isResting();
+            }
+        });
+        this.goalSelector.addGoal(5, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 0.8D, Ingredient.of(Items.CACTUS), false) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !MantroodonEntity.this.isResting();
+            }
+        });
+        this.goalSelector.addGoal(7, new RandomStrollGoal(this, 0.8D) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !MantroodonEntity.this.isResting();
+            }
+        });
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
 
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+    }
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -93,10 +112,11 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
-        if (!this.isTame() && stack.is(Items.COOKED_BEEF)) {
+        if (!this.isTame() && stack.is(ModItems.SPECKLEREY.get())) {
             if (!player.getAbilities().instabuild) stack.shrink(1);
             if (this.random.nextInt(3) == 0) {
                 this.tame(player);
+                this.setTame(true);
                 this.level().broadcastEntityEvent(this, (byte)7);
             } else {
                 this.level().broadcastEntityEvent(this, (byte)6);
@@ -143,11 +163,6 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         if (this.isSheared() && this.random.nextInt(6000) == 0) {
             this.setSheared(false);
         }
-
-        if (this.isResting()) {
-            this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
-            this.getNavigation().stop();
-        }
     }
 
     @Override
@@ -181,7 +196,8 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
     }
 
     public boolean isResting() { return this.entityData.get(RESTING); }
-    public void setResting(boolean resting) { this.entityData.set(RESTING, resting); }
+    public void setResting(boolean resting) {this.entityData.set(RESTING, resting);this.setOrderedToSit(resting);this.getNavigation().stop();
+        if (resting) {this.setDeltaMovement(0, this.getDeltaMovement().y, 0);}}
 
     public boolean isSheared() { return this.entityData.get(SHEARED); }
     public void setSheared(boolean sheared) { this.entityData.set(SHEARED, sheared); }
@@ -196,7 +212,13 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         tag.putBoolean("Resting", this.isResting());
         tag.putInt("CollarColor", this.getCollarColor());
     }
-
+    @Override
+    public void setTarget(@Nullable LivingEntity target) {
+        super.setTarget(target);
+        if (this.isTame() && target != null && target != this.getOwner()) {
+            this.setLastHurtByMob(target);
+        }
+    }
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
@@ -209,5 +231,39 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
         return ModEntities.MANTROODON.get().create(level);
+    }
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        boolean success = super.doHurtTarget(target);
+
+        if (success && target instanceof LivingEntity livingTarget) {
+            livingTarget.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    net.minecraft.world.effect.MobEffects.POISON,
+                    100,
+                    0
+            ));
+            this.level().playSound(
+                    null, this.blockPosition(),
+                    SoundEvents.BEE_STING,
+                    SoundSource.HOSTILE,
+                    1.0F, 1.0F
+            );
+        }
+        return success;
+    }
+
+    @Override
+    public void tame(Player player) {
+        super.tame(player);
+        this.setOwnerUUID(player.getUUID());
+        this.setTame(true);
+    }
+
+    @Override
+    public void setLastHurtByMob(@Nullable LivingEntity target) {
+        super.setLastHurtByMob(target);
+        if (!this.isTame() && target != null) {
+            this.setTarget(target);
+        }
     }
 }

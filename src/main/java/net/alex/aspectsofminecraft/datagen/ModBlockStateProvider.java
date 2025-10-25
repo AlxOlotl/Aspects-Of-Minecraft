@@ -10,12 +10,14 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
@@ -64,6 +66,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         doorBlockWithRenderType((DoorBlock)ModBlocks.CHARRED_DOOR.get(), modLoc("block/charred_door_bottom"), modLoc("block/charred_door_top"),"cutout");
         trapdoorBlockWithRenderType((TrapDoorBlock)ModBlocks.CHARRED_TRAPDOOR.get(), modLoc("block/charred_trapdoor"),true,"cutout");
 
+        giantClam(ModBlocks.GIANT_CLAM.get());
 
         blockWithItem(ModBlocks.BAMBOO_CORAL_BLOCK);
         blockWithItem(ModBlocks.DEAD_BAMBOO_CORAL_BLOCK);
@@ -86,10 +89,19 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
         nautilusBlock(ModBlocks.NAUTILUS_BLOCK.get());
-        crossFlower(ModBlocks.BUBBLECUP.get(), "bubblecup");
-        crossFlower(ModBlocks.BUBBLECUP_BLOSSOM.get(), "bubblecup_blossom");
+        blockWithItem(ModBlocks.BUBBLECUP.get(), models().cross(blockTexture(ModBlocks.BUBBLECUP.get()).getPath(),
+                blockTexture(ModBlocks.BUBBLECUP.get())).renderType("cutout"));
+        blockWithItem(ModBlocks.BUBBLECUP_BLOSSOM.get(), models().cross(blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get()).getPath(),
+                blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get())).renderType("cutout"));
+        blockWithItem(ModBlocks.POTTED_BUBBLECUP.get(), models().singleTexture("potted_bubblecup", new ResourceLocation("flower_pot_cross"),"plant",
+                        blockTexture(ModBlocks.BUBBLECUP.get())).renderType("cutout"));
+        blockWithItem(ModBlocks.POTTED_BUBBLECUP_BLOSSOM.get(), models().singleTexture("potted_bubblecup", new ResourceLocation("flower_pot_cross"),"plant",
+                        blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get())).renderType("cutout"));
         makeCrop(((SpecklereyCropBlock) ModBlocks.SPECKLEREY_CROP.get()), "specklerey_stage", "specklerey_stage");
 
+    }
+
+    private void blockWithItem(@NotNull Block block, BlockModelBuilder cutout) {
     }
 
     public void makeCrop(CropBlock block, String modelName, String textureName) {
@@ -140,13 +152,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     }
 
-    private void crossFlower(Block block, String name) {
-        ModelFile cross = models().cross(name, new ResourceLocation(Aspects.MOD_ID, "block/" + name))
-                .renderType("cutout");
-        simpleBlock(block, cross);
-        simpleBlockItem(block, cross);
-    }
-
     private void nautilusBlock(Block block) {
         ModelFile nautilusModel = models().getBuilder("nautilus_block")
                 .parent(models().getExistingFile(mcLoc("block/cube")))
@@ -181,5 +186,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         });
         itemModels().withExistingParent("nautilus_block", modLoc("block/nautilus_block"));
     }
-
+    private void giantClam(Block block) {
+        getVariantBuilder(block).partialState()
+                .addModels(new ConfiguredModel(models()
+                        .getExistingFile(modLoc("block/giant_clam"))));
+    }
 }

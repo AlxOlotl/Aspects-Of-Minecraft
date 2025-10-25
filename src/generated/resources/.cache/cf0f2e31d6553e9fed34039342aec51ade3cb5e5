@@ -1,15 +1,17 @@
-// 1.20.1	2025-10-16T09:42:06.7424655	Item Models: aspects
+// 1.20.1	2025-10-24T18:44:04.8830043	Item Models: aspects
 677cc4fd6ec62f124f54e14cd29b2f380c2c9cdd assets/aspects/models/item/aspect.json
 90d11f7eac3718636e5da04439451f69a7852aa5 assets/aspects/models/item/boebo_button.json
 5085ff10bec6a9719b4268a7e45a1695dbff5801 assets/aspects/models/item/boebo_door.json
 f17327189dcd56da5cff075fe5f3484153cc6c64 assets/aspects/models/item/boebo_fence.json
-e2fe942f3d9fe649939c24a4758e77be72ac4966 assets/aspects/models/item/bubblecup.json
-66f4272caea62fc296109cb81a52e484e9020b6c assets/aspects/models/item/bubblecup_blossom.json
+cd874affce57465e2c78967d6c2e4ce72f32f7aa assets/aspects/models/item/bubblecup.json
+4dd693f55631c0a52640a192964ed7aceedd6df8 assets/aspects/models/item/bubblecup_blossom.json
 7bc1ca03bea5367b6d0780b4fc8ef609b04dd933 assets/aspects/models/item/bubblecup_dewdrop.json
 2dd659ba2d772afebe3acc866a44b507657ccd93 assets/aspects/models/item/charred_button.json
 e76d3284bd6a11207e97adec145cf19fa3266da2 assets/aspects/models/item/charred_door.json
 e746628b51618467f4c9e94a5ef026ac931cf9b0 assets/aspects/models/item/charred_fence.json
 89b999d651bbdd0c30835e46f8da9c0ba6057e12 assets/aspects/models/item/cobalt_ingot.json
+3274fbdecfa6f7ff4b3eb822d2932c10c7d1b37c assets/aspects/models/item/giant_clam.json
+16059087d1eaecc6ffb5d26ee49ccdc3cf554183 assets/aspects/models/item/gold_pearl.json
 2052d0525a1e8767d7aaf656727aa15da3264f50 assets/aspects/models/item/hagfish_bucket.json
 bf802e9fb40f9db692bfa985d7880f815e2aadd5 assets/aspects/models/item/hagfish_spawn_egg.json
 c31dd1c5fa6c87735f3f3c54ff1bfd1884f8517a assets/aspects/models/item/hag_goo.json
@@ -18,6 +20,7 @@ c31dd1c5fa6c87735f3f3c54ff1bfd1884f8517a assets/aspects/models/item/hag_goo.json
 1be97883344b7724a3073f6356d299da3a4f467b assets/aspects/models/item/mammotitan_spawn_egg.json
 706721bb4cca0d6e2d2e9f10cd687b77d33847f3 assets/aspects/models/item/minecraft.json
 68550b38f7f465dd559b608cf625a6ba3147c311 assets/aspects/models/item/of.json
+79555e71f38d12d6e77ee70779b91a7827529e7b assets/aspects/models/item/pink_pearl.json
 fe1fa5d6fb0ba851bb20c87d9d49ecc68d2d4a49 assets/aspects/models/item/raw_cobalt.json
 2d975e95e35c25230478e03757e3fc50577095e0 assets/aspects/models/item/scaly_plume.json
 7b011efbf3dd01179361d510c622ec8af3f46fbb assets/aspects/models/item/scorched_mane.json

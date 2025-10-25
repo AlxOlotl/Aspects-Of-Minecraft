@@ -7,6 +7,11 @@
   "creativetab.aspects_items_tab": "AOM Items",
   "creativetab.aspects_mobs_tab": "AOM Mobs",
 
+  "item.aspects.pink_pearl": "Pink Pearl",
+  "item.aspects.gold_pearl": "Gold Pearl",
+  "block.aspects.giant_clam": "Giant Clam",
+  "entity.aspects.pearler": "Pearler",
+
   "block.aspects.bamboo_coral_block": "Bamboo Coral Block",
   "block.aspects.dead_bamboo_coral_block": "Dead Bamboo Coral Block",
   "block.aspects.shelf_coral_block": "Shelf Coral Block",

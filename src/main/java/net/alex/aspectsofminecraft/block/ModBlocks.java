@@ -94,6 +94,10 @@ public class ModBlocks {
             () -> new FlowerPotBlock((()->(FlowerPotBlock)Blocks.FLOWER_POT), BUBBLECUP_BLOSSOM,  BlockBehaviour.Properties.copy(Blocks.POTTED_DANDELION)));
 
     //Corals
+    public static final RegistryObject<Block> GIANT_CLAM = registerBlock("giant_clam",
+            () -> new GiantClamBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE)
+                    .noOcclusion().strength(1.5F).sound(SoundType.STONE)));
+
     public static final RegistryObject<Block> BAMBOO_CORAL_BLOCK = registerBlock("bamboo_coral_block",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.BUBBLE_CORAL_BLOCK)));
     public static final RegistryObject<Block> DEAD_BAMBOO_CORAL_BLOCK = registerBlock("dead_bamboo_coral_block",

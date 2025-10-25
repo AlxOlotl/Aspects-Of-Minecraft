@@ -70,6 +70,7 @@ public class Aspects
 
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.COBALT_BLOCK);
+            event.accept(ModBlocks.GIANT_CLAM);
             event.accept(ModBlocks.BOEBO_WOOD);
             event.accept(ModBlocks.BOEBO_PLANKS);
             event.accept(ModBlocks.BOEBO_STAIRS);
@@ -99,6 +100,7 @@ public class Aspects
             event.accept(ModBlocks.COBALT_ORE);
             event.accept(ModBlocks.DEEPSLATE_COBALT_ORE);
             event.accept(ModBlocks.RAW_COBALT_BLOCK);
+            event.accept(ModBlocks.GIANT_CLAM);
             event.accept(ModItems.SPECKLEREY_SEEDS);
             event.accept(ModBlocks.BUBBLECUP);
             event.accept(ModBlocks.BUBBLECUP_BLOSSOM);
@@ -131,7 +133,7 @@ public class Aspects
         }
 
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-
+            event.accept(ModItems.HAGFISH_BUCKET);
         }
 
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
@@ -149,6 +151,8 @@ public class Aspects
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_COBALT);
             event.accept(ModItems.COBALT_INGOT);
+            event.accept(ModItems.PINK_PEARL);
+            event.accept(ModItems.GOLD_PEARL);
             event.accept(ModItems.BUBBLECUP_DEWDROP);
             event.accept(ModItems.HAG_GOO);
             event.accept(ModItems.SCALY_PLUME);
@@ -174,9 +178,13 @@ public class Aspects
         public static void onClientSetup(FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
 
-
+                //Blocks
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_BLOCK.get(), RenderType.translucent());
                 ItemBlockRenderTypes.setRenderLayer(ModBlocks.HAG_GOO_LAYER.get(), RenderType.translucent());
+                ItemBlockRenderTypes.setRenderLayer(ModBlocks.GIANT_CLAM.get(), RenderType.cutout());
+                //Items
+
+                //Entities
                 EntityRenderers.register(ModEntities.ROOT_MOLE.get(), RootMoleRenderer::new);
                 EntityRenderers.register(ModEntities.MANTROODON.get(), MantroodonRenderer::new);
                 EntityRenderers.register(ModEntities.HAGFISH.get(), HagfishRenderer::new);
@@ -184,5 +192,4 @@ public class Aspects
             });
         }
     }
-
 }
