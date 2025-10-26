@@ -1,29 +1,27 @@
 package net.alex.aspectsofminecraft.entity.ai.goal;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.model.GeoModel;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class RandomBlendAnimationGoal<T extends Mob & GeoEntity> extends Goal {
-
-    private static final Map<Class<?>, List<String>> CACHE = new ConcurrentHashMap<>();
-
     private final T entity;
     private final Random random = new Random();
-    private List<String> blendAnimations = Collections.emptyList();
+
+    private static final Map<Class<?>, List<String>> BLEND_CACHE = new HashMap<>();
+    private static final Map<Class<?>, Map<String, Float>> LENGTH_CACHE = new HashMap<>();
+
+    private int cooldownTicks = 0;
+    private boolean playing = false;
     private String currentAnim = null;
-    private int cooldown = 0;
-    private boolean isPlaying = false;
 
     public RandomBlendAnimationGoal(T entity) {
         this.entity = entity;
@@ -31,90 +29,113 @@ public class RandomBlendAnimationGoal<T extends Mob & GeoEntity> extends Goal {
 
     @Override
     public boolean canUse() {
-        if (blendAnimations.isEmpty()) {
-            blendAnimations = loadBlendAnimations(entity);
+        if (entity.level().isClientSide) return false;
+        if (playing) return false;
+        if (cooldownTicks > 0) {
+            cooldownTicks--;
+            return false;
         }
 
-        boolean hasTarget = entity.getTarget() != null;
-        boolean hasLivingOwner = false;
+        if (entity.getTarget() != null && entity.getTarget().isAlive()) return false;
 
-        if (entity instanceof TamableAnimal tamable &&
-                tamable.getOwner() != null &&
-                tamable.getOwner().isAlive()) {
-            hasLivingOwner = true;
-        }
+        boolean inWater = entity.isInWaterOrBubble();
+        boolean onGround = entity.onGround();
+        boolean flying = !onGround && !inWater && entity.getDeltaMovement().y > 0.05D;
 
-        return !blendAnimations.isEmpty()
-                && !hasTarget
-                && !hasLivingOwner
-                && !entity.isAggressive()
-                && cooldown-- <= 0
-                && !isPlaying;
+        String statePrefix = flying ? "air_blend" : inWater ? "water_blend" : "land_blend";
+
+        double moveSq = entity.getDeltaMovement().lengthSqr();
+        if (moveSq > 0.5D) return false;
+
+        List<String> blends = loadBlendAnimations(entity, statePrefix);
+        return !blends.isEmpty() && random.nextInt(200) == 0;
     }
 
     @Override
     public void start() {
-        if (blendAnimations.isEmpty()) return;
-        currentAnim = blendAnimations.get(random.nextInt(blendAnimations.size()));
-        isPlaying = true;
-        entity.triggerAnim("controller", currentAnim.substring("animation.".length()));
-        cooldown = 200 + random.nextInt(200);
+        String statePrefix = getCurrentStatePrefix();
+        List<String> blends = loadBlendAnimations(entity, statePrefix);
+        if (blends.isEmpty()) return;
+
+        String chosen = blends.get(random.nextInt(blends.size()));
+        this.currentAnim = chosen;
+        this.playing = true;
+
+        float length = LENGTH_CACHE
+                .getOrDefault(entity.getClass(), Map.of())
+                .getOrDefault(chosen, 3.0f);
+
+        this.cooldownTicks = (int) (length * 20) + 40 + random.nextInt(60);
+        entity.triggerAnim("controller", chosen);
     }
 
     @Override
     public boolean canContinueToUse() {
-        return isPlaying;
+        return playing;
     }
 
     @Override
     public void tick() {
-        if (--cooldown <= 0) {
-            isPlaying = false;
+        if (cooldownTicks-- <= 0) {
+            playing = false;
         }
     }
 
-    @Override
-    public void stop() {
-        isPlaying = false;
-        currentAnim = null;
+    private static List<String> loadBlendAnimations(GeoEntity geoEntity, String prefix) {
+        Entity base = (Entity) geoEntity;
+        ResourceLocation entityId = Objects.requireNonNull(
+                ForgeRegistries.ENTITY_TYPES.getKey(base.getType())
+        );
+
+        return BLEND_CACHE.computeIfAbsent(geoEntity.getClass(), c -> {
+                    List<String> found = new ArrayList<>();
+                    Map<String, Float> lengths = new HashMap<>();
+
+                    ResourceLocation animRes = new ResourceLocation(
+                            entityId.getNamespace(),
+                            "animations/" + entityId.getPath() + ".animation.json"
+                    );
+
+                    try (InputStreamReader reader = new InputStreamReader(
+                            Objects.requireNonNull(geoEntity.getClass().getResourceAsStream(
+                                    "/assets/" + animRes.getNamespace() + "/" + animRes.getPath()
+                            ))
+                    )) {
+                        JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+                        JsonObject animations = root.getAsJsonObject("animations");
+
+                        for (String key : animations.keySet()) {
+                            if (key.endsWith("_blend") && !key.contains("attack_blend")) {
+                                String animName = "animation." + key;
+                                found.add(animName);
+
+                                JsonObject anim = animations.getAsJsonObject(key);
+                                if (anim.has("animation_length")) {
+                                    lengths.put(animName, anim.get("animation_length").getAsFloat());
+                                }
+                            }
+                        }
+
+                        LENGTH_CACHE.put(geoEntity.getClass(), lengths);
+                        System.out.println("[RandomBlendAnimationGoal] Loaded "
+                                + found.size() + " blend animations for " + entityId);
+
+                    } catch (Exception e) {
+                        System.err.println("[RandomBlendAnimationGoal] Failed to load animations for "
+                                + animRes + ": " + e.getMessage());
+                    }
+
+                    return found;
+                }).stream()
+                .filter(name -> name.contains(prefix))
+                .toList();
     }
 
-    private static List<String> loadBlendAnimations(GeoEntity entity) {
-        Entity baseEntity = (Entity) entity;
-        ResourceLocation entityId = Objects.requireNonNull(
-                net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES.getKey(baseEntity.getType())
-        );
+    private String getCurrentStatePrefix() {
+        boolean inWater = entity.isInWaterOrBubble();
+        boolean onGround = entity.onGround();
+        boolean flying = !onGround && !inWater && entity.getDeltaMovement().y > 0.05D;
 
-        ResourceLocation animRes = new ResourceLocation(
-                entityId.getNamespace(),
-                "animations/" + entityId.getPath() + ".animation.json"
-        );
-
-        return CACHE.computeIfAbsent(entity.getClass(), c -> {
-            List<String> found = new ArrayList<>();
-
-            try (InputStreamReader reader = new InputStreamReader(
-                    Objects.requireNonNull(entity.getClass().getResourceAsStream(
-                            "/assets/" + animRes.getNamespace() + "/" + animRes.getPath()
-                    ))
-            )) {
-                JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
-                JsonObject animations = root.getAsJsonObject("animations");
-
-                for (String key : animations.keySet()) {
-                    if (key.endsWith("_blend") && !key.contains("attack_blend")) {
-                        found.add("animation." + key);
-                    }
-                }
-
-                System.out.println("[RandomBlendAnimationGoal] Found " + found.size()
-                        + " blend animations for " + entityId);
-
-            } catch (Exception e) {
-                System.err.println("[RandomBlendAnimationGoal] Failed to load animations for "
-                        + animRes + ": " + e.getMessage());
-            }
-            return found;
-        });
+        return flying ? "air_blend" : inWater ? "water_blend" : "land_blend";
     }
 }
