@@ -2,6 +2,8 @@ package net.alex.aspectsofminecraft.datagen;
 
 import net.alex.aspectsofminecraft.Aspects;
 import net.alex.aspectsofminecraft.block.ModBlocks;
+import net.alex.aspectsofminecraft.block.custom.BubblecupBlock;
+import net.alex.aspectsofminecraft.block.custom.BubblecupBlossomBlock;
 import net.alex.aspectsofminecraft.block.custom.SpecklereyCropBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -89,14 +91,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.HAG_GOO_BLOCK);
         hagGooLayer(ModBlocks.HAG_GOO_LAYER.get());
         nautilusBlock(ModBlocks.NAUTILUS_BLOCK.get());
-        blockWithItem(ModBlocks.BUBBLECUP.get(), models().cross(blockTexture(ModBlocks.BUBBLECUP.get()).getPath(),
-                blockTexture(ModBlocks.BUBBLECUP.get())).renderType("cutout"));
-        blockWithItem(ModBlocks.BUBBLECUP_BLOSSOM.get(), models().cross(blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get()).getPath(),
-                blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get())).renderType("cutout"));
-        blockWithItem(ModBlocks.POTTED_BUBBLECUP.get(), models().singleTexture("potted_bubblecup", new ResourceLocation("flower_pot_cross"),"plant",
-                        blockTexture(ModBlocks.BUBBLECUP.get())).renderType("cutout"));
-        blockWithItem(ModBlocks.POTTED_BUBBLECUP_BLOSSOM.get(), models().singleTexture("potted_bubblecup", new ResourceLocation("flower_pot_cross"),"plant",
-                        blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get())).renderType("cutout"));
+        getVariantBuilder(ModBlocks.BUBBLECUP.get()).forAllStates(state -> {
+            boolean blooming = state.getValue(BubblecupBlock.BLOOMING);String modelName = blooming ? "bubblecup_blossom" : "bubblecup";
+            return ConfiguredModel.builder().modelFile(models().cross(modelName, blockTexture(blooming ? ModBlocks.BUBBLECUP_BLOSSOM.get() : ModBlocks.BUBBLECUP.get())).renderType("cutout")).build();});
+        getVariantBuilder(ModBlocks.BUBBLECUP_BLOSSOM.get()).forAllStates(state -> {
+            boolean permanent = state.getValue(BubblecupBlossomBlock.PERMANENT); String modelName = permanent ? "bubblecup_blossom" : "bubblecup_blossom";
+            return ConfiguredModel.builder().modelFile(models().cross(modelName, blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get())).renderType("cutout")).build();});
+        blockWithItem(ModBlocks.POTTED_BUBBLECUP.get(), models().singleTexture("potted_bubblecup", new ResourceLocation("minecraft", "block/flower_pot_cross"),
+                                "plant", blockTexture(ModBlocks.BUBBLECUP.get())).renderType("cutout"));
+        blockWithItem(ModBlocks.POTTED_BUBBLECUP_BLOSSOM.get(), models().singleTexture("potted_bubblecup_blossom", new ResourceLocation("minecraft", "block/flower_pot_cross"),
+                                "plant", blockTexture(ModBlocks.BUBBLECUP_BLOSSOM.get())).renderType("cutout"));
         makeCrop(((SpecklereyCropBlock) ModBlocks.SPECKLEREY_CROP.get()), "specklerey_stage", "specklerey_stage");
 
     }

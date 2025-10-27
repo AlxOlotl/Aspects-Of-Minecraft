@@ -2,13 +2,16 @@ package net.alex.aspectsofminecraft.util;
 
 public interface Burrower {
     DigLevel getDigLevel();
-
     int getDigDelayTicks();
 
-    default boolean isBurrowing() {
-        return false;
-    }
+    boolean isBurrowing();
+    void setBurrowing(boolean burrowing);
 
-    default void onBurrowTick() {
-    }
+    default void onDigStart() {}
+    default void onDigging() {}
+    default void onDigEnd() {}
+
+    default String getDigDownAnimation() { return "animation.dig_down"; }
+    default String getDigLoopAnimation() { return "animation.digging"; }
+    default String getDigUpAnimation() { return "animation.dig_up"; }
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-24T18:44:04.8734547	Block States: aspects
+// 1.20.1	2025-10-27T07:52:33.9695596	Block States: aspects
 8a464c98af63cb5ea07be52191cd030f2a3c9e64 assets/aspects/blockstates/bamboo_coral_block.json
 e1bdb4957d311f5398a560ed34c5055cd1f55441 assets/aspects/blockstates/boebo_button.json
 8ccd4739a0ec623dc1edb78ae0666b365a6403a6 assets/aspects/blockstates/boebo_door.json
@@ -10,6 +10,8 @@ c01e55fb94fd5d9398edb7e86bb3ce99010916f5 assets/aspects/blockstates/boebo_fence_
 505a826c4f4e867fb42509f4a38e855718555ae5 assets/aspects/blockstates/boebo_stairs.json
 55a7fb3ab94aac0c71fc4beedf6edef47cd56135 assets/aspects/blockstates/boebo_trapdoor.json
 1482bae5f2c7a02811b1a8e559ef43153f56652b assets/aspects/blockstates/boebo_wood.json
+e7342b0b16b4c3328d10408370458cbf387c0596 assets/aspects/blockstates/bubblecup.json
+f456bc2111e3f727ab60599709f1e8c13230ca81 assets/aspects/blockstates/bubblecup_blossom.json
 5f5063fbd13c619b6331d26a8a8777e28039e763 assets/aspects/blockstates/charred_button.json
 bc8e7a7deb1bb497f86abd261aff346f509eaa20 assets/aspects/blockstates/charred_door.json
 13bec147e230daf79b0f5b2d765d3464eca2a9b2 assets/aspects/blockstates/charred_fence.json
@@ -106,7 +108,8 @@ b60678ed28c4dd846c4a725056ccfcaf04ea8b3a assets/aspects/models/block/hag_goo_lay
 b26a74f6eea351b87da847d7baf13a744554b8ba assets/aspects/models/block/hag_goo_layer_layer_7.json
 052213efc3c67020f52864d5978d66180015e0f8 assets/aspects/models/block/hag_goo_layer_layer_8.json
 4ede0807679a789595ef93418f5e6e7821ab82b3 assets/aspects/models/block/nautilus_block.json
-3e8d31f476522586fbef67dd6ca4889673e78f65 assets/aspects/models/block/potted_bubblecup.json
+a8d5d15797080e7163ac121fc512e08864c33b11 assets/aspects/models/block/potted_bubblecup.json
+3e8d31f476522586fbef67dd6ca4889673e78f65 assets/aspects/models/block/potted_bubblecup_blossom.json
 21efa62721e5a1c36d145208811702eed767263a assets/aspects/models/block/raw_cobalt_block.json
 f00ae608a85b50aa2fe926207889b974bc6d1ac0 assets/aspects/models/block/shelf_coral_block.json
 5b04ba4ec81c314e5f6b1db8b19e6968369ddbd9 assets/aspects/models/block/specklerey_stage0.json

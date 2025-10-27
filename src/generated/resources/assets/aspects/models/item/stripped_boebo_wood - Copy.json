@@ -1,7 +1,0 @@
-{
-  "parent": "aspects:block/stripped_boebo_wood",
-  "textures": {
-    "end": "aspects:block/stripped_boebo_log",
-    "side": "aspects:block/stripped_boebo_log"
-  }
-}

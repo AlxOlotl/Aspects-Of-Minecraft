@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_right",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "bottom": "aspects:block/charred_door_bottom",
-    "top": "aspects:block/charred_door_top"
-  }
-}

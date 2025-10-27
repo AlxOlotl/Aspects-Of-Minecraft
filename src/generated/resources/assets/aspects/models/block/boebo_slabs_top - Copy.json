@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "aspects:block/boebo_planks",
-    "side": "aspects:block/boebo_planks",
-    "top": "aspects:block/boebo_planks"
-  }
-}

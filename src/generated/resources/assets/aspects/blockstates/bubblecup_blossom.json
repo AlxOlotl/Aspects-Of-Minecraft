@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "permanent=false": {
+      "model": "aspects:block/bubblecup_blossom"
+    },
+    "permanent=true": {
+      "model": "aspects:block/bubblecup_blossom"
+    }
+  }
+}
