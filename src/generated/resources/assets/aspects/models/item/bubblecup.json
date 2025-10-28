@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "aspects:block/bubblecup"
+    "layer0": "aspects:item/bubblecup"
   }
 }

@@ -44,8 +44,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.HAGFISH_BUCKET);
         simpleItem(ModItems.MAMMOTITAN_SPAWN_EGG);
 
-        simpleBlockItemBlockTexture(ModBlocks.BUBBLECUP);
-        simpleBlockItemBlockTexture(ModBlocks.BUBBLECUP_BLOSSOM);
+        simpleBlockItem(ModBlocks.BUBBLECUP);
+        simpleBlockItem(ModBlocks.BUBBLECUP_BLOSSOM);
 
         simpleBlockItem(ModBlocks.BOEBO_DOOR);
         simpleBlockItem(ModBlocks.CHARRED_DOOR);

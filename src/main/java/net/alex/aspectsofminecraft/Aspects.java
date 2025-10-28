@@ -58,8 +58,9 @@ public class Aspects
             ComposterBlock.COMPOSTABLES.put(ModItems.SPECKLEREY.get(),0.25f);
             ComposterBlock.COMPOSTABLES.put(ModItems.SPECKLEREY_SEEDS.get(),0.4f);
 
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BUBBLECUP.getId(),ModBlocks.POTTED_BUBBLECUP);
-            ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(ModBlocks.BUBBLECUP_BLOSSOM.getId(),ModBlocks.POTTED_BUBBLECUP_BLOSSOM);
+            FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
+            pot.addPlant(ModBlocks.BUBBLECUP.getId(), ModBlocks.POTTED_BUBBLECUP);
+            pot.addPlant(ModBlocks.BUBBLECUP_BLOSSOM.getId(), ModBlocks.POTTED_BUBBLECUP_BLOSSOM);
         });
     }
 

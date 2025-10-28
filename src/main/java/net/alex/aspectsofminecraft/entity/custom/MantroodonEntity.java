@@ -11,14 +11,17 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
@@ -43,8 +46,13 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
             SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> RESTING =
             SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ANGRY =
+            SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> COLLAR_COLOR =
             SynchedEntityData.defineId(MantroodonEntity.class, EntityDataSerializers.INT);
+
+    private static final int MAX_REGROW_TIME = 20 * 60 * 3;
+    private int furRegrowTimer = 0;
 
     public MantroodonEntity(EntityType<? extends TamableAnimal> type, Level level) {
         super(type, level);
@@ -63,6 +71,7 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         super.defineSynchedData();
         this.entityData.define(SHEARED, false);
         this.entityData.define(RESTING, false);
+        this.entityData.define(ANGRY, false);
         this.entityData.define(COLLAR_COLOR, DyeColor.RED.getId());
     }
 
@@ -100,6 +109,7 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, player -> this.isAngry() && !this.isTame()));
     }
 
     @Override
@@ -109,6 +119,10 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         if (stack.getItem() instanceof ShearsItem && this.readyForShearing()) {
             this.shear(SoundSource.PLAYERS);
             stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
+            if (!this.isTame()) {
+                this.setAngry(true);
+                this.setTarget(player);
+            }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
@@ -116,7 +130,6 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
             if (!player.getAbilities().instabuild) stack.shrink(1);
             if (this.random.nextInt(3) == 0) {
                 this.tame(player);
-                this.setTame(true);
                 this.level().broadcastEntityEvent(this, (byte)7);
             } else {
                 this.level().broadcastEntityEvent(this, (byte)6);
@@ -149,6 +162,7 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
         this.gameEvent(GameEvent.SHEAR, this);
         this.setSheared(true);
+        this.furRegrowTimer = MAX_REGROW_TIME;
 
         if (!this.level().isClientSide) {
             int dropCount = 1 + this.random.nextInt(2);
@@ -160,8 +174,17 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
     public void aiStep() {
         super.aiStep();
 
-        if (this.isSheared() && this.random.nextInt(6000) == 0) {
-            this.setSheared(false);
+        if (this.isSheared()) {
+            if (furRegrowTimer > 0) {
+                furRegrowTimer--;
+            } else {
+                this.setSheared(false);
+                this.setAngry(false);
+            }
+        }
+
+        if (this.isAngry() && this.getTarget() == null && this.tickCount % 100 == 0) {
+            this.setAngry(false);
         }
     }
 
@@ -170,37 +193,53 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         controllerRegistrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
     }
 
+    private <T extends GeoEntity> PlayState predicate(AnimationState<T> state) {
+        var controller = state.getController();
+
+        if (this.isResting()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.mantroodon.rest", Animation.LoopType.HOLD_ON_LAST_FRAME));
+            return PlayState.CONTINUE;
+        }
+
+        if (this.isAngry() && this.isSheared()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.mantroodon.angry_sheared", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        if (this.isAngry()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.mantroodon.angry", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        if (this.isSheared()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.mantroodon.sheared", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+        if (state.isMoving()) {
+            controller.setAnimation(RawAnimation.begin().then("animation.mantroodon.walk", Animation.LoopType.LOOP));
+            return PlayState.CONTINUE;
+        }
+
+        controller.setAnimation(RawAnimation.begin().then("animation.mantroodon.idle", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
 
-    private <T extends GeoEntity> PlayState predicate(AnimationState<T> state) {
-        var controller = state.getController();
-
-        if (this.isResting()) {
-            controller.setAnimation(RawAnimation.begin()
-                    .then("animation.mantroodon.rest", Animation.LoopType.HOLD_ON_LAST_FRAME));
-            return PlayState.CONTINUE;
-        }
-
-        if (state.isMoving()) {
-            controller.setAnimation(RawAnimation.begin()
-                    .then("animation.mantroodon.walk", Animation.LoopType.LOOP));
-            return PlayState.CONTINUE;
-        }
-
-        controller.setAnimation(RawAnimation.begin()
-                .then("animation.mantroodon.idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
-
     public boolean isResting() { return this.entityData.get(RESTING); }
-    public void setResting(boolean resting) {this.entityData.set(RESTING, resting);this.setOrderedToSit(resting);this.getNavigation().stop();
-        if (resting) {this.setDeltaMovement(0, this.getDeltaMovement().y, 0);}}
+    public void setResting(boolean resting) {
+        this.entityData.set(RESTING, resting);
+        this.setOrderedToSit(resting);
+        this.getNavigation().stop();
+        if (resting) this.setDeltaMovement(0, this.getDeltaMovement().y, 0);
+    }
 
     public boolean isSheared() { return this.entityData.get(SHEARED); }
     public void setSheared(boolean sheared) { this.entityData.set(SHEARED, sheared); }
+
+    public boolean isAngry() { return this.entityData.get(ANGRY); }
+    public void setAngry(boolean angry) { this.entityData.set(ANGRY, angry); }
 
     public int getCollarColor() { return this.entityData.get(COLLAR_COLOR); }
     public void setCollarColor(int color) { this.entityData.set(COLLAR_COLOR, color); }
@@ -210,60 +249,38 @@ public class MantroodonEntity extends TamableAnimal implements GeoEntity, Sheara
         super.addAdditionalSaveData(tag);
         tag.putBoolean("Sheared", this.isSheared());
         tag.putBoolean("Resting", this.isResting());
+        tag.putBoolean("Angry", this.isAngry());
         tag.putInt("CollarColor", this.getCollarColor());
     }
-    @Override
-    public void setTarget(@Nullable LivingEntity target) {
-        super.setTarget(target);
-        if (this.isTame() && target != null && target != this.getOwner()) {
-            this.setLastHurtByMob(target);
-        }
-    }
+
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         this.setSheared(tag.getBoolean("Sheared"));
         this.setResting(tag.getBoolean("Resting"));
+        this.setAngry(tag.getBoolean("Angry"));
         this.setCollarColor(tag.getInt("CollarColor"));
+    }
+
+    @Override
+    public boolean doHurtTarget(Entity target) {
+        boolean success = super.doHurtTarget(target);
+        if (success && target instanceof LivingEntity living) {
+            living.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 0));
+            this.level().playSound(null, this.blockPosition(), SoundEvents.BEE_STING, SoundSource.HOSTILE, 1.0F, 1.0F);
+        }
+        return success;
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource source, int looting, boolean recentlyHit) {
+        super.dropCustomDeathLoot(source, looting, recentlyHit);
+        if (!this.isSheared()) this.spawnAtLocation(ModItems.SCORCHED_MANE.get());
     }
 
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
         return ModEntities.MANTROODON.get().create(level);
-    }
-    @Override
-    public boolean doHurtTarget(Entity target) {
-        boolean success = super.doHurtTarget(target);
-
-        if (success && target instanceof LivingEntity livingTarget) {
-            livingTarget.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                    net.minecraft.world.effect.MobEffects.POISON,
-                    100,
-                    0
-            ));
-            this.level().playSound(
-                    null, this.blockPosition(),
-                    SoundEvents.BEE_STING,
-                    SoundSource.HOSTILE,
-                    1.0F, 1.0F
-            );
-        }
-        return success;
-    }
-
-    @Override
-    public void tame(Player player) {
-        super.tame(player);
-        this.setOwnerUUID(player.getUUID());
-        this.setTame(true);
-    }
-
-    @Override
-    public void setLastHurtByMob(@Nullable LivingEntity target) {
-        super.setLastHurtByMob(target);
-        if (!this.isTame() && target != null) {
-            this.setTarget(target);
-        }
     }
 }
